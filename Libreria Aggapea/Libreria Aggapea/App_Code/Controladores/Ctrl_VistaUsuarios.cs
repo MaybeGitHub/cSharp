@@ -12,7 +12,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
         public void meterUsuario(string usuario, string password)
         {
             Usuario user = new Usuario(usuario, password);
-            ctrl_f.guardar(user.datos());
+            ctrl_f.guardar(user.datos(), "usuarios");
         }
 
         public Boolean validacionExistenciaUsuario(string user)

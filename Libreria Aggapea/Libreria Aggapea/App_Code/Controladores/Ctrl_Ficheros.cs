@@ -8,10 +8,22 @@ namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_Ficheros
     { 
-        public void guardar(string objeto)
+        private string pathLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
+        private string pathUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
+
+        public void guardar(string objeto, string queEnPlural)
         {
-            string path = @"C:\Users\" + Environment.UserName + @"\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
-            FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
+            FileStream fs = null;
+            if (queEnPlural.ToLower().Equals("libros"))
+            {
+                fs = new FileStream(pathLibros, FileMode.Append, FileAccess.Write, FileShare.Write);
+            }
+
+            if (queEnPlural.ToLower().Equals("usuarios"))
+            {
+                fs = new FileStream(pathUsuarios, FileMode.Append, FileAccess.Write, FileShare.Write);
+            }
+
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(objeto);
             sw.Close();
@@ -19,21 +31,19 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
         public string[] leer(string queEnPlural)
         {
-            string path = "";
             if (queEnPlural.ToLower().Equals("libros")){
-                path = @"C:\Users\" + Environment.UserName + @"\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
+                return File.ReadAllLines(pathLibros);
             }
 
             if (queEnPlural.ToLower().Equals("usuarios")){
-                path = @"C:\Users\" + Environment.UserName + @"\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
+                return File.ReadAllLines(pathUsuarios);
             }
-            return File.ReadAllLines(path);
+            return null;            
         }
 
         public void comprarLibro_ActualizarTxT(string valoresLibro)
         {
-            string path = @"C:\Users\" + Environment.UserName + @"\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
-            string[] libros = File.ReadAllLines(path);
+            string[] libros = File.ReadAllLines(pathLibros);
             string[] libro = valoresLibro.Split(':');
             for ( int i = 0; i < libros.Length; i++) {
                 if (libros[i].Equals(valoresLibro))
@@ -44,8 +54,8 @@ namespace Libreria_Aggapea.App_Code.Controladores
                     libros[i] = recreoLibro.datos();
                 }
             }
-            File.WriteAllText(path, string.Empty);
-            File.WriteAllLines (path, libros);
+            File.WriteAllText(pathLibros, string.Empty);
+            File.WriteAllLines (pathLibros, libros);
         }
     }
 }
