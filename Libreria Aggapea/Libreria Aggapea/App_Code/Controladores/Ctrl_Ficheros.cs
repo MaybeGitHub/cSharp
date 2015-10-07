@@ -8,8 +8,8 @@ namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_Ficheros
     { 
-        private string pathLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
-        private string pathUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\Projects\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
+        private string pathLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
+        private string pathUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
 
         public void guardar(string objeto, string queEnPlural)
         {
