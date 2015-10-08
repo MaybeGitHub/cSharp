@@ -94,7 +94,7 @@
     <Compile Include="App_Code\Controladores\Ctrl_Ficheros.cs" />
     <Compile Include="App_Code\Modelos\Libro.cs" />
     <Compile Include="App_Code\Modelos\Usuario.cs" />
-    <Compile Include="Herramientas\Herramientas.cs" />
+    <Compile Include="Herramientas\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vistas\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
