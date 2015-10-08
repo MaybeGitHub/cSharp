@@ -38,3 +38,23 @@ C:\Users\deadl\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria A
 C:\Users\deadl\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Agapea.csprojResolveAssemblyReference.cache
 C:\Users\deadl\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.dll
 C:\Users\deadl\Documents\Visual Studio 2015\Projects\Libreria Aggapea\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.pdb
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\csc.exe
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\vbc.exe
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\VBCSCompiler.exe
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Libreria Aggapea.dll.config
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Libreria Aggapea.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Libreria Aggapea.pdb
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Agapea.csprojResolveAssemblyReference.cache
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.dll
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.pdb

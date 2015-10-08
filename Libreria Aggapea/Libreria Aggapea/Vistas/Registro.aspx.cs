@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Libreria_Aggapea.App_Code.Controladores;
+using Libreria_Aggapea.Herramientas;
 
 namespace Libreria_Aggapea
 {
@@ -12,15 +13,11 @@ namespace Libreria_Aggapea
     {
 
         private Ctrl_VistaUsuarios ctrl_VM = new Ctrl_VistaUsuarios();
+        private Tools tool = new Tools();
+
         protected void Page_Load(Object sender, EventArgs e)
         {
-            string __message = "",__valor="";
-            foreach (string key in this.Context.Request.Params)
-            {
-                if (this.Context.Request[key] == null) { __valor = "null";  } else { __valor = this.Context.Request[key].ToString(); };
-                __message += "clave: " + key + " ---- valor:_" + __valor + "\n";
-            }
-            this.TextBox1.Text = __message;
+            tool.pintarCajaInfoPagina(TextBox1, Context);
         }
 
         protected void registrar_boton_Click(object sender, ImageClickEventArgs e)
