@@ -110,27 +110,8 @@ namespace Libreria_Aggapea.Vistas
         protected void catalogo_libros_SelectedNodeChanged(object sender, EventArgs e)
         {
             expositor_libros.Controls.Clear();
-            TreeView root = catalogo_libros;
-            foreach( TreeNode hoja in root.Nodes)
-            {
-                if ( hoja.Selected )
-                {
-                    generarTabla();
-                }
-                else
-                {
-                    if ( hoja.ChildNodes.Count != 0)
-                    {
-                        foreach( TreeNode hojilla in hoja.ChildNodes)
-                        {
-                            if (hojilla.Selected)
-                            {
-                                generarTabla(hojilla.Text);
-                            }
-                        }
-                    } 
-                }
-            }
+            TreeView root = (TreeView) sender;
+            generarTabla(root.SelectedNode.Text);
         }
     }
 }
