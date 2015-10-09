@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Ficheros\Cestas.txt" />
     <Content Include="App_Code\Ficheros\Libros.txt" />
     <Content Include="App_Code\Ficheros\Usuarios.txt" />
     <Content Include="Vistas\Imagenes\registroAgapea2.2.png" />
@@ -89,9 +90,11 @@
     <Content Include="Vistas\Registro.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Controladores\Ctrl_VistaCesta.cs" />
     <Compile Include="App_Code\Controladores\Ctrl_VistaLibros.cs" />
     <Compile Include="App_Code\Controladores\Ctrl_VistaUsuarios.cs" />
     <Compile Include="App_Code\Controladores\Ctrl_Ficheros.cs" />
+    <Compile Include="App_Code\Modelos\Cesta.cs" />
     <Compile Include="App_Code\Modelos\Libro.cs" />
     <Compile Include="App_Code\Modelos\Usuario.cs" />
     <Compile Include="Herramientas\Tools.cs" />

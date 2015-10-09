@@ -10,6 +10,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
     { 
         private string pathLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
         private string pathUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
+        private string pathCestas = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Cestas.txt";
 
         public void guardar(string objeto, string queEnPlural)
         {
@@ -24,6 +25,10 @@ namespace Libreria_Aggapea.App_Code.Controladores
                 fs = new FileStream(pathUsuarios, FileMode.Append, FileAccess.Write, FileShare.Write);
             }
 
+            if (queEnPlural.ToLower().Equals("cestas"))
+            {
+                fs = new FileStream(pathCestas, FileMode.Append, FileAccess.Write, FileShare.Write);
+            }
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(objeto);
             sw.Close();
@@ -56,6 +61,20 @@ namespace Libreria_Aggapea.App_Code.Controladores
             }
             File.WriteAllText(pathLibros, string.Empty);
             File.WriteAllLines (pathLibros, libros);
+        }
+
+        public void añadirLibroCesta(string user, string titulo)
+        {
+            string[] cestas = File.ReadAllLines(pathLibros);
+            for (int i = 0; i < cestas.Length; i++)
+            {
+                if (cestas[i].Split(':')[0].Equals(user))
+                {
+                    cestas[i] += ":" + titulo;
+                }
+            }
+            File.WriteAllText(pathCestas, string.Empty);
+            File.WriteAllLines(pathCestas, cestas);
         }
     }
 }

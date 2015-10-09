@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Libreria_Aggapea.App_Code.Controladores;
+using Libreria_Aggapea.Herramientas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Libreria_Aggapea.App_Code.Controladores;
-using Libreria_Aggapea.Herramientas;
 
 namespace Libreria_Aggapea.Vistas
 {
@@ -13,7 +13,9 @@ namespace Libreria_Aggapea.Vistas
     {
         private Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();
         private Ctrl_VistaLibros ctrl_VL = new Ctrl_VistaLibros();
+        private Ctrl_VistaCesta ctrl_VC = new Ctrl_VistaCesta();
         private Tools tool = new Tools();
+        private string usuario;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +23,8 @@ namespace Libreria_Aggapea.Vistas
 
             if (this.Request.QueryString["usuario"] != null)
             {
-                welcomeUsuario.Text = "Bienvenido de nuevo, " + this.Request.QueryString["usuario"].ToString();
+                usuario = this.Request.QueryString["usuario"].ToString();
+                welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario;
             }
             else
             {
@@ -30,13 +33,31 @@ namespace Libreria_Aggapea.Vistas
 
             if (!IsPostBack) {
                 generarTreeLibros();
+                generarTabla();
             }
-            
-            generarTabla();
+            else
+            {
+                expositor_libros.Controls.Clear();
+                foreach ( string key in Request.Params)
+                {
+                    if ( key == "__EVENTARGUMENT")
+                    {
+                        if (Request[key].Split('\\').Length > 1) {                            
+                            string valor = Request[key].Split('\\')[1];
+                            generarTabla(valor);
+                        }
+                        else
+                        {
+                            generarTabla();
+                        }                        
+                    }
+                }               
+            }  
         }
 
         private void generarTreeLibros()
         {
+            List<string> categoriasYaCreadas = new List<string>();
             TreeNode hoja = new TreeNode("Categorias");
             catalogo_libros.Nodes.Add(hoja);
             catalogo_libros.ExpandDepth = 1;
@@ -44,11 +65,10 @@ namespace Libreria_Aggapea.Vistas
             foreach (string libroBruto in ctrl_VL.libros) {
                 hoja = new TreeNode();
                 hoja.Text = libroBruto.Split(':')[6];
-                catalogo_libros.Nodes[0].ChildNodes.Add(hoja);
-                foreach ( string libroElegido in ctrl_VL.leerLibros(hoja.Text))
-                {
-                    hoja.ChildNodes.Add(new TreeNode(libroElegido));
-                }                
+                if (!categoriasYaCreadas.Contains(hoja.Text) ){
+                    categoriasYaCreadas.Add(hoja.Text);
+                    catalogo_libros.Nodes[0].ChildNodes.Add(hoja);
+                }           
             }
         }
 
@@ -103,15 +123,11 @@ namespace Libreria_Aggapea.Vistas
 
         private void comprarLibro(object sender, EventArgs e)
         {
-            ctrl_F.comprarLibro_ActualizarTxT(ctrl_VL.mapeoBotones[(Button)sender]);
+            Button botonSeleccionado = (Button)sender;
+            string valorBoton = ctrl_VL.mapeoBotones[botonSeleccionado];
+            ctrl_VC.añadirLibro(usuario, valorBoton);
+            ctrl_F.comprarLibro_ActualizarTxT(valorBoton);
             Response.Redirect(Request.RawUrl);
-        }
-
-        protected void catalogo_libros_SelectedNodeChanged(object sender, EventArgs e)
-        {
-            expositor_libros.Controls.Clear();
-            TreeView root = (TreeView) sender;
-            generarTabla(root.SelectedNode.Text);
         }
     }
 }

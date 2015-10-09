@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td class="auto-style1">
-                    <asp:TreeView ID="catalogo_libros" runat="server" BorderStyle="Solid" ExpandDepth="0" OnSelectedNodeChanged="catalogo_libros_SelectedNodeChanged" ShowLines="True"></asp:TreeView>
+                    <asp:TreeView ID="catalogo_libros" runat="server" BorderStyle="Solid" ExpandDepth="0" ShowLines="True"></asp:TreeView>
                     
                 </td>
                 <td class="auto-style2">
