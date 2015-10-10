@@ -17,8 +17,7 @@ namespace Libreria_Aggapea.Herramientas
                 if (datos.Request[key] == null) { valor = "null"; } else { valor = datos.Request[key].ToString(); };
                 message += "clave: " + key + " ---- valor:_" + valor + "\n";
             }
-            cajaMultilinea.Text = message;
-            
+            cajaMultilinea.Text = message;            
         }
     }
 }
