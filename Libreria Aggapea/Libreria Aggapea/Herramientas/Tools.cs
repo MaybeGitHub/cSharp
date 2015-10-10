@@ -18,6 +18,7 @@ namespace Libreria_Aggapea.Herramientas
                 message += "clave: " + key + " ---- valor:_" + valor + "\n";
             }
             cajaMultilinea.Text = message;
+            
         }
     }
 }
