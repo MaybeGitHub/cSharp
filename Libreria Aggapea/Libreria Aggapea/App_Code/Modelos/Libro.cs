@@ -9,7 +9,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
 {
     public class Libro
     {
-        public string nombre { get; set; }
+        public string titulo { get; set; }
         public string autor { get; set; }
         public string editorial { get; set; }
         public string ISBN10 { get; set; }
@@ -25,7 +25,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
 
         public Libro(string[] datosLibro)
         {          
-            this.nombre = datosLibro[0];
+            this.titulo = datosLibro[0];
             this.autor = datosLibro[1]; 
             this.editorial = datosLibro[2]; 
             this.ISBN10 = datosLibro[3]; 

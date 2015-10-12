@@ -7,13 +7,13 @@ namespace Libreria_Aggapea.App_Code.Modelos
 {
     public class Cesta
     {
-        public Usuario user { get; set; }
+        public Usuario dueño { get; set; }
 
         public List<Libro> listaLibros { get; set; }
 
         public Cesta(Usuario dueño)
         {
-            user = dueño;
+            this.dueño = dueño;
         }
 
         public void añadirLibro(Libro libro)
@@ -24,10 +24,10 @@ namespace Libreria_Aggapea.App_Code.Modelos
         public string datos()
         {
             string ret = "";
-            ret += user.usuario;
+            ret += dueño.nombre;
             foreach ( Libro l in listaLibros)
             {
-                ret += ":" + l.nombre;
+                ret += ":" + l.titulo;
             }
             return ret;
         }

@@ -8,48 +8,39 @@ namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_VistaCesta
     {
-        Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();
-        List<Cesta> listaCestas;
-        Cesta cestaElegida;
+        Ctrl_Ficheros ctrl_F { get; set; }
 
-        public void crearNuevaCesta(string usuario, string datosLibro)
+        public Ctrl_VistaCesta()
         {
-            string[] usuarios = ctrl_F.leer("usuarios");
-            string[] datosUsuario;
-
-            foreach ( string user in usuarios )
-            {
-                datosUsuario = user.Split(':');
-                if ( datosUsuario.Contains(usuario) )
-                {
-                    cestaElegida = new Cesta(new Usuario(datosUsuario));
-                    cestaElegida.listaLibros.Add(new Libro(datosLibro.Split(':')));
-                    listaCestas.Add( cestaElegida );
-                    ctrl_F.guardar(usuario, "cestas");
-                }
-            }
+            ctrl_F = new Ctrl_Ficheros();
         }
 
-        public void añadirLibro(string user, string datosLibro)
+        public void añadirLibroAlUsuario(string usuario, string datosLibro)
         {
             Boolean encontrado = false;
-            
-            foreach (Cesta cesta in listaCestas)
+            string nombre;
+
+            foreach (string cesta in ctrl_F.leer("cestas") )
             {
-                if (cesta.user.usuario.Equals(user))
+                nombre = cesta.Split(':')[0];
+                if (nombre.Equals(usuario))
                 {
                     encontrado = true;
-                    cesta.listaLibros.Add(new Libro(datosLibro.Split(':')));
                 }
-            }
+            }           
 
             if (!encontrado)
             {
-                crearNuevaCesta(user, datosLibro);
+                crearNuevaCesta(usuario);
             }
-            
-            ctrl_F.añadirLibroCesta(user, datosLibro.Split(':')[0]);
+                 
+            ctrl_F.añadirLibroCesta(usuario, datosLibro.Split(':')[0]);
+            ctrl_F.actualizarTxTLibros(datosLibro);
         }
 
+        public void crearNuevaCesta(string usuario)
+        {
+            ctrl_F.guardar(usuario, "cestas");
+        }
     }
 }

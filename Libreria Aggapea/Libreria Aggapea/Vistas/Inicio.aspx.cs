@@ -28,7 +28,8 @@ namespace Libreria_Aggapea.Vistas
             }
             else
             {
-                welcomeUsuario.Text = "Bienvenido";
+                usuario = "jesus";
+                welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario;
             }
 
             if (!IsPostBack) {
@@ -125,8 +126,7 @@ namespace Libreria_Aggapea.Vistas
         {
             Button botonSeleccionado = (Button)sender;
             string valorBoton = ctrl_VL.mapeoBotones[botonSeleccionado];
-            ctrl_VC.añadirLibro(usuario, valorBoton);
-            ctrl_F.comprarLibro_ActualizarTxT(valorBoton);
+            ctrl_VC.añadirLibroAlUsuario(usuario, valorBoton);
             Response.Redirect(Request.RawUrl);
         }
     }

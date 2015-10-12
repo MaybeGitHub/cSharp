@@ -1,6 +1,6 @@
-Pocoyo:Pokito:Pocoyandia:123:1357:Libro basado en la serie pocoyo:Niños:9,99:0:50
-C'est La vie:Madame bouvier:Francesada:098:0864:Entra en la cultura francesa:Cultura:13,49:0:50
-Programacion para Dummies:DummyMan:Dummy&Co:112:12357:Aprende programacion rapido y barato:Aprendizaje:18,70:0:75
+Pocoyo:Pokito:Pocoyandia:123:1357:Libro basado en la serie pocoyo:Niños:9,99:7:43
+C'est La vie:Madame bouvier:Francesada:098:0864:Entra en la cultura francesa:Cultura:13,49:5:45
+Programacion para Dummies:DummyMan:Dummy&Co:112:12357:Aprende programacion rapido y barato:Aprendizaje:18,70:1:74
 El libro de petete:Anonimo:Santillana:246:2468:Perfeto sujetapapeles de mesa:Ladrillo:10,20:0:20
 Cobayas:Michael Mettler:Tikal:9543215:2135487321:Aprende mas sobre estos animalitos:Documentacion:15,99:0:50
 Un pais en la mochila:Paco Garcia:Españoles por España:099:0865:Adentrate en la riqueza de la cultura Española:Cultura:13,49:0:50

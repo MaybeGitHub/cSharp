@@ -29,6 +29,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
             {
                 fs = new FileStream(pathCestas, FileMode.Append, FileAccess.Write, FileShare.Write);
             }
+
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(objeto);
             sw.Close();
@@ -43,13 +44,19 @@ namespace Libreria_Aggapea.App_Code.Controladores
             if (queEnPlural.ToLower().Equals("usuarios")){
                 return File.ReadAllLines(pathUsuarios);
             }
+
+            if (queEnPlural.ToLower().Equals("cestas"))
+            {
+                return File.ReadAllLines(pathCestas);
+            }
             return null;            
         }
 
-        public void comprarLibro_ActualizarTxT(string valoresLibro)
+        public void actualizarTxTLibros(string valoresLibro)
         {
             string[] libros = File.ReadAllLines(pathLibros);
             string[] libro = valoresLibro.Split(':');
+
             for ( int i = 0; i < libros.Length; i++) {
                 if (libros[i].Equals(valoresLibro))
                 {
@@ -65,7 +72,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
         public void añadirLibroCesta(string user, string titulo)
         {
-            string[] cestas = File.ReadAllLines(pathLibros);
+            string[] cestas = File.ReadAllLines(pathCestas);
             for (int i = 0; i < cestas.Length; i++)
             {
                 if (cestas[i].Split(':')[0].Equals(user))

@@ -7,12 +7,12 @@ namespace Libreria_Aggapea.App_Code.Modelos
 {
     public class Usuario
     {
-        public string usuario { get; set; }
+        public string nombre { get; set; }
         public string contraseña { get; set; }
 
         public Usuario(string usuario, string contraseña)
         {
-            this.usuario = usuario;
+            this.nombre = usuario;
             this.contraseña = contraseña;
         }
 
@@ -22,7 +22,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
             {
                 switch (i)
                 {
-                    case 0: usuario = datos[i]; break;
+                    case 0: nombre = datos[i]; break;
                     case 1: contraseña = datos[i]; break;
                 }
 
@@ -31,7 +31,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
 
         public string datos()
         {
-            return usuario + ":" + contraseña + "\n";
+            return nombre + ":" + contraseña + "\n";
         }
     }   
 }
