@@ -30,9 +30,11 @@
                     
                 </td>
                 <td class="auto-style2">
-        <asp:Table ID="expositor_libros" runat="server"></asp:Table>
+                    <asp:Table ID="expositor_libros" runat="server"></asp:Table>
                 </td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Table ID="expositor_cesta" runat="server"></asp:Table>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>

@@ -17,18 +17,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
         public Boolean validacionExistenciaUsuario(string user)
         {
-            string[] listaUsuarios = ctrl_f.leer("usuarios");
-            string nombre;
-            Boolean esPosible = true;
-
-            foreach( string usuario in listaUsuarios)
-            {
-                nombre = usuario.Split(':')[0];
-                if ( nombre.ToLower().Equals(user.ToLower()) ){
-                    esPosible = false;
-                }
-            }       
-            return esPosible;
+            return !ctrl_f.encontrar(user, "usuarios");
         }
     }
 }

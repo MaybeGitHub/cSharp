@@ -17,19 +17,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
         public void añadirLibroAlUsuario(string usuario, string datosLibro)
         {
-            Boolean encontrado = false;
-            string nombre;
-
-            foreach (string cesta in ctrl_F.leer("cestas") )
-            {
-                nombre = cesta.Split(':')[0];
-                if (nombre.Equals(usuario))
-                {
-                    encontrado = true;
-                }
-            }           
-
-            if (!encontrado)
+            if (!ctrl_F.encontrar(usuario, "cestas"))
             {
                 crearNuevaCesta(usuario);
             }

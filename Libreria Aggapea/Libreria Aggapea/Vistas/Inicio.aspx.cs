@@ -34,7 +34,7 @@ namespace Libreria_Aggapea.Vistas
 
             if (!IsPostBack) {
                 generarTreeLibros();
-                generarTabla();
+                generarTabla();               
             }
             else
             {
@@ -53,7 +53,104 @@ namespace Libreria_Aggapea.Vistas
                         }                        
                     }
                 }               
-            }  
+            }
+
+            generarCesta();
+        }
+
+        private void generarCesta()
+        {
+            expositor_cesta.CellSpacing = 0;
+            List<string> librosGuardados = new List<string>();
+            if ( ctrl_F.encontrar(usuario, "cestas"))
+            {
+                TableRow fila = new TableRow();
+                expositor_cesta.Rows.Add(fila);
+
+                TableCell columna = new TableCell();
+                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+                expositor_cesta.Rows[0].Cells.Add(columna);
+
+                Label label = new Label();
+                label.Text = "Tu cesta";
+                label.Style.Add("text-align", "center");
+                label.Font.Bold = true;
+                label.Style.Add("display", "block");
+                columna.Controls.Add( label );
+
+                string[] librosComprados = null;
+
+                foreach (string cestaBruto in ctrl_F.leer("cestas"))
+                {                   
+                    if (cestaBruto.Split(':')[0].Equals(usuario))
+                    {
+                        librosComprados = cestaBruto.Split(':');
+                        break;
+                    }
+                }
+
+                fila = new TableRow();
+                expositor_cesta.Rows.Add(fila);
+
+                columna = new TableCell();
+                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+                expositor_cesta.Rows[1].Cells.Add(columna);
+
+                for ( int i = 1; i < librosComprados.Length; i++)
+                {                   
+                    label = new Label();
+                    label.Text = librosComprados[i];
+                    librosGuardados.Add(librosComprados[i]);
+                    label.Style.Add("display", "block");
+                    columna.Controls.Add(label);
+                }
+
+                fila = new TableRow();
+                expositor_cesta.Rows.Add(fila);
+
+                columna = new TableCell();
+                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+                expositor_cesta.Rows[2].Cells.Add(columna);
+
+                label = new Label();
+                label.Text = "Total : ";
+
+                double total = 0;
+                foreach( string titulo in librosGuardados)
+                {
+                   foreach ( string libro in ctrl_F.leer("libros"))
+                    {
+                        if (libro.Split(':').Contains(titulo))
+                        {
+                            total += double.Parse(libro.Split(':')[7]);
+                        }
+                    }
+                }
+                label.Text += total + "€";
+                label.Font.Bold = true;
+                label.Style.Add("display", "block");
+                columna.Controls.Add(label);
+
+                fila = new TableRow();
+                expositor_cesta.Rows.Add(fila);
+
+                columna = new TableCell();
+                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+                columna.HorizontalAlign = HorizontalAlign.Center;
+                expositor_cesta.Rows[3].Cells.Add(columna);               
+
+                Button pagar_button = new Button();
+                pagar_button.Text = "Pagar";
+                columna.Controls.Add(pagar_button);
+
+            }
         }
 
         private void generarTreeLibros()
@@ -69,7 +166,7 @@ namespace Libreria_Aggapea.Vistas
                 if (!categoriasYaCreadas.Contains(hoja.Text) ){
                     categoriasYaCreadas.Add(hoja.Text);
                     catalogo_libros.Nodes[0].ChildNodes.Add(hoja);
-                }           
+                }
             }
         }
 

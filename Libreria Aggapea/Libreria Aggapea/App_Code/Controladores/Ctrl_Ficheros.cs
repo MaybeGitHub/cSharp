@@ -52,9 +52,26 @@ namespace Libreria_Aggapea.App_Code.Controladores
             return null;            
         }
 
+        public Boolean encontrar(string objetoEncontrar, string dondeEnPlural)
+        {
+            Boolean encontrado = false;
+            string nombre;
+
+            foreach (string lineaLeida in leer(dondeEnPlural))
+            {
+                nombre = lineaLeida.Split(':')[0];
+                if (nombre.Equals(objetoEncontrar))
+                {
+                    encontrado = true;
+                }
+            }
+
+            return encontrado;
+        }
+
         public void actualizarTxTLibros(string valoresLibro)
         {
-            string[] libros = File.ReadAllLines(pathLibros);
+            string[] libros = leer("libros");
             string[] libro = valoresLibro.Split(':');
 
             for ( int i = 0; i < libros.Length; i++) {
@@ -72,7 +89,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
         public void añadirLibroCesta(string user, string titulo)
         {
-            string[] cestas = File.ReadAllLines(pathCestas);
+            string[] cestas = leer("cestas");
             for (int i = 0; i < cestas.Length; i++)
             {
                 if (cestas[i].Split(':')[0].Equals(user))
