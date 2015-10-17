@@ -55,7 +55,6 @@ C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Agg
 C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Libreria Aggapea.pdb
 C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Agapea.csprojResolveAssemblyReference.cache
 C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.dll
 C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.pdb
 C:\Users\deadl\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\bin\roslyn\csc.exe
@@ -78,3 +77,4 @@ C:\Users\deadl\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Agg
 C:\Users\deadl\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Agapea.csprojResolveAssemblyReference.cache
 C:\Users\deadl\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.dll
 C:\Users\deadl\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Aggapea.pdb
+C:\Users\Maybe\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\obj\Debug\Libreria Agapea.csprojResolveAssemblyReference.cache
