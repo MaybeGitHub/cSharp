@@ -17,10 +17,8 @@ namespace Libreria_Aggapea.App_Code.Modelos
         public string resumen { get; set; }
         public string categoria { get; set; }
         public double precio { get; set; }
-        public int vendidos { get; set; }
-        public int stock { get; set; }
 
-        private string[] atributos = new string[] { "nombre", "autor", "editorial", "ISBN10", "ISBN13", "resumen", "categoria", "precio", "vendidos", "stock" };
+        private string[] atributos = new string[] { "titulo", "autor", "editorial", "ISBN10", "ISBN13", "resumen", "categoria", "precio" };
         private List<string> valores = new List<string>();
 
         public Libro(string[] datosLibro)
@@ -32,9 +30,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
             this.ISBN13 = datosLibro[4]; 
             this.resumen = datosLibro[5]; 
             this.categoria = datosLibro[6]; 
-            this.precio = double.Parse(datosLibro[7]); 
-            this.vendidos = int.Parse(datosLibro[8]); 
-            this.stock = int.Parse(datosLibro[9]);
+            this.precio = double.Parse(datosLibro[7]);
 
             valores.AddRange(datosLibro);
         }

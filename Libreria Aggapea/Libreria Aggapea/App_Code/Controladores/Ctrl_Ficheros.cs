@@ -53,16 +53,16 @@ namespace Libreria_Aggapea.App_Code.Controladores
             return null;            
         }       
 
-        public void sustituir(string que, string donde)
+        public void actualizarLibro(Libro libro)
         {
-            ArrayList volcado = new ArrayList(leer(donde));
+            ArrayList volcado = new ArrayList(leer("libros"));
 
             for (int i = 0; i < volcado.Count; i++)
             {
-                if ((string)volcado[i] == que)
+                if (((string)volcado[i]).Split(':')[0] == libro.titulo )
                 {
                     volcado.RemoveAt(i);
-                    volcado.Insert(i, que);
+                    volcado.Insert(i, libro.datos());
                 }
             }
            
@@ -70,11 +70,19 @@ namespace Libreria_Aggapea.App_Code.Controladores
             File.WriteAllLines(pathLibros, volcado.Cast<string>());
         }
 
-        public void bajarStockLibroTxT(Libro libro)
+        public void actualizarCesta(Cesta cesta)
         {
-            libro.stock -= 1;
-            libro.vendidos += 1;
-            sustituir(libro.datos(), "libros");
+            ArrayList volcado = new ArrayList(leer("cestas"));
+            for (int i = 0; i < volcado.Count; i++)
+            {
+                if (((string)volcado[i]).Split(':')[0] == cesta.dueño.nombre)
+                {
+                    volcado.RemoveAt(i);
+                    volcado.Insert(i, cesta.datos());
+                }
+            }
+            File.WriteAllText(pathCestas, string.Empty);
+            File.WriteAllLines(pathCestas, volcado.Cast<string>());
         }
 
         public void añadirLibroTxTCesta(Usuario usuario, Libro libro)

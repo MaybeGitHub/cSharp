@@ -32,9 +32,8 @@ namespace Libreria_Aggapea.App_Code.Controladores
                     break;
                 }
             }
-                 
+            
             ctrl_F.añadirLibroTxTCesta(usuario, libro);
-            ctrl_F.bajarStockLibroTxT(libro);
         }
 
         public void comprobarCesta(Usuario usuario)
@@ -48,14 +47,30 @@ namespace Libreria_Aggapea.App_Code.Controladores
                     tengo = true;
                     break;
                 }
-            }
-          
+            }          
 
             if (!tengo)
             { 
                 listaCestas.Add(new Cesta(usuario));
                 ctrl_F.añadirNuevo(usuario.nombre, "cestas");
             }
+        }
+
+        public void actualizarCesta(Usuario usuario, Libro libroBorrar)
+        {
+            foreach(Cesta cesta in listaCestas)
+            {
+                if ( cesta.dueño.nombre == usuario.nombre )
+                {
+                    foreach (Libro libro in cesta.listaLibros)
+                        if (libro.titulo == libroBorrar.titulo)
+                        {
+                            cesta.listaLibros.Remove(libro);
+                            ctrl_F.actualizarCesta(cesta);
+                            break;
+                        }
+                }
+            }           
         }
     }
 }

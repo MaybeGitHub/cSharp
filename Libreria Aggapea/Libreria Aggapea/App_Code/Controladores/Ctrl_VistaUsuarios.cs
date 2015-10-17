@@ -9,7 +9,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_VistaUsuarios
     {
-        private Ctrl_Ficheros ctrl_f = new Ctrl_Ficheros();
+        private Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();
         private Tools tools = new Tools();
 
         public ArrayList listaUsuarios { get; set; }
@@ -21,7 +21,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
         }
         public void añadirUsuario(Usuario usuario)
         {
-            ctrl_f.añadirNuevo(usuario.datos(), "usuarios");
+            ctrl_F.añadirNuevo(usuario.datos(), "usuarios");
             listaUsuarios.Add(usuario);
         }
     }

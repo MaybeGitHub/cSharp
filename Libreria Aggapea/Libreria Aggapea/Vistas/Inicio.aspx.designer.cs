@@ -31,13 +31,13 @@ namespace Libreria_Aggapea.Vistas {
         protected global::System.Web.UI.WebControls.Label busqueda_Label;
         
         /// <summary>
-        /// barraBusqueda_Tx control.
+        /// busqueda_Tx control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox barraBusqueda_Tx;
+        protected global::System.Web.UI.WebControls.TextBox busqueda_Tx;
         
         /// <summary>
         /// busqueda_Btn control.

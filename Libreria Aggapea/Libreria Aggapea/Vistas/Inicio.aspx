@@ -21,10 +21,9 @@
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style2">
                     <asp:Label ID="busqueda_Label" runat="server" Text="Busca Libro : "></asp:Label>
-                    <asp:TextBox ID="barraBusqueda_Tx" runat="server" BorderStyle="Solid" Height="20px"  Width="406px" BorderColor="Black" BorderWidth="1px" Wrap="False"></asp:TextBox>
-                    <asp:Button ID="busqueda_Btn" runat="server" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" OnClick="busqueda_Btn_Click" Text="Buscar" Width="79px" CausesValidation="False" UseSubmitBehavior="False" />
-                    <asp:Table ID="tablaRadios" runat="server" Width="572px">
-                    </asp:Table>
+                    <asp:TextBox ID="busqueda_Tx" runat="server" BorderStyle="Solid" Height="20px"  Width="406px" BorderColor="Black" BorderWidth="1px" Wrap="False"></asp:TextBox>
+                    <asp:Button ID="busqueda_Btn" runat="server" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" OnClick="busqueda_Btn_Click" Text="Buscar" Width="79px" />
+                    <asp:Table ID="tablaRadios" runat="server" Width="572px"></asp:Table>
                     <asp:TextBox ID="mostrarResultado_Tx" runat="server" Height="20px" TextMode="MultiLine" Width="575px" Visible="False" ReadOnly="True"></asp:TextBox>
                 </td>
                 <td>

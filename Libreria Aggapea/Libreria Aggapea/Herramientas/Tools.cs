@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Libreria_Aggapea.App_Code.Controladores;
 using Libreria_Aggapea.App_Code.Modelos;
@@ -12,6 +13,8 @@ namespace Libreria_Aggapea.Herramientas
     public class Tools
     {
         private Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();
+        public Hashtable mapeoBotones = new Hashtable();
+
 
         public void pintarCajaInfoPagina( TextBox cajaMultilinea, HttpContext datos )
         {
@@ -81,6 +84,39 @@ namespace Libreria_Aggapea.Herramientas
                 ret.Add(fabricaLibros(titulo));
             }
             return ret;
+        }
+
+        public Table crearPanelCesta(Label label, Action<object, EventArgs> borrarLibroCesta)
+        {
+            Table nuevaTabla = new Table();
+            nuevaTabla.Rows.Add(new TableRow());
+            TableCell columna = new TableCell();
+            columna.Controls.Add(label);
+            nuevaTabla.Rows[0].Cells.Add(columna);
+            columna = new TableCell();
+            Button borrar = new Button();
+            borrar.Text = "X";
+            borrar.ControlStyle.ForeColor = System.Drawing.Color.Red;
+            borrar.Click += new EventHandler( borrarLibroCesta );
+            mapeoBotones.Add(borrar, label.Text);
+            columna.Controls.Add(borrar);
+            nuevaTabla.Rows[0].Cells.Add(columna);
+            return nuevaTabla;
+        }
+
+        public void crearPanelLibro(TableCell columnActual, Libro libro, Action<object, EventArgs> comprarLibro)
+        {
+            foreach (Label label in libro.generarLabels())
+            {
+                columnActual.Controls.Add(label);
+            }
+
+            Button comprar_Button = new Button();
+            comprar_Button.Text = "Comprar";
+            comprar_Button.UseSubmitBehavior = false;
+            comprar_Button.Click += new EventHandler(comprarLibro);
+            mapeoBotones.Add(comprar_Button, libro);
+            columnActual.Controls.Add(comprar_Button);
         }
     }
 }
