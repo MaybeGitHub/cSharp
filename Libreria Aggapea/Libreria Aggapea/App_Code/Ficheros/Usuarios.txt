@@ -1,3 +1,1 @@
-﻿jesus:12345678
-jesuso:qwertyuiop
-pepe:12341234
+﻿admin:12345678

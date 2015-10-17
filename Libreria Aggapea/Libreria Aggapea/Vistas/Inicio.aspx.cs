@@ -1,11 +1,12 @@
 ﻿using Libreria_Aggapea.App_Code.Controladores;
 using Libreria_Aggapea.Herramientas;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Libreria_Aggapea.App_Code.Modelos;
 
 namespace Libreria_Aggapea.Vistas
 {
@@ -15,215 +16,204 @@ namespace Libreria_Aggapea.Vistas
         private Ctrl_VistaLibros ctrl_VL = new Ctrl_VistaLibros();
         private Ctrl_VistaCesta ctrl_VC = new Ctrl_VistaCesta();
         private Tools tool = new Tools();
-        private string usuario;
+        private Usuario usuario;
+        private string categoriaSeleccionada = "Categorias";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            tool.pintarCajaInfoPagina(TextBox1, Context);
-
-            if (this.Request.QueryString["usuario"] != null)
+            tool.pintarCajaInfoPagina(TextBox1, Context);            
+            if (Session["usuario"] != null)
             {
-                usuario = this.Request.QueryString["usuario"].ToString();
-                welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario;
+                usuario = (Usuario)Session["usuario"];
             }
             else
             {
-                usuario = "jesus";
-                welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario;
+                usuario = new Usuario("admin", "12345678");
             }
+            
+            welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario.nombre;           
 
-            if (!IsPostBack) {
-                generarTreeLibros();
-                generarTabla();               
-            }
-            else
+            string paramentrosEvent = Request.Params["__EVENTARGUMENT"];
+
+            if (IsPostBack)
             {
-                expositor_libros.Controls.Clear();
-                foreach ( string key in Request.Params)
+                if (paramentrosEvent != null && paramentrosEvent.Split('\\').Count() > 1)
                 {
-                    if ( key == "__EVENTARGUMENT")
+                    string[] datosEventArgument = paramentrosEvent.Split('\\');
+                    if (datosEventArgument[0].Contains("Categorias"))
                     {
-                        if (Request[key].Split('\\').Length > 1) {                            
-                            string valor = Request[key].Split('\\')[1];
-                            generarTabla(valor);
-                        }
-                        else
-                        {
-                            generarTabla();
-                        }                        
+                        categoriaSeleccionada = datosEventArgument[1];
                     }
-                }               
+                }
             }
-
+            else
+            {
+                generarTreeLibros();
+            }
+            generarTablaLibros();
             generarCesta();
         }
 
         private void generarCesta()
         {
             expositor_cesta.CellSpacing = 0;
-            List<string> librosGuardados = new List<string>();
-            if ( ctrl_F.encontrar(usuario, "cestas"))
+
+            //Busco Cesta Existente
+
+            ctrl_VC.comprobarCesta(usuario);
+
+            Cesta cestaUsuario = null;          
+
+            foreach (Cesta cesta in ctrl_VC.listaCestas)
             {
-                TableRow fila = new TableRow();
-                expositor_cesta.Rows.Add(fila);
-
-                TableCell columna = new TableCell();
-                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
-                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
-                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
-                expositor_cesta.Rows[0].Cells.Add(columna);
-
-                Label label = new Label();
-                label.Text = "Tu cesta";
-                label.Style.Add("text-align", "center");
-                label.Font.Bold = true;
-                label.Style.Add("display", "block");
-                columna.Controls.Add( label );
-
-                string[] librosComprados = null;
-
-                foreach (string cestaBruto in ctrl_F.leer("cestas"))
-                {                   
-                    if (cestaBruto.Split(':')[0].Equals(usuario))
-                    {
-                        librosComprados = cestaBruto.Split(':');
-                        break;
-                    }
-                }
-
-                fila = new TableRow();
-                expositor_cesta.Rows.Add(fila);
-
-                columna = new TableCell();
-                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
-                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
-                expositor_cesta.Rows[1].Cells.Add(columna);
-
-                for ( int i = 1; i < librosComprados.Length; i++)
-                {                   
-                    label = new Label();
-                    label.Text = librosComprados[i];
-                    librosGuardados.Add(librosComprados[i]);
-                    label.Style.Add("display", "block");
-                    columna.Controls.Add(label);
-                }
-
-                fila = new TableRow();
-                expositor_cesta.Rows.Add(fila);
-
-                columna = new TableCell();
-                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
-                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
-                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
-                expositor_cesta.Rows[2].Cells.Add(columna);
-
-                label = new Label();
-                label.Text = "Total : ";
-
-                double total = 0;
-                foreach( string titulo in librosGuardados)
+                if (cesta.dueño!= null && cesta.dueño.nombre == usuario.nombre)
                 {
-                   foreach ( string libro in ctrl_F.leer("libros"))
-                    {
-                        if (libro.Split(':').Contains(titulo))
-                        {
-                            total += double.Parse(libro.Split(':')[7]);
-                        }
-                    }
+                    cestaUsuario = cesta;
+                    break;
                 }
-                label.Text += total + "€";
-                label.Font.Bold = true;
+            }
+
+            // Cabecera
+
+            TableRow fila = new TableRow();
+            expositor_cesta.Rows.Add(fila);
+
+            TableCell columna = new TableCell();
+            columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+            columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+            columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+            expositor_cesta.Rows[0].Cells.Add(columna);
+
+            Label label = new Label();
+            label.Text = "Tu cesta";
+            label.Style.Add("text-align", "center");
+            label.Font.Bold = true;
+            label.Style.Add("display", "block");
+            columna.Controls.Add( label );         
+
+            // Libros
+
+            fila = new TableRow();
+            expositor_cesta.Rows.Add(fila);
+
+            columna = new TableCell();
+            columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+            columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+            expositor_cesta.Rows[1].Cells.Add(columna);
+
+            foreach( Libro libro in cestaUsuario.listaLibros )
+            {                   
+                label = new Label();
+                label.Text = (string) libro.titulo;
                 label.Style.Add("display", "block");
                 columna.Controls.Add(label);
-
-                fila = new TableRow();
-                expositor_cesta.Rows.Add(fila);
-
-                columna = new TableCell();
-                columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
-                columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
-                columna.ControlStyle.BorderStyle = BorderStyle.Solid;
-                columna.HorizontalAlign = HorizontalAlign.Center;
-                expositor_cesta.Rows[3].Cells.Add(columna);               
-
-                Button pagar_button = new Button();
-                pagar_button.Text = "Pagar";
-                columna.Controls.Add(pagar_button);
-
             }
+
+            // Coste
+
+            fila = new TableRow();
+            expositor_cesta.Rows.Add(fila);
+
+            columna = new TableCell();
+            columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+            columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+            columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+            expositor_cesta.Rows[2].Cells.Add(columna);
+
+            label = new Label();
+            label.Text = "Total : ";
+
+            double total = 0;
+            foreach( Libro libro in cestaUsuario.listaLibros )
+            {
+                total += libro.precio;
+            }
+            label.Text += total + "€";
+            label.Font.Bold = true;
+            label.Style.Add("display", "block");
+            columna.Controls.Add(label);
+
+            // Comprar
+
+            fila = new TableRow();
+            expositor_cesta.Rows.Add(fila);
+
+            columna = new TableCell();
+            columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
+            columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+            columna.ControlStyle.BorderStyle = BorderStyle.Solid;
+            columna.HorizontalAlign = HorizontalAlign.Center;
+            expositor_cesta.Rows[3].Cells.Add(columna);               
+
+            Button pagar_button = new Button();
+            pagar_button.Text = "Pagar";
+            columna.Controls.Add(pagar_button);         
         }
 
         private void generarTreeLibros()
         {
-            List<string> categoriasYaCreadas = new List<string>();
+            ArrayList categoriasPuestas = new ArrayList();
             TreeNode hoja = new TreeNode("Categorias");
             catalogo_libros.Nodes.Add(hoja);
             catalogo_libros.ExpandDepth = 1;
 
-            foreach (string libroBruto in ctrl_VL.libros) {
+            foreach (Libro libro in ctrl_VL.listaLibros) {
                 hoja = new TreeNode();
-                hoja.Text = libroBruto.Split(':')[6];
-                if (!categoriasYaCreadas.Contains(hoja.Text) ){
-                    categoriasYaCreadas.Add(hoja.Text);
+                hoja.Text = libro.categoria;
+                if (!categoriasPuestas.Contains( hoja.Text) ){
+                    categoriasPuestas.Add(hoja.Text);
                     catalogo_libros.Nodes[0].ChildNodes.Add(hoja);
                 }
             }
         }
 
-        private void generarTabla()
-        {            
-            double librosRestantes = (double)ctrl_VL.libros.Length;        
-            int filasNecesarias = (int)Math.Ceiling(librosRestantes / 3);
-            TableCell columnActual;
-            TableRow rowActual;
-
-            for (int f = 0; f < filasNecesarias; f++)
-            {
-                rowActual = new TableRow();
-                expositor_libros.Rows.Add(rowActual);
-                for (int c = 0; c < 3 && librosRestantes > 0; c++)
-                {
-                    columnActual = new TableCell();
-                    columnActual.ControlStyle.BorderColor = System.Drawing.Color.Black;
-                    columnActual.ControlStyle.BorderStyle = BorderStyle.Solid;
-                    columnActual.Style.Add("padding", "10px");
-                    ctrl_VL.construirPanelLibro(columnActual, f, c, comprarLibro);                    
-                    rowActual.Cells.Add(columnActual);
-                    librosRestantes--;
-                }
-            }
-        }
-
-        private void generarTabla(string contenido)
+        private void generarTablaLibros()
         {
-            double librosRestantes = (double)ctrl_VL.leerLibros(contenido).Count;
-            int filasNecesarias = (int)Math.Ceiling(librosRestantes / 3);
-            TableCell columnActual;
-            TableRow rowActual;
+            expositor_libros.Controls.Clear();
+            TableCell columnActual = null;
+            TableRow rowActual = null;
 
-            for (int f = 0; f < filasNecesarias; f++)
+            if (categoriaSeleccionada != "Categorias")
             {
-                rowActual = new TableRow();
-                expositor_libros.Rows.Add(rowActual);
-                for (int c = 0; c < 3 && librosRestantes > 0; c++)
+                ArrayList librosCategoriaBuscada = ctrl_VL.leerLibros(categoriaSeleccionada);
+                foreach (Libro libro in librosCategoriaBuscada)
                 {
+                    if (librosCategoriaBuscada.IndexOf(libro) % 3 == 0)
+                    {
+                        rowActual = new TableRow();
+                        expositor_libros.Rows.Add(rowActual);
+                    }
                     columnActual = new TableCell();
                     columnActual.ControlStyle.BorderColor = System.Drawing.Color.Black;
                     columnActual.ControlStyle.BorderStyle = BorderStyle.Solid;
                     columnActual.Style.Add("padding", "10px");
-                    ctrl_VL.construirPanelLibro(columnActual, ctrl_VL.librosEncontrados.ElementAt(c), comprarLibro);
+                    ctrl_VL.construirPanelLibro(columnActual, libro, comprarLibro);
                     rowActual.Cells.Add(columnActual);
-                    librosRestantes--;
                 }
             }
-
+            else
+            {
+                foreach (Libro libro in ctrl_VL.listaLibros)
+                {
+                    if (ctrl_VL.listaLibros.IndexOf(libro) % 3 == 0)
+                    {
+                        rowActual = new TableRow();
+                        expositor_libros.Rows.Add(rowActual);
+                    }
+                    columnActual = new TableCell();
+                    columnActual.ControlStyle.BorderColor = System.Drawing.Color.Black;
+                    columnActual.ControlStyle.BorderStyle = BorderStyle.Solid;
+                    columnActual.Style.Add("padding", "10px");
+                    ctrl_VL.construirPanelLibro(columnActual, libro, comprarLibro);
+                    rowActual.Cells.Add(columnActual);
+                }
+            }
         }
 
         private void comprarLibro(object sender, EventArgs e)
-        {
-            Button botonSeleccionado = (Button)sender;
-            string valorBoton = ctrl_VL.mapeoBotones[botonSeleccionado];
-            ctrl_VC.añadirLibroAlUsuario(usuario, valorBoton);
+        {            
+            Libro libro = (Libro) ctrl_VL.mapeoBotones[(Button)sender];
+            ctrl_VC.añadirLibroCestaUsuario(usuario, libro);
             Response.Redirect(Request.RawUrl);
         }
     }

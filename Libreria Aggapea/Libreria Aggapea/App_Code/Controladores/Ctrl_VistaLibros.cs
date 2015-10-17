@@ -1,32 +1,30 @@
 ﻿using Libreria_Aggapea.App_Code.Modelos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using System.Web;
 using System.Web.UI.WebControls;
+using Libreria_Aggapea.Herramientas;
+using System.Linq;
 
 namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_VistaLibros
     {
         private Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();
-
-        public string[] libros { get; set; }
-        public List<int> librosEncontrados { get; set; }
-
-        public Dictionary<object, string> mapeoBotones = new Dictionary<object, string>();
+        private Tools tools = new Tools();
+        public ArrayList listaLibros { get; set; }
+        public Hashtable mapeoBotones = new Hashtable();
 
         public Ctrl_VistaLibros()
         {
-            libros = ctrl_F.leer("libros");
+            listaLibros = new ArrayList();
+            tools.rellenarList(listaLibros, "libros");            
         }
 
         public void construirPanelLibro(TableCell columnActual, int fila, int columna, Action<object, EventArgs> comprarLibro)
         {           
             int libroActual = (3 * fila) + columna;
-            string libroSeleccionado = libros[libroActual];
-            string[] datosLibro = libroSeleccionado.Split(':');
-            Libro libro = new Libro(datosLibro);
+            Libro libro = (Libro)listaLibros[libroActual];
 
             foreach (Label label in libro.generarLabels())
             {
@@ -37,16 +35,12 @@ namespace Libreria_Aggapea.App_Code.Controladores
             comprar_Button.Text = "Comprar";
             comprar_Button.ID = "comprar_boton" + libroActual;
             comprar_Button.Click += new EventHandler( comprarLibro );
-            mapeoBotones.Add(comprar_Button, libro.datos());
+            mapeoBotones.Add(comprar_Button, libro);
             columnActual.Controls.Add(comprar_Button);
         }
 
-        public void construirPanelLibro(TableCell columnActual, int libroActual, Action<object, EventArgs> comprarLibro)
+        public void construirPanelLibro(TableCell columnActual, Libro libro, Action<object, EventArgs> comprarLibro)
         {
-            string libroSeleccionado = libros[libroActual];
-            string[] datosLibro = libroSeleccionado.Split(':');
-            Libro libro = new Libro(datosLibro);
-
             foreach (Label label in libro.generarLabels())
             {
                 columnActual.Controls.Add(label);
@@ -54,25 +48,20 @@ namespace Libreria_Aggapea.App_Code.Controladores
 
             Button comprar_Button = new Button();
             comprar_Button.Text = "Comprar";
-            comprar_Button.ID = "comprar_boton" + libroActual;
             comprar_Button.Click += new EventHandler(comprarLibro);
-            mapeoBotones.Add(comprar_Button, libro.datos());
+            mapeoBotones.Add(comprar_Button, libro);
             columnActual.Controls.Add(comprar_Button);
         }
 
-        public List<string> leerLibros(string indice)
+        public ArrayList leerLibros(string categoria)
         {
-            List<string> ret = new List<string>();
-            librosEncontrados = new List<int>();
-            string[] datosLibro;
+            ArrayList ret = new ArrayList();
 
-            for ( int i = 0; i < libros.Length; i++ )
-            {
-                datosLibro = libros[i].Split(':');
-                if ( datosLibro.Contains(indice) )
+            foreach ( Libro libro in listaLibros )
+            {               
+                if ( libro.categoria == categoria )
                 {
-                    librosEncontrados.Add(i);
-                    ret.Add(datosLibro[0]);
+                    ret.Add(libro);
                 }
             }
             return ret;

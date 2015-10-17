@@ -6,14 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Libreria_Aggapea.App_Code.Controladores;
 using Libreria_Aggapea.Herramientas;
+using Libreria_Aggapea.App_Code.Modelos;
 
 namespace Libreria_Aggapea
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
 
-        private Ctrl_VistaUsuarios ctrl_VM = new Ctrl_VistaUsuarios();
+        private Ctrl_VistaUsuarios ctrl_VU = new Ctrl_VistaUsuarios();
         private Tools tool = new Tools();
+        private Usuario usuario;
 
         protected void Page_Load(Object sender, EventArgs e)
         {
@@ -24,8 +26,9 @@ namespace Libreria_Aggapea
         {
             if (IsValid)
             {            
-                ctrl_VM.meterUsuario(usuario_TxBox.Text, pass_TxBox.Text);
-                Response.Redirect("Inicio.aspx?usuario=" + usuario_TxBox.Text);                
+                ctrl_VU.añadirUsuario(usuario);
+                Session["usuario"] = usuario;
+                Server.Transfer("Inicio.aspx");
             }
         }
 
@@ -51,7 +54,18 @@ namespace Libreria_Aggapea
 
         protected void usuarioExiste_FV_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = ctrl_VM.validacionExistenciaUsuario(usuario_TxBox.Text);
+            usuario = new Usuario(usuario_TxBox.Text, pass_TxBox.Text);
+            foreach (Usuario usuariosAlmacenados in ctrl_VU.listaUsuarios) {
+                if ( usuariosAlmacenados.nombre == usuario.nombre)
+                {
+                    args.IsValid = false;
+                    break;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
         }
     }
 }

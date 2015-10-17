@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 
@@ -9,11 +9,18 @@ namespace Libreria_Aggapea.App_Code.Modelos
     {
         public Usuario dueño { get; set; }
 
-        public List<Libro> listaLibros { get; set; }
+        public ArrayList listaLibros { get; set; }
 
         public Cesta(Usuario dueño)
         {
             this.dueño = dueño;
+            listaLibros = new ArrayList();
+        }
+
+        public Cesta(Usuario usuario, ArrayList libros)
+        {
+            dueño = usuario;
+            listaLibros = libros;            
         }
 
         public void añadirLibro(Libro libro)

@@ -1,23 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 using Libreria_Aggapea.App_Code.Modelos;
+using Libreria_Aggapea.Herramientas;
 
 namespace Libreria_Aggapea.App_Code.Controladores
 {
     public class Ctrl_VistaUsuarios
     {
-        Ctrl_Ficheros ctrl_f = new Ctrl_Ficheros();
-        public void meterUsuario(string usuario, string password)
-        {
-            Usuario user = new Usuario(usuario, password);
-            ctrl_f.guardar(user.datos(), "usuarios");
-        }
+        private Ctrl_Ficheros ctrl_f = new Ctrl_Ficheros();
+        private Tools tools = new Tools();
 
-        public Boolean validacionExistenciaUsuario(string user)
+        public ArrayList listaUsuarios { get; set; }
+
+        public Ctrl_VistaUsuarios()
         {
-            return !ctrl_f.encontrar(user, "usuarios");
+            listaUsuarios = new ArrayList();
+            tools.rellenarList(listaUsuarios, "usuarios");
+        }
+        public void añadirUsuario(Usuario usuario)
+        {
+            ctrl_f.añadirNuevo(usuario.datos(), "usuarios");
+            listaUsuarios.Add(usuario);
         }
     }
 }
