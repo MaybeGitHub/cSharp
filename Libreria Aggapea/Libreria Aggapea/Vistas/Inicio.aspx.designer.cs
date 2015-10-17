@@ -22,6 +22,51 @@ namespace Libreria_Aggapea.Vistas {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// busqueda_Label control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label busqueda_Label;
+        
+        /// <summary>
+        /// barraBusqueda_Tx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox barraBusqueda_Tx;
+        
+        /// <summary>
+        /// busqueda_Btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button busqueda_Btn;
+        
+        /// <summary>
+        /// tablaRadios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tablaRadios;
+        
+        /// <summary>
+        /// mostrarResultado_Tx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox mostrarResultado_Tx;
+        
+        /// <summary>
         /// welcomeUsuario control.
         /// </summary>
         /// <remarks>

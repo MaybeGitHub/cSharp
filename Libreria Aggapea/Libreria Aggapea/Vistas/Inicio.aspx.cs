@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Libreria_Aggapea.App_Code.Modelos;
+using System.Drawing;
 
 namespace Libreria_Aggapea.Vistas
 {
@@ -18,10 +19,11 @@ namespace Libreria_Aggapea.Vistas
         private Tools tool = new Tools();
         private Usuario usuario;
         private string categoriaSeleccionada = "Categorias";
+        private ArrayList listaRadios = new ArrayList();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            tool.pintarCajaInfoPagina(TextBox1, Context);            
+            tool.pintarCajaInfoPagina(TextBox1, Context);
             if (Session["usuario"] != null)
             {
                 usuario = (Usuario)Session["usuario"];
@@ -30,8 +32,8 @@ namespace Libreria_Aggapea.Vistas
             {
                 usuario = new Usuario("admin", "12345678");
             }
-            
-            welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario.nombre;           
+
+            welcomeUsuario.Text = "Bienvenido de nuevo, " + usuario.nombre;
 
             string paramentrosEvent = Request.Params["__EVENTARGUMENT"];
 
@@ -50,8 +52,32 @@ namespace Libreria_Aggapea.Vistas
             {
                 generarTreeLibros();
             }
+            generarRadios();
             generarTablaLibros();
-            generarCesta();
+            generarCesta();           
+        }
+
+        private void generarRadios()
+        {
+            tablaRadios.Rows.Add(new TableRow());
+            TableCell columna;
+            RadioButton radio;
+
+            for ( int i = 0; i < 3; i++)
+            {
+                columna = new TableCell();                
+                radio = new RadioButton();
+                listaRadios.Add(radio);
+                radio.GroupName = "busqueda";
+                switch (i)
+                {
+                    case 0: radio.Checked = true; radio.Text = "Autor"; break;
+                    case 1: radio.Text = "Titulo"; break;
+                    case 2: radio.Text = "Categoria"; break;
+                }
+                columna.Controls.Add(radio);
+                tablaRadios.Rows[0].Cells.Add(columna);
+            }
         }
 
         private void generarCesta()
@@ -62,11 +88,11 @@ namespace Libreria_Aggapea.Vistas
 
             ctrl_VC.comprobarCesta(usuario);
 
-            Cesta cestaUsuario = null;          
+            Cesta cestaUsuario = null;
 
             foreach (Cesta cesta in ctrl_VC.listaCestas)
             {
-                if (cesta.dueño!= null && cesta.dueño.nombre == usuario.nombre)
+                if (cesta.dueño != null && cesta.dueño.nombre == usuario.nombre)
                 {
                     cestaUsuario = cesta;
                     break;
@@ -89,7 +115,7 @@ namespace Libreria_Aggapea.Vistas
             label.Style.Add("text-align", "center");
             label.Font.Bold = true;
             label.Style.Add("display", "block");
-            columna.Controls.Add( label );         
+            columna.Controls.Add(label);
 
             // Libros
 
@@ -101,10 +127,10 @@ namespace Libreria_Aggapea.Vistas
             columna.ControlStyle.BorderStyle = BorderStyle.Solid;
             expositor_cesta.Rows[1].Cells.Add(columna);
 
-            foreach( Libro libro in cestaUsuario.listaLibros )
-            {                   
+            foreach (Libro libro in cestaUsuario.listaLibros)
+            {
                 label = new Label();
-                label.Text = (string) libro.titulo;
+                label.Text = (string)libro.titulo;
                 label.Style.Add("display", "block");
                 columna.Controls.Add(label);
             }
@@ -124,7 +150,7 @@ namespace Libreria_Aggapea.Vistas
             label.Text = "Total : ";
 
             double total = 0;
-            foreach( Libro libro in cestaUsuario.listaLibros )
+            foreach (Libro libro in cestaUsuario.listaLibros)
             {
                 total += libro.precio;
             }
@@ -143,11 +169,11 @@ namespace Libreria_Aggapea.Vistas
             columna.ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
             columna.ControlStyle.BorderStyle = BorderStyle.Solid;
             columna.HorizontalAlign = HorizontalAlign.Center;
-            expositor_cesta.Rows[3].Cells.Add(columna);               
+            expositor_cesta.Rows[3].Cells.Add(columna);
 
             Button pagar_button = new Button();
             pagar_button.Text = "Pagar";
-            columna.Controls.Add(pagar_button);         
+            columna.Controls.Add(pagar_button);
         }
 
         private void generarTreeLibros()
@@ -157,10 +183,12 @@ namespace Libreria_Aggapea.Vistas
             catalogo_libros.Nodes.Add(hoja);
             catalogo_libros.ExpandDepth = 1;
 
-            foreach (Libro libro in ctrl_VL.listaLibros) {
+            foreach (Libro libro in ctrl_VL.listaLibros)
+            {
                 hoja = new TreeNode();
                 hoja.Text = libro.categoria;
-                if (!categoriasPuestas.Contains( hoja.Text) ){
+                if (!categoriasPuestas.Contains(hoja.Text))
+                {
                     categoriasPuestas.Add(hoja.Text);
                     catalogo_libros.Nodes[0].ChildNodes.Add(hoja);
                 }
@@ -211,10 +239,49 @@ namespace Libreria_Aggapea.Vistas
         }
 
         private void comprarLibro(object sender, EventArgs e)
-        {            
-            Libro libro = (Libro) ctrl_VL.mapeoBotones[(Button)sender];
+        {
+            Libro libro = (Libro)ctrl_VL.mapeoBotones[(Button)sender];
             ctrl_VC.añadirLibroCestaUsuario(usuario, libro);
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void busqueda_Btn_Click(object sender, EventArgs e)
+        {
+            RadioButton radioSeleccionado = null;
+            foreach(RadioButton radio in listaRadios)
+            {
+                if ( radio.Checked)
+                {
+                    radioSeleccionado = radio;
+                    break;
+                }
+            }
+            mostrarResultado_Tx.Text = "";
+            string texto = barraBusqueda_Tx.Text;
+            string textoCapitalizado = "";
+            
+            if (texto.Length != 0)
+            {
+                textoCapitalizado = texto.Replace(texto.ElementAt(0).ToString(), texto.ElementAt(0).ToString().ToUpper());
+                ArrayList librosEncontrados = ctrl_VL.buscarLibros(textoCapitalizado, radioSeleccionado.Text.ToLower());
+                if (librosEncontrados.Count > 0)
+                {
+                    mostrarResultado_Tx.Visible = true;
+                    foreach (Libro libro in librosEncontrados)
+                    {
+                        mostrarResultado_Tx.Height = 15 * librosEncontrados.Count;
+                        mostrarResultado_Tx.Text += libro.autor + " - " + libro.titulo + " - " + libro.categoria + " - " + libro.precio + "€\n";
+                    }
+                }
+                else
+                {
+                    mostrarResultado_Tx.Visible = false;
+                }
+            }
+            else
+            {
+                mostrarResultado_Tx.Visible = false;
+            }            
         }
     }
 }

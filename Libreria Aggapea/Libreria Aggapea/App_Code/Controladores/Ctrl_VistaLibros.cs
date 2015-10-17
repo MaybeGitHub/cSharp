@@ -66,5 +66,43 @@ namespace Libreria_Aggapea.App_Code.Controladores
             }
             return ret;
         }
-    }
+
+        public ArrayList buscarLibros(string busqueda, string tipo)
+        {           
+            ArrayList libros = new ArrayList();
+            switch (tipo.ToLower())
+            {
+                case "titulo":
+                    foreach (Libro libro in listaLibros)
+                    {
+                        if (libro.titulo.StartsWith(busqueda))
+                        {
+                            libros.Add(libro);
+                        }
+                    }
+                    break;
+                case "autor":
+                    foreach (Libro libro in listaLibros)
+                    {
+                        if (libro.autor.StartsWith(busqueda))
+                        {
+                            libros.Add(libro);
+                        }
+                    }
+                    break;
+                case "categoria":
+                    foreach (Libro libro in listaLibros)
+                    {
+                        if (libro.categoria.StartsWith(busqueda))
+                        {
+                            libros.Add(libro);
+                        }
+                    }
+                    break;
+            }
+
+            return libros;               
+         }
+
+     }
 }
