@@ -38,10 +38,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
         public string datos()
         {
             string ret = "";
-            for ( int i = 0; i < atributos.Length; i++ )
-            {
-                ret += valores.ToArray()[i] + ( i < atributos.Length-1 ? ":": "");
-            }
+            for ( int i = 0; i < atributos.Length; i++ ) ret += valores.ToArray()[i] + ( i < atributos.Length-1 ? ":": "");
             return ret;
         }
 

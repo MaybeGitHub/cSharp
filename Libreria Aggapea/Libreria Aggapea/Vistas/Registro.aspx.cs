@@ -12,21 +12,23 @@ namespace Libreria_Aggapea
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-
+        private Ctrl_Ficheros ctrl_F = new Ctrl_Ficheros();       
+        private Tools tools = new Tools();
         private Ctrl_VistaUsuarios ctrl_VU = new Ctrl_VistaUsuarios();
-        private Tools tool = new Tools();
         private Usuario usuario;
 
         protected void Page_Load(Object sender, EventArgs e)
         {
-            tool.pintarCajaInfoPagina(TextBox1, Context);
+            tools.pintarCajaInfoPagina(TextBox1, Context);
+            usuario_TxBox.Focus();
         }
 
         protected void registrar_boton_Click(object sender, ImageClickEventArgs e)
         {
             if (IsValid)
-            {            
-                ctrl_VU.añadirUsuario(usuario);
+            {
+                usuario = new Usuario(usuario_TxBox.Text, pass_TxBox.Text);
+                ctrl_F.añadirUsuario(usuario);
                 Session["usuario"] = usuario;
                 Server.Transfer("Inicio.aspx");
             }
@@ -34,38 +36,18 @@ namespace Libreria_Aggapea
 
         protected void passLong_V_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if ( pass2_TxBox.Text.Length < 8)
-            {
-                args.IsValid = false;                
-            }
+            if ( pass2_TxBox.Text.Length < 8) args.IsValid = false;
         }
 
         protected void almaCheck_V_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if ( alma_ChkBox.Checked == false)
-            {
-                args.IsValid = false;
-            }
-            else
-            {
-                alma_ChkBox.Checked = false;
-            }
+            if ( alma_ChkBox.Checked == false ) args.IsValid = false;
+            alma_ChkBox.Checked = false;
         }
 
         protected void usuarioExiste_FV_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            usuario = new Usuario(usuario_TxBox.Text, pass_TxBox.Text);
-            foreach (Usuario usuariosAlmacenados in ctrl_VU.listaUsuarios) {
-                if ( usuariosAlmacenados.nombre == usuario.nombre)
-                {
-                    args.IsValid = false;
-                    break;
-                }
-                else
-                {
-                    args.IsValid = true;
-                }
-            }
+            if ( ctrl_VU.usuarios.Where(usuario => usuario.nombre == usuario_TxBox.Text).Count() != 0 ) args.IsValid = false;            
         }
     }
 }

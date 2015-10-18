@@ -1,7 +1,7 @@
 ﻿using Libreria_Aggapea.App_Code.Controladores;
 using Libreria_Aggapea.Herramientas;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,7 +18,6 @@ namespace Libreria_Aggapea.Vistas
         private Tools tools = new Tools();
         private Usuario usuario;
         private string categoriaSeleccionada = "Categorias";
-        private ArrayList listaRadios = new ArrayList();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,13 +66,14 @@ namespace Libreria_Aggapea.Vistas
             {
                 columna = new TableCell();                
                 radio = new RadioButton();
-                listaRadios.Add(radio);
+                
                 radio.GroupName = "busqueda";
                 switch (i)
                 {
                     case 0: radio.Checked = true; radio.Text = "Autor"; break;
                     case 1: radio.Text = "Titulo"; break;
                 }
+                tools.mapeoBotonesRadios.Add(radio, radio.Text.ToLower());
                 columna.Controls.Add(radio);
                 tablaRadios.Rows[0].Cells.Add(columna);
             }
@@ -88,16 +88,7 @@ namespace Libreria_Aggapea.Vistas
 
             ctrl_VC.comprobarCesta(usuario);
 
-            Cesta cestaUsuario = null;
-
-            foreach (Cesta cesta in ctrl_VC.listaCestas)
-            {
-                if (cesta.dueño != null && cesta.dueño.nombre == usuario.nombre)
-                {
-                    cestaUsuario = cesta;
-                    break;
-                }
-            }
+            Cesta cestaUsuario = ctrl_VC.cestas.Where(cesta => cesta.dueño != null && cesta.dueño.nombre == usuario.nombre).ElementAt(0);            
 
             // Cabecera
 
@@ -127,13 +118,7 @@ namespace Libreria_Aggapea.Vistas
             columna.ControlStyle.BorderStyle = BorderStyle.Solid;
             expositor_cesta.Rows[1].Cells.Add(columna);
 
-            foreach (Libro libro in cestaUsuario.listaLibros)
-            {
-                label = new Label();
-                label.Text = (string)libro.titulo;
-                label.Style.Add("display", "block");
-                columna.Controls.Add(tools.crearPanelCesta(label, borrarLibroCesta));
-            }
+            foreach (Libro libro in cestaUsuario.listaLibros) columna.Controls.Add(tools.crearPanelCesta(libro, borrarLibroCesta));
 
             // Coste
 
@@ -150,10 +135,7 @@ namespace Libreria_Aggapea.Vistas
             label.Text = "Total : ";
 
             double total = 0;
-            foreach (Libro libro in cestaUsuario.listaLibros)
-            {
-                total += libro.precio;
-            }
+            foreach(Libro libro in cestaUsuario.listaLibros ) total += libro.precio;
             label.Text += total + "€";
             label.Font.Bold = true;
             label.Style.Add("display", "block");
@@ -178,12 +160,12 @@ namespace Libreria_Aggapea.Vistas
 
         private void generarTreeCategorias()
         {
-            ArrayList categoriasPuestas = new ArrayList();
+            List<string> categoriasPuestas = new List<string>();
             TreeNode hoja = new TreeNode("Categorias");
             catalogo_libros.Nodes.Add(hoja);
             catalogo_libros.ExpandDepth = 1;
 
-            foreach (Libro libro in ctrl_VL.listaLibros)
+            foreach (Libro libro in ctrl_VL.libros)
             {
                 hoja = new TreeNode();
                 hoja.Text = libro.categoria;
@@ -203,7 +185,7 @@ namespace Libreria_Aggapea.Vistas
 
             if (categoriaSeleccionada != "Categorias")
             {
-                ArrayList librosCategoriaBuscada = ctrl_VL.leerLibros(categoriaSeleccionada);
+                List<Libro> librosCategoriaBuscada = ctrl_VL.leerLibros(categoriaSeleccionada);
                 foreach (Libro libro in librosCategoriaBuscada)
                 {
                     if (librosCategoriaBuscada.IndexOf(libro) % 3 == 0)
@@ -221,9 +203,9 @@ namespace Libreria_Aggapea.Vistas
             }
             else
             {
-                foreach (Libro libro in ctrl_VL.listaLibros)
+                foreach (Libro libro in ctrl_VL.libros)
                 {
-                    if (ctrl_VL.listaLibros.IndexOf(libro) % 3 == 0)
+                    if (ctrl_VL.libros.IndexOf(libro) % 3 == 0)
                     {
                         rowActual = new TableRow();
                         expositor_libros.Rows.Add(rowActual);
@@ -240,54 +222,36 @@ namespace Libreria_Aggapea.Vistas
 
         private void comprarLibro(object sender, EventArgs e)
         {
-            Libro libro = (Libro)tools.mapeoBotones[sender];
+            Libro libro = tools.mapeoBotonesCompra[(Button)sender];
             ctrl_VC.añadirLibroCestaUsuario(usuario, libro);
             Response.Redirect(Request.RawUrl);
         }
 
         private void borrarLibroCesta(object sender, EventArgs e)
         {
-            ctrl_VC.actualizarCesta(usuario, tools.fabricaLibros((string)tools.mapeoBotones[sender]));
+            ctrl_VC.actualizarCesta(usuario, tools.mapeoBotonesCesta[(Button)sender]);
             Response.Redirect(Request.RawUrl);
         }
 
         protected void busqueda_Btn_Click(object sender, EventArgs e)
-        {
-            RadioButton radioSeleccionado = null;
-            foreach(RadioButton radio in listaRadios)
-            {
-                if ( radio.Checked)
-                {
-                    radioSeleccionado = radio;
-                    break;
-                }
-            }
+        {        
+            RadioButton radioSeleccionado = tools.mapeoBotonesRadios.Keys.Where(radio => radio.Checked == true).ElementAt(0);
             mostrarResultado_Tx.Text = "";
-            string texto = busqueda_Tx.Text;
-            string textoCapitalizado = "";
-            
-            if (texto.Length != 0)
+
+            if (busqueda_Tx.Text.Length != 0)
             {
-                textoCapitalizado = texto.Replace(texto.ElementAt(0).ToString(), texto.ElementAt(0).ToString().ToUpper());
-                ArrayList librosEncontrados = ctrl_VL.buscarLibros(textoCapitalizado, radioSeleccionado.Text.ToLower());
+                string texto = busqueda_Tx.Text.Replace(busqueda_Tx.Text.ElementAt(0).ToString(), busqueda_Tx.Text.ElementAt(0).ToString().ToUpper());
+                List<Libro> librosEncontrados = ctrl_VL.buscarLibros(texto, tools.mapeoBotonesRadios[radioSeleccionado]);
                 if (librosEncontrados.Count > 0)
-                {
+                {                    
                     mostrarResultado_Tx.Visible = true;
+                    mostrarResultado_Tx.Height = 15 * librosEncontrados.Count;
                     foreach (Libro libro in librosEncontrados)
-                    {
-                        mostrarResultado_Tx.Height = 15 * librosEncontrados.Count;
                         mostrarResultado_Tx.Text += libro.autor + " - " + libro.titulo + " - " + libro.categoria + " - " + libro.precio + "€\n";
-                    }
                 }
-                else
-                {
-                    mostrarResultado_Tx.Visible = false;
-                }
+                else mostrarResultado_Tx.Visible = false;
             }
-            else
-            {
-                mostrarResultado_Tx.Visible = false;
-            }
+            else mostrarResultado_Tx.Visible = false;
             busqueda_Tx.Text = "";        
         }
     }
