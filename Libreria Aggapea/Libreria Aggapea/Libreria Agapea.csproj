@@ -69,13 +69,11 @@
     <Content Include="App_Code\Ficheros\Cestas.txt" />
     <Content Include="App_Code\Ficheros\Libros.txt" />
     <Content Include="App_Code\Ficheros\Usuarios.txt" />
-    <Content Include="Vistas\Imagenes\registroAgapea2.2.png" />
-    <Content Include="Vistas\Imagenes\registroAgapea_1.2.png" />
-    <Content Include="Vistas\Imagenes\registroAgapea_1.png" />
-    <Content Include="Vistas\Imagenes\registroAgapea_2.3.png" />
-    <Content Include="Vistas\Imagenes\registroAgapea_3.png" />
-    <Content Include="Vistas\Imagenes\registroAgapea_Boton.png" />
+    <Content Include="Imagenes\cabecera.png" />
+    <Content Include="Imagenes\pie.png" />
+    <Compile Include="Vistas\Body.aspx" />
     <Content Include="packages.config" />
+    <Compile Include="Vistas\Master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -99,6 +97,20 @@
     <Compile Include="App_Code\Modelos\Usuario.cs" />
     <Compile Include="Herramientas\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vistas\Body.aspx.cs">
+      <DependentUpon>Body.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vistas\Body.aspx.designer.cs">
+      <DependentUpon>Body.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Master.Master.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vistas\Master.Master.designer.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
