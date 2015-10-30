@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Index.Master.cs" Inherits="LibreriaAgapea.Views.Index" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>    
+    <asp:Panel ID="cabecera" runat="server" style="height:15%">
+
+        <asp:ImageButton ID="headImage" runat="server" ImageUrl="~/Images/cabecera.png" Width="100%"/>
+
+    </asp:Panel>
+    <asp:Panel ID="Buscador" runat="server" style="height:15%" HorizontalAlign="Center">
+        <asp:Label ID="label_Find" runat="server" Text="Buscar Libro: "></asp:Label>
+        <asp:TextBox ID="text_Find" runat="server" Width="50%"></asp:TextBox>
+        <asp:Button ID="button_Find" runat="server" Text="Buscar" />
+        <asp:Label ID="label_Welcome" runat="server" Text="Bienvenido"></asp:Label>
+        <br /><asp:Table ID="table_Radios" runat="server"></asp:Table>
+        <br /><asp:TextBox ID="text_Found" runat="server" Width="50%" TextMode="MultiLine" Visible="False"></asp:TextBox>
+    </asp:Panel>
+    <asp:panel ID="body" runat="server" style="height:60%">        
+        <asp:panel ID="panel_Tree" runat="server" style="float:left; width:15%">
+            <asp:TreeView ID="tree_BookType" runat="server" ShowLines="True" Width="100%">
+            </asp:TreeView>
+        </asp:panel>
+        <asp:panel ID="panel_Books" runat="server" style="float:left; width:75%">
+            <asp:ContentPlaceHolder ID="main" runat="server">        
+            </asp:ContentPlaceHolder>
+        </asp:panel>
+        <asp:Panel ID="panel_Cart" runat="server" style="float:left; width:10%">
+            <asp:Table ID="table_Cart" runat="server"></asp:Table>
+        </asp:Panel>
+    </asp:panel>
+    <asp:panel ID="pie" runat="server" style="height:10%">
+        <asp:ImageButton ID="footImage" runat="server" ImageUrl="~/Images/pie.png" Width="100%"/>
+    </asp:panel>
+    <asp:TextBox ID="text_PageInfo" runat="server" Width="100%" TextMode="MultiLine" Visible="False" Height="200px"></asp:TextBox>
+</body>
+</html>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Libreria_Aggapea")]
+[assembly: AssemblyTitle("LibreriaAgapea")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Libreria_Aggapea")]
+[assembly: AssemblyProduct("LibreriaAgapea")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a5821f69-71a4-4463-a3d7-e59bbe957b0d")]
+[assembly: Guid("0584e6b7-493f-453e-ae14-f20ca7d36241")]
 
 // Version information for an assembly consists of the following four values:
 //

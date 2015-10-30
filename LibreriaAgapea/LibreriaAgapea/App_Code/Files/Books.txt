@@ -1,4 +1,4 @@
-Pocoyo:Pokito:Pocoyandia:123:1357:Libro basado en la serie pocoyo:Niños:9,99
+﻿Pocoyo:Pokito:Pocoyandia:123:1357:Libro basado en la serie pocoyo:Niños:9,99
 C'est La vie:Madame bouvier:Francesada:098:0864:Entra en la cultura francesa:Cultura:13,49
 Programacion para Dummies:DummyMan:Dummy&Co:112:12357:Aprende programacion rapido y barato:Aprendizaje:18,70
 El libro de petete:Anonimo:Santillana:246:2468:Perfeto sujetapapeles de mesa:Ladrillo:10,20

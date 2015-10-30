@@ -7,153 +7,189 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Libreria_Aggapea {
+namespace LibreriaAgapea.Views {
     
     
-    public partial class WebForm1 {
+    public partial class Index {
         
         /// <summary>
-        /// form1 control.
+        /// head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// usuario_Label control.
+        /// cabecera control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usuario_Label;
+        protected global::System.Web.UI.WebControls.Panel cabecera;
         
         /// <summary>
-        /// usuario_TxBox control.
+        /// headImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox usuario_TxBox;
+        protected global::System.Web.UI.WebControls.ImageButton headImage;
         
         /// <summary>
-        /// usuario_FV control.
+        /// Buscador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator usuario_FV;
+        protected global::System.Web.UI.WebControls.Panel Buscador;
         
         /// <summary>
-        /// usuarioExiste_FV control.
+        /// label_Find control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator usuarioExiste_FV;
+        protected global::System.Web.UI.WebControls.Label label_Find;
         
         /// <summary>
-        /// pass_Label control.
+        /// text_Find control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pass_Label;
+        protected global::System.Web.UI.WebControls.TextBox text_Find;
         
         /// <summary>
-        /// pass_TxBox control.
+        /// button_Find control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pass_TxBox;
+        protected global::System.Web.UI.WebControls.Button button_Find;
         
         /// <summary>
-        /// pass_FV control.
+        /// label_Welcome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator pass_FV;
+        protected global::System.Web.UI.WebControls.Label label_Welcome;
         
         /// <summary>
-        /// passLong_V control.
+        /// table_Radios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator passLong_V;
+        protected global::System.Web.UI.WebControls.Table table_Radios;
         
         /// <summary>
-        /// pass2_Label control.
+        /// text_Found control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pass2_Label;
+        protected global::System.Web.UI.WebControls.TextBox text_Found;
         
         /// <summary>
-        /// pass2_TxBox control.
+        /// body control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pass2_TxBox;
+        protected global::System.Web.UI.WebControls.Panel body;
         
         /// <summary>
-        /// pass2_CV control.
+        /// panel_Tree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator pass2_CV;
+        protected global::System.Web.UI.WebControls.Panel panel_Tree;
         
         /// <summary>
-        /// alma_ChkBox control.
+        /// tree_BookType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox alma_ChkBox;
+        protected global::System.Web.UI.WebControls.TreeView tree_BookType;
         
         /// <summary>
-        /// almaCheck_V control.
+        /// panel_Books control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator almaCheck_V;
+        protected global::System.Web.UI.WebControls.Panel panel_Books;
         
         /// <summary>
-        /// registrar_boton control.
+        /// main control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton registrar_boton;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder main;
         
         /// <summary>
-        /// TextBox1 control.
+        /// panel_Cart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.Panel panel_Cart;
+        
+        /// <summary>
+        /// table_Cart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table table_Cart;
+        
+        /// <summary>
+        /// pie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pie;
+        
+        /// <summary>
+        /// footImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton footImage;
+        
+        /// <summary>
+        /// text_PageInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox text_PageInfo;
     }
 }

@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.IO;
+using LibreriaAgapea.App_Code.Models;
+using LibreriaAgapea.App_Code.Tools;
+
+namespace LibreriaAgapea.App_Code.Controllers
+{
+    public class CBook
+    {
+        private Tool tools = new Tool();
+        private CFile cF = new CFile();
+        public List<Book> libros = new List<Book>();
+
+        public CBook()
+        {
+            libros.AddRange(File.ReadAllLines(cF.rutaLibros).Select(linea => new Book(linea.Split(':'))));
+        }
+
+        public List<Book> buscarLibros(string busqueda, string tipo)
+        {
+            if (tipo == "titulo") return libros.Where(libro => libro.titulo.StartsWith(busqueda)).ToList();
+            if (tipo == "autor") return libros.Where(libro => libro.autor.StartsWith(busqueda)).ToList();
+            return null;
+        }
+
+        public List<Book> leerLibros(string categoria)
+        {
+            List<Book> ret = new List<Book>();
+            ret.AddRange(libros.Where(libro => libro.categoria == categoria));
+            return ret;
+        }
+    }
+}

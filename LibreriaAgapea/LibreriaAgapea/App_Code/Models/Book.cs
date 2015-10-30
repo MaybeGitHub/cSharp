@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Libreria_Aggapea.App_Code.Modelos
+namespace LibreriaAgapea.App_Code.Models
 {
-    public class Libro
+    public class Book
     {
         public string titulo { get; set; }
         public string autor { get; set; }
@@ -21,15 +20,15 @@ namespace Libreria_Aggapea.App_Code.Modelos
         private string[] atributos = new string[] { "titulo", "autor", "editorial", "ISBN10", "ISBN13", "resumen", "categoria", "precio" };
         private List<string> valores = new List<string>();
 
-        public Libro(string[] datosLibro)
-        {          
+        public Book(string[] datosLibro)
+        {
             this.titulo = datosLibro[0];
-            this.autor = datosLibro[1]; 
-            this.editorial = datosLibro[2]; 
-            this.ISBN10 = datosLibro[3]; 
-            this.ISBN13 = datosLibro[4]; 
-            this.resumen = datosLibro[5]; 
-            this.categoria = datosLibro[6]; 
+            this.autor = datosLibro[1];
+            this.editorial = datosLibro[2];
+            this.ISBN10 = datosLibro[3];
+            this.ISBN13 = datosLibro[4];
+            this.resumen = datosLibro[5];
+            this.categoria = datosLibro[6];
             this.precio = double.Parse(datosLibro[7]);
 
             valores.AddRange(datosLibro);
@@ -38,7 +37,7 @@ namespace Libreria_Aggapea.App_Code.Modelos
         public string datos()
         {
             string ret = "";
-            for ( int i = 0; i < atributos.Length; i++ ) ret += valores.ToArray()[i] + ( i < atributos.Length-1 ? ":": "");
+            for (int i = 0; i < atributos.Length; i++) ret += valores.ToArray()[i] + (i < atributos.Length - 1 ? ":" : "");
             return ret;
         }
 
@@ -47,9 +46,10 @@ namespace Libreria_Aggapea.App_Code.Modelos
             List<Label> labels = new List<Label>();
             Label label;
 
-            for (int i = 0; i < atributos.Length; i++) { 
+            for (int i = 0; i < atributos.Length; i++)
+            {
                 label = new Label();
-                label.Text = atributos[i].ToUpper() + ": " + valores.ToArray()[i] + (atributos[i].Equals("precio") ? " €": "");
+                label.Text = atributos[i].ToUpper() + ": " + valores.ToArray()[i] + (atributos[i].Equals("precio") ? " €" : "");
                 label.Style.Add("display", "block");
                 labels.Add(label);
             }

@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Libreria_Aggapea.App_Code.Modelos
+namespace LibreriaAgapea.App_Code.Models
 {
-    public class Usuario
+    public class User
     {
         public string nombre { get; set; }
         public string contraseña { get; set; }
 
-        public Usuario(string usuario, string contraseña)
+        public User(string usuario, string contraseña)
         {
             this.nombre = usuario;
             this.contraseña = contraseña;
         }
 
-        public Usuario(string[] datos)
+        public User(string[] datos)
         {
-            for ( int i = 0; i < datos.Length; i++ )
+            for (int i = 0; i < datos.Length; i++)
             {
                 switch (i)
                 {
@@ -33,5 +33,5 @@ namespace Libreria_Aggapea.App_Code.Modelos
         {
             return nombre + ":" + contraseña + "\n";
         }
-    }   
+    }
 }

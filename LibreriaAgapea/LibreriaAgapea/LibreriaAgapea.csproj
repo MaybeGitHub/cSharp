@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5821F69-71A4-4463-A3D7-E59BBE957B0D}</ProjectGuid>
+    <ProjectGuid>{0584E6B7-493F-453E-AE14-F20CA7D36241}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Libreria_Aggapea</RootNamespace>
-    <AssemblyName>Libreria Aggapea</AssemblyName>
+    <RootNamespace>LibreriaAgapea</RootNamespace>
+    <AssemblyName>LibreriaAgapea</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -66,14 +66,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Ficheros\Cestas.txt" />
-    <Content Include="App_Code\Ficheros\Libros.txt" />
-    <Content Include="App_Code\Ficheros\Usuarios.txt" />
-    <Content Include="Imagenes\cabecera.png" />
-    <Content Include="Imagenes\pie.png" />
-    <Compile Include="Vistas\Body.aspx" />
     <Content Include="packages.config" />
-    <Compile Include="Vistas\Master.Master" />
+    <Content Include="Views\Index.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -82,49 +76,38 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HtmlPage1.html" />
-    <Content Include="Vistas\Inicio.aspx" />
+    <Content Include="App_Code\Files\Books.txt" />
+    <Content Include="App_Code\Files\Carts.txt" />
+    <Content Include="App_Code\Files\Users.txt" />
+    <Content Include="Images\cabecera.png" />
+    <Content Include="Images\pie.png" />
+    <Content Include="Views\Center.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Vistas\Registro.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Controladores\Ctrl_VistaCesta.cs" />
-    <Compile Include="App_Code\Controladores\Ctrl_VistaLibros.cs" />
-    <Compile Include="App_Code\Controladores\Ctrl_VistaUsuarios.cs" />
-    <Compile Include="App_Code\Controladores\Ctrl_Ficheros.cs" />
-    <Compile Include="App_Code\Modelos\Cesta.cs" />
-    <Compile Include="App_Code\Modelos\Libro.cs" />
-    <Compile Include="App_Code\Modelos\Usuario.cs" />
-    <Compile Include="Herramientas\Tools.cs" />
+    <Compile Include="Views\Center.aspx.cs">
+      <DependentUpon>Center.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Center.aspx.designer.cs">
+      <DependentUpon>Center.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Index.Master.cs">
+      <DependentUpon>Index.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Index.Master.designer.cs">
+      <DependentUpon>Index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Controllers\CFile.cs" />
+    <Compile Include="App_Code\Controllers\CCart.cs" />
+    <Compile Include="App_Code\Controllers\CBook.cs" />
+    <Compile Include="App_Code\Controllers\CUser.cs" />
+    <Compile Include="App_Code\Models\Cart.cs" />
+    <Compile Include="App_Code\Models\Book.cs" />
+    <Compile Include="App_Code\Models\User.cs" />
+    <Compile Include="App_Code\Tools\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vistas\Body.aspx.cs">
-      <DependentUpon>Body.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vistas\Body.aspx.designer.cs">
-      <DependentUpon>Body.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Master.Master.cs">
-      <DependentUpon>Master.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vistas\Master.Master.designer.cs">
-      <DependentUpon>Master.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Registro.aspx.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vistas\Registro.aspx.designer.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Inicio.aspx.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vistas\Inicio.aspx.designer.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -140,9 +123,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1244</DevelopmentServerPort>
+          <DevelopmentServerPort>2367</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1245/</IISUrl>
+          <IISUrl>http://localhost:2367/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

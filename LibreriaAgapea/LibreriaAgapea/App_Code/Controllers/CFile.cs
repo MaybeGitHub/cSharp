@@ -1,57 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
-using Libreria_Aggapea.App_Code.Modelos;
-using System.Collections.Generic;
+using LibreriaAgapea.App_Code.Models;
 
-namespace Libreria_Aggapea.App_Code.Controladores
+namespace LibreriaAgapea.App_Code.Controllers
 {
-    public class Ctrl_Ficheros 
-    { 
+    public class CFile
+    {
         public string rutaLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
         public string rutaUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
         public string rutaCestas = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Cestas.txt";
 
-        public void añadirUsuario(Usuario usuario)
+        public void añadirUsuario(User usuario)
         {
-            StreamWriter sw = new StreamWriter( new FileStream(rutaUsuarios, FileMode.Append) );
+            StreamWriter sw = new StreamWriter(new FileStream(rutaUsuarios, FileMode.Append));
             sw.Write(usuario.datos());
             sw.Close();
         }
 
-        public void añadirLibro(Libro libro)
+        public void añadirLibro(Book libro)
         {
             StreamWriter sw = new StreamWriter(new FileStream(rutaLibros, FileMode.Append));
             sw.Write(libro.datos());
             sw.Close();
         }
 
-        public void añadirCesta(Cesta cesta)
+        public void añadirCesta(Cart cesta)
         {
             StreamWriter sw = new StreamWriter(new FileStream(rutaCestas, FileMode.Append));
             sw.Write(cesta.datos());
             sw.Close();
         }
 
-        public void actualizarLibro(Libro libro)
+        public void actualizarLibro(Book libro)
         {
             List<string> volcado = new List<string>(File.ReadAllLines(rutaLibros));
 
             for (int i = 0; i < volcado.Count; i++)
             {
-                if ((volcado.ElementAt(i).Split(':')[0] == libro.titulo ))
+                if ((volcado.ElementAt(i).Split(':')[0] == libro.titulo))
                 {
                     volcado.RemoveAt(i);
                     volcado.Insert(i, libro.datos());
                 }
             }
-           
+
             File.WriteAllText(rutaLibros, string.Empty);
             File.WriteAllLines(rutaLibros, volcado.Cast<string>());
         }
 
-        public void actualizarCesta(Cesta cesta)
+        public void actualizarCesta(Cart cesta)
         {
             List<string> volcado = new List<string>(File.ReadAllLines(rutaCestas));
             for (int i = 0; i < volcado.Count; i++)
@@ -66,7 +66,7 @@ namespace Libreria_Aggapea.App_Code.Controladores
             File.WriteAllLines(rutaCestas, volcado.Cast<string>());
         }
 
-        public void añadirLibroTxTCesta(Usuario usuario, Libro libro)
+        public void añadirLibroTxTCesta(User usuario, Book libro)
         {
             string[] cestas = File.ReadAllLines(rutaCestas);
             for (int i = 0; i < cestas.Length; i++)
