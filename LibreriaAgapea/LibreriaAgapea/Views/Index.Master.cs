@@ -17,7 +17,10 @@ namespace LibreriaAgapea.Views
         private CCart cC = new CCart();
         private Tool tool = new Tool();
         private User usuario;
-        private string categoriaSeleccionada = "Categorias";
+        private string categoriaSeleccionada = null;
+        private string text_FindValue = "";
+        private RadioButton radio;
+        private List<RadioButton> listRadios = new List<RadioButton>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,13 +34,12 @@ namespace LibreriaAgapea.Views
             {
                 usuario = new User("admin", "12345678");
             }
-
-            label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
-
-            string paramentrosEvent = Request.Params["__EVENTARGUMENT"];
+            cC.comprobarCesta(usuario);
+            label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;            
 
             if (IsPostBack)
             {
+                string paramentrosEvent = Request.Params["__EVENTARGUMENT"];
                 if (paramentrosEvent != null && paramentrosEvent.Split('\\').Count() > 1)
                 {
                     string[] datosEventArgument = paramentrosEvent.Split('\\');
@@ -52,11 +54,13 @@ namespace LibreriaAgapea.Views
                 generarTreeCategorias();
             }
             generarRadios();
+            generarTablaCentral();
             generarCesta();
         }
 
         private void generarRadios()
         {
+            table_Radios.Controls.Clear();
             table_Radios.Rows.Add(new TableRow());
             TableCell columna;
             RadioButton radio;
@@ -75,7 +79,7 @@ namespace LibreriaAgapea.Views
                     case 3: radio.Text = "Editorial"; break;    
                     case 4: radio.Text = "ISBN"; break;
                 }
-                tool.mapeoBotonesRadios.Add(radio, radio.Text.ToLower());
+                listRadios.Add(radio);                
                 columna.Controls.Add(radio);
                 table_Radios.Rows[0].Cells.Add(columna);
             }
@@ -86,9 +90,7 @@ namespace LibreriaAgapea.Views
             table_Cart.Controls.Clear();
             table_Cart.CellSpacing = 0;
 
-            //Busco Cesta Existente
-
-            cC.comprobarCesta(usuario);
+            //Busco Cesta Existente            
 
             Cart cestaUsuario = cC.cestas.Where(cesta => cesta.dueño != null && cesta.dueño.nombre == usuario.nombre).ElementAt(0);
 
@@ -195,34 +197,58 @@ namespace LibreriaAgapea.Views
                     tree_BookType.Nodes[0].ChildNodes.Add(hoja);
                 }
             }
-        }      
+        }
+
+        private void generarTablaCentral()
+        {
+            ((Table)main.FindControl("table_Books")).Controls.Clear();
+            TableCell columnActual = null;
+            TableRow rowActual = null;
+            VBook vB;
+            List<Book> librosMostrar = cB.libros;
+            if (categoriaSeleccionada != null)
+            {
+                librosMostrar = cB.buscarLibros(categoriaSeleccionada, "categoria");
+            }
+            
+            if ( text_FindValue != "")
+            {
+                radio = listRadios.Where(radio => radio.Checked).SingleOrDefault();
+                text_FindValue = text_FindValue.Replace(text_FindValue.ElementAt(0).ToString(), text_FindValue.ElementAt(0).ToString().ToUpper());
+                librosMostrar = cB.buscarLibros(text_FindValue, radio.Text.ToLower());
+            }
+            foreach (Book libro in librosMostrar)
+            {
+                if (librosMostrar.IndexOf(libro) % 3 == 0)
+                {
+                    rowActual = new TableRow();
+                    ((Table)main.FindControl("table_Books")).Rows.Add(rowActual);
+                }
+                columnActual = new TableCell();
+                columnActual.ControlStyle.BorderColor = System.Drawing.Color.RosyBrown;
+                columnActual.ControlStyle.BorderWidth = 1;
+                vB = LoadControl("~/ItemControllers/VBook.ascx") as VBook;
+                vB.getButton().Click += new EventHandler(añadirLibroCesta);
+                vB.createVBook(libro);
+                tool.mapeoBotonesCompra.Add(vB.getButton(), libro);
+                columnActual.Controls.Add(vB);
+                rowActual.Cells.Add(columnActual);
+            }
+        }
+
+        private void añadirLibroCesta(object sender, EventArgs e)
+        {
+            cC.añadirLibroCesta(usuario, tool.mapeoBotonesCompra[(Button)sender]);
+        }
 
         private void borrarLibroCesta(object sender, EventArgs e)
         {
-            cC.actualizarCesta(usuario, tool.mapeoBotonesCesta[(Button)sender]);
-            Response.Redirect(Request.RawUrl);
+            cC.borrarLibroCesta(usuario, tool.mapeoBotonesCesta[(Button)sender]);
         }
 
         protected void busqueda_Btn_Click(object sender, EventArgs e)
         {
-            RadioButton radioSeleccionado = tool.mapeoBotonesRadios.Keys.Where(radio => radio.Checked == true).SingleOrDefault();
-            text_Found.Text = "";
-
-            if (text_Find.Text.Length != 0)
-            {
-                string texto = text_Find.Text.Replace(text_Find.Text.ElementAt(0).ToString(), text_Find.Text.ElementAt(0).ToString().ToUpper());
-                List<Book> librosEncontrados = cB.buscarLibros(texto, tool.mapeoBotonesRadios[radioSeleccionado]);
-                if (librosEncontrados.Count > 0)
-                {
-                    text_Found.Visible = true;
-                    text_Found.Height = 15 * librosEncontrados.Count;
-                    foreach (Book libro in librosEncontrados)
-                        text_Found.Text += libro.autor + " - " + libro.titulo + " - " + libro.categoria + " - " + libro.precio + " €\n";
-                }
-                else text_Found.Visible = false;
-            }
-            else text_Found.Visible = false;
-            text_Find.Text = "";
+            text_FindValue = text_Find.Text;
         }
     }
 }

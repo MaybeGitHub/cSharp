@@ -20,7 +20,7 @@ namespace LibreriaAgapea.App_Code.Controllers
             cestas = File.ReadAllLines(cF.rutaCestas).Select(linea => new Cart(linea.Split(':'))).ToList();
         }
 
-        public void actualizarCesta(User usuario, Book libroBorrar)
+        public void borrarLibroCesta(User usuario, Book libroBorrar)
         {
             foreach (Cart cesta in cestas)
             {
@@ -37,7 +37,7 @@ namespace LibreriaAgapea.App_Code.Controllers
             }
         }
 
-        public void añadirLibroCestaUsuario(User usuario, Book libro)
+        public void añadirLibroCesta(User usuario, Book libro)
         {
             foreach (Cart cesta in cestas)
             {

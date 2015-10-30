@@ -28,12 +28,5 @@ namespace LibreriaAgapea.App_Code.Controllers
             if (tipo == "isbn") return libros.Where(libro => libro.ISBN10.StartsWith(busqueda) || libro.ISBN13.StartsWith(busqueda) ).ToList();
             return null;
         }
-
-        public List<Book> leerLibros(string categoria)
-        {
-            List<Book> ret = new List<Book>();
-            ret.AddRange(libros.Where(libro => libro.categoria == categoria));
-            return ret;
-        }
     }
 }
