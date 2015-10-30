@@ -29,27 +29,6 @@ namespace LibreriaAgapea.App_Code.Tools
             return File.ReadAllLines(ctrl_F.rutaLibros).Where(libro => libro.Split(':')[0] == titulo).Select(libro => new Book(libro.Split(':'))).ElementAt(0);
         }
 
-        public Table crearPanelCesta(Book libro, Action<object, EventArgs> borrarLibroCesta)
-        {
-            Table nuevaTabla = new Table();
-            nuevaTabla.Rows.Add(new TableRow());
-            TableCell columna = new TableCell();
-            Label label = new Label();
-            label.Text = libro.titulo;
-            label.Style.Add("display", "block");
-            columna.Controls.Add(label);
-            nuevaTabla.Rows[0].Cells.Add(columna);
-            columna = new TableCell();
-            Button borrar = new Button();
-            borrar.Text = "X";
-            borrar.ControlStyle.ForeColor = System.Drawing.Color.Red;
-            borrar.Click += new EventHandler(borrarLibroCesta);
-            mapeoBotonesCesta.Add(borrar, libro);
-            columna.Controls.Add(borrar);
-            nuevaTabla.Rows[0].Cells.Add(columna);
-            return nuevaTabla;
-        }
-
         public void crearPanelLibro(TableCell columnActual, Book libro, Action<object, EventArgs> comprarLibro)
         {
             foreach (Label label in libro.generarLabels()) columnActual.Controls.Add(label);

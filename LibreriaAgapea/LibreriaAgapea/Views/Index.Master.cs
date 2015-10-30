@@ -7,13 +7,14 @@ using System.Web.UI.WebControls;
 using LibreriaAgapea.App_Code.Controllers;
 using LibreriaAgapea.App_Code.Models;
 using LibreriaAgapea.App_Code.Tools;
+using LibreriaAgapea.ItemControllers;
 
 namespace LibreriaAgapea.Views
 {
     public partial class Index : System.Web.UI.MasterPage
     {
-        private CBook ctrl_VL = new CBook();
-        private CCart ctrl_VC = new CCart();
+        private CBook cB = new CBook();
+        private CCart cC = new CCart();
         private Tool tool = new Tool();
         private User usuario;
         private string categoriaSeleccionada = "Categorias";
@@ -60,7 +61,7 @@ namespace LibreriaAgapea.Views
             TableCell columna;
             RadioButton radio;
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 5; i++)
             {
                 columna = new TableCell();
                 radio = new RadioButton();
@@ -70,6 +71,9 @@ namespace LibreriaAgapea.Views
                 {
                     case 0: radio.Checked = true; radio.Text = "Autor"; break;
                     case 1: radio.Text = "Titulo"; break;
+                    case 2: radio.Text = "Categoria"; break;
+                    case 3: radio.Text = "Editorial"; break;    
+                    case 4: radio.Text = "ISBN"; break;
                 }
                 tool.mapeoBotonesRadios.Add(radio, radio.Text.ToLower());
                 columna.Controls.Add(radio);
@@ -84,9 +88,9 @@ namespace LibreriaAgapea.Views
 
             //Busco Cesta Existente
 
-            ctrl_VC.comprobarCesta(usuario);
+            cC.comprobarCesta(usuario);
 
-            Cart cestaUsuario = ctrl_VC.cestas.Where(cesta => cesta.dueño != null && cesta.dueño.nombre == usuario.nombre).ElementAt(0);
+            Cart cestaUsuario = cC.cestas.Where(cesta => cesta.dueño != null && cesta.dueño.nombre == usuario.nombre).ElementAt(0);
 
             // Cabecera
 
@@ -115,8 +119,26 @@ namespace LibreriaAgapea.Views
             columna.ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
             columna.ControlStyle.BorderStyle = BorderStyle.Solid;
             table_Cart.Rows[1].Cells.Add(columna);
+            List<string> listBooks = new List<string>();
 
-            foreach (Book libro in cestaUsuario.listaLibros) columna.Controls.Add(tool.crearPanelCesta(libro, borrarLibroCesta));
+            foreach (Book libro in cestaUsuario.listaLibros)
+            {               
+                if ( !listBooks.Contains(libro.titulo) ) {
+                    listBooks.Add(libro.titulo);
+                    VCarts vC = LoadControl("~/ItemControllers/VCarts.ascx") as VCarts;
+                    vC.createVCarts(libro.titulo);
+                    foreach(Book book in cestaUsuario.listaLibros)
+                    {
+                        if ( libro.titulo == book.titulo)
+                        {
+                            vC.addCount();
+                        }
+                    }
+                    vC.getButton().Click += new EventHandler(borrarLibroCesta);
+                    tool.mapeoBotonesCesta.Add(vC.getButton(), libro);
+                    columna.Controls.Add(vC);
+                }                
+            }
 
             // Coste
 
@@ -133,8 +155,8 @@ namespace LibreriaAgapea.Views
             label.Text = "Total : ";
 
             double total = 0;
-            foreach (Book libro in cestaUsuario.listaLibros) total += libro.precio;
-            label.Text += total + "€";
+            foreach (Book libro in cestaUsuario.listaLibros) total += libro.precio;            
+            label.Text += total + " €";
             label.Font.Bold = true;
             label.Style.Add("display", "block");
             columna.Controls.Add(label);
@@ -163,7 +185,7 @@ namespace LibreriaAgapea.Views
             tree_BookType.Nodes.Add(hoja);
             tree_BookType.ExpandDepth = 1;
 
-            foreach (Book libro in ctrl_VL.libros)
+            foreach (Book libro in cB.libros)
             {
                 hoja = new TreeNode();
                 hoja.Text = libro.categoria;
@@ -177,25 +199,25 @@ namespace LibreriaAgapea.Views
 
         private void borrarLibroCesta(object sender, EventArgs e)
         {
-            ctrl_VC.actualizarCesta(usuario, tool.mapeoBotonesCesta[(Button)sender]);
+            cC.actualizarCesta(usuario, tool.mapeoBotonesCesta[(Button)sender]);
             Response.Redirect(Request.RawUrl);
         }
 
         protected void busqueda_Btn_Click(object sender, EventArgs e)
         {
-            RadioButton radioSeleccionado = tool.mapeoBotonesRadios.Keys.Where(radio => radio.Checked == true).ElementAt(0);
+            RadioButton radioSeleccionado = tool.mapeoBotonesRadios.Keys.Where(radio => radio.Checked == true).SingleOrDefault();
             text_Found.Text = "";
 
             if (text_Find.Text.Length != 0)
             {
                 string texto = text_Find.Text.Replace(text_Find.Text.ElementAt(0).ToString(), text_Find.Text.ElementAt(0).ToString().ToUpper());
-                List<Book> librosEncontrados = ctrl_VL.buscarLibros(texto, tool.mapeoBotonesRadios[radioSeleccionado]);
+                List<Book> librosEncontrados = cB.buscarLibros(texto, tool.mapeoBotonesRadios[radioSeleccionado]);
                 if (librosEncontrados.Count > 0)
                 {
                     text_Found.Visible = true;
                     text_Found.Height = 15 * librosEncontrados.Count;
                     foreach (Book libro in librosEncontrados)
-                        text_Found.Text += libro.autor + " - " + libro.titulo + " - " + libro.categoria + " - " + libro.precio + "€\n";
+                        text_Found.Text += libro.autor + " - " + libro.titulo + " - " + libro.categoria + " - " + libro.precio + " €\n";
                 }
                 else text_Found.Visible = false;
             }

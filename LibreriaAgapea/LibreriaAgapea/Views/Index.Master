@@ -32,14 +32,14 @@
                 <asp:ContentPlaceHolder ID="main" runat="server">        
                 </asp:ContentPlaceHolder>
             </asp:panel>
-            <asp:Panel ID="panel_Cart" runat="server" style="float:right; width:10%">
-                <asp:Table ID="table_Cart" runat="server"></asp:Table>
+            <asp:Panel ID="panel_Cart" runat="server" style="float:left; width:14%">
+                <asp:Table ID="table_Cart" runat="server"  HorizontalAlign="Center"></asp:Table>
             </asp:Panel>
         </asp:panel>
         <asp:panel ID="pie" runat="server" style="height:10%">
             <asp:ImageButton ID="footImage" runat="server" ImageUrl="~/Images/pie.png" Width="100%"/>
         </asp:panel>
-    </form>
-    <asp:TextBox ID="text_PageInfo" runat="server" Width="100%" TextMode="MultiLine" Visible="False" Height="200px"></asp:TextBox>
+        <asp:TextBox ID="text_PageInfo" runat="server" Width="100%" TextMode="MultiLine" Height="200px"></asp:TextBox>
+    </form>    
 </body>
 </html>

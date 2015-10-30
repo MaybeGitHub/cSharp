@@ -125,6 +125,7 @@ namespace LibreriaAgapea.ItemControllers
             ISBN10 = book.ISBN10;
             ISBN13 = book.ISBN13;
             price = book.precio;
+            type = book.categoria;
         }
 
         public Button getButton()

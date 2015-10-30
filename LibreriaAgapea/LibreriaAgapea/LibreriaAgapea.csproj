@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="ItemControllers\VBook.ascx" />
     <Content Include="Images\NoImage.jpg" />
+    <Content Include="ItemControllers\VCarts.ascx" />
     <Content Include="packages.config" />
     <Content Include="Views\Index.Master" />
     <None Include="Web.Debug.config">
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="ItemControllers\VBook.ascx.designer.cs">
       <DependentUpon>VBook.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ItemControllers\VCarts.ascx.cs">
+      <DependentUpon>VCarts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ItemControllers\VCarts.ascx.designer.cs">
+      <DependentUpon>VCarts.ascx</DependentUpon>
     </Compile>
     <Compile Include="Views\Center.aspx.cs">
       <DependentUpon>Center.aspx</DependentUpon>
