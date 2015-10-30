@@ -66,6 +66,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ItemControllers\VBook.ascx" />
+    <Content Include="Images\NoImage.jpg" />
     <Content Include="packages.config" />
     <Content Include="Views\Index.Master" />
     <None Include="Web.Debug.config">
@@ -85,6 +87,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemControllers\VBook.ascx.cs">
+      <DependentUpon>VBook.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ItemControllers\VBook.ascx.designer.cs">
+      <DependentUpon>VBook.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Center.aspx.cs">
       <DependentUpon>Center.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

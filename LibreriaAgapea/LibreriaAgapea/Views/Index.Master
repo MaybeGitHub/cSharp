@@ -8,7 +8,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body style="width:95%; padding:1%">
     <form runat="server">
         <asp:Panel ID="cabecera" runat="server" style="height:15%">
 
@@ -24,15 +24,15 @@
             <asp:TextBox ID="text_Found" runat="server" Width="50%" TextMode="MultiLine" Visible="False"></asp:TextBox>
         </asp:Panel>
         <asp:panel ID="body" runat="server" style="height:60%">        
-            <asp:panel ID="panel_Tree" runat="server" style="float:left; width:15%">
+            <asp:panel ID="panel_Tree" runat="server" style="float:left; width:15%" BorderColor="RosyBrown" BorderWidth="1px">
                 <asp:TreeView ID="tree_BookType" runat="server" ShowLines="True" Width="100%">
                 </asp:TreeView>
             </asp:panel>
-            <asp:panel ID="panel_Books" runat="server" style="float:left; width:75%">
+            <asp:panel ID="panel_Books" runat="server" style="float:left; width:70%" BorderColor="RosyBrown" BorderWidth="1px">
                 <asp:ContentPlaceHolder ID="main" runat="server">        
                 </asp:ContentPlaceHolder>
             </asp:panel>
-            <asp:Panel ID="panel_Cart" runat="server" style="float:left; width:10%">
+            <asp:Panel ID="panel_Cart" runat="server" style="float:right; width:10%">
                 <asp:Table ID="table_Cart" runat="server"></asp:Table>
             </asp:Panel>
         </asp:panel>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using LibreriaAgapea.App_Code.Controllers;
 using LibreriaAgapea.App_Code.Models;
 using LibreriaAgapea.App_Code.Tools;
+using LibreriaAgapea.ItemControllers;
 
 namespace LibreriaAgapea.Views
 {
@@ -50,42 +51,30 @@ namespace LibreriaAgapea.Views
             table_Books.Controls.Clear();
             TableCell columnActual = null;
             TableRow rowActual = null;
-
+            VBook vB;
+            List<Book> librosMostrar = cB.libros;
             if (selectedType != null)
             {
-                List<Book> librosCategoriaBuscada = cB.leerLibros(selectedType);
-                foreach (Book libro in librosCategoriaBuscada)
-                {
-                    if (librosCategoriaBuscada.IndexOf(libro) % 3 == 0)
-                    {
-                        rowActual = new TableRow();
-                        table_Books.Rows.Add(rowActual);
-                    }
-                    columnActual = new TableCell();
-                    columnActual.ControlStyle.BorderColor = System.Drawing.Color.Black;
-                    columnActual.ControlStyle.BorderStyle = BorderStyle.Solid;
-                    columnActual.Style.Add("padding", "10px");
-                    tool.crearPanelLibro(columnActual, libro, comprarLibro);
-                    rowActual.Cells.Add(columnActual);
-                }
+                librosMostrar = cB.leerLibros(selectedType);
             }
-            else
+
+            foreach (Book libro in librosMostrar)
             {
-                foreach (Book libro in cB.libros)
+                if (librosMostrar.IndexOf(libro) % 3 == 0)
                 {
-                    if (cB.libros.IndexOf(libro) % 3 == 0)
-                    {
-                        rowActual = new TableRow();
-                        table_Books.Rows.Add(rowActual);
-                    }
-                    columnActual = new TableCell();
-                    columnActual.ControlStyle.BorderColor = System.Drawing.Color.Black;
-                    columnActual.ControlStyle.BorderStyle = BorderStyle.Solid;
-                    columnActual.Style.Add("padding", "10px");
-                    tool.crearPanelLibro(columnActual, libro, comprarLibro);
-                    rowActual.Cells.Add(columnActual);
+                    rowActual = new TableRow();
+                    table_Books.Rows.Add(rowActual);
                 }
-            }
+                columnActual = new TableCell();
+                columnActual.ControlStyle.BorderColor = System.Drawing.Color.RosyBrown;
+                columnActual.ControlStyle.BorderWidth = 1;
+                vB = LoadControl("~/ItemControllers/VBook.ascx") as VBook;
+                vB.getButton().Click += new EventHandler(comprarLibro);
+                vB.createVBook(libro);
+                tool.mapeoBotonesCompra.Add(vB.getButton(), libro);
+                columnActual.Controls.Add(vB);
+                rowActual.Cells.Add(columnActual);
+            }           
         }
 
         private void comprarLibro(object sender, EventArgs e)
