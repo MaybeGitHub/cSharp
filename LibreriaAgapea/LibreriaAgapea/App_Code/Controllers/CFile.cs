@@ -9,9 +9,9 @@ namespace LibreriaAgapea.App_Code.Controllers
 {
     public class CFile
     {
-        public string rutaLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Libros.txt";
-        public string rutaUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Usuarios.txt";
-        public string rutaCestas = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\Libreria Aggapea\Libreria Aggapea\App_Code\Ficheros\Cestas.txt";
+        public string rutaLibros = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\LibreriaAgapea\LibreriaAgapea\App_Code\Files\Books.txt";
+        public string rutaUsuarios = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\LibreriaAgapea\LibreriaAgapea\App_Code\Files\Users.txt";
+        public string rutaCestas = @"C:\Users\" + Environment.UserName + @"\Documents\GitHubVisualStudio\cSharp\LibreriaAgapea\LibreriaAgapea\App_Code\Files\Carts.txt";
 
         public void añadirUsuario(User usuario)
         {

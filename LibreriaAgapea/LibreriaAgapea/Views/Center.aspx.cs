@@ -41,7 +41,7 @@ namespace LibreriaAgapea.Views
                         selectedType = datosEventArgument[1];
                     }
                 }
-            }
+            }            
             generarTablaCentral();
         }
 
@@ -51,7 +51,7 @@ namespace LibreriaAgapea.Views
             TableCell columnActual = null;
             TableRow rowActual = null;
 
-            if (selectedType != "Categorias")
+            if (selectedType != null)
             {
                 List<Book> librosCategoriaBuscada = cB.leerLibros(selectedType);
                 foreach (Book libro in librosCategoriaBuscada)
