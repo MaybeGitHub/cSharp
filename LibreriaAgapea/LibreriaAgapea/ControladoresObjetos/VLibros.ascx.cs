@@ -4,64 +4,64 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using LibreriaAgapea.App_Code.Models;
+using LibreriaAgapea.App_Code.Modelos;
 
-namespace LibreriaAgapea.ItemControllers
+namespace LibreriaAgapea.ControladoresObjetos
 {
-    public partial class VBook : System.Web.UI.UserControl
+    public partial class VLibros : System.Web.UI.UserControl
     {
-        private string __title, __author, __type, __ISBN10, __ISBN13, __editorial;
-        private double __price;
-        private Image __image;
+        private string __titulo, __autor, __categoria, __ISBN10, __ISBN13, __editorial;
+        private double __precio;
+        private Image __imagen;
 
-        public Image image
+        public Image imagen
         {
             get
             {
-                return __image;
+                return __imagen;
             }
             set
             {
-                __image = value;
-                imgbutton_Book.ImageUrl = __image.ImageUrl;
+                __imagen = value;
+                imgbutton_Libro.ImageUrl = __imagen.ImageUrl;
             }
         }
-        public string title
+        public string titulo
         {
             get
             {
-                return __title;
+                return __titulo;
             }
             set
             {
-                __title = value;
-                label_Title.Text = "Title: " + __title;
-            }
-        }
-
-        public string author
-        {
-            get
-            {
-                return __author;
-            }
-            set
-            {
-                __author = value;
-                label_Author.Text = "Author: " + __author;
+                __titulo = value;
+                label_Titulo.Text = "Title: " + __titulo;
             }
         }
 
-        public string type
+        public string autor
         {
             get
             {
-                return __type;
+                return __autor;
             }
             set
             {
-                __type = value;
-                label_Type.Text = "Type: " + __type;
+                __autor = value;
+                label_Autor.Text = "Author: " + __autor;
+            }
+        }
+
+        public string categoria
+        {
+            get
+            {
+                return __categoria;
+            }
+            set
+            {
+                __categoria = value;
+                label_Categoria.Text = "Type: " + __categoria;
             }
         }
 
@@ -91,16 +91,16 @@ namespace LibreriaAgapea.ItemControllers
             }
         }
 
-        public double price
+        public double precio
         {
             get
             {
-                return __price;
+                return __precio;
             }
             set
             {
-                __price = value;
-                label_Price.Text = "Price: " + __price + "€";
+                __precio = value;
+                label_Precio.Text = "Price: " + __precio + "€";
             }
         }
 
@@ -117,20 +117,20 @@ namespace LibreriaAgapea.ItemControllers
             }
         }
 
-        public void createVBook(Book book)
+        public void createVBook(Libro book)
         {
-            title = book.titulo;
-            author = book.autor;
+            titulo = book.titulo;
+            autor = book.autor;
             editorial = book.editorial;
             ISBN10 = book.ISBN10;
             ISBN13 = book.ISBN13;
-            price = book.precio;
-            type = book.categoria;
+            precio = book.precio;
+            categoria = book.categoria;
         }
 
         public Button getButton()
         {
-            return button_Buy;
+            return button_Comprar;
         }
 
         protected void Page_Load(object sender, EventArgs e)

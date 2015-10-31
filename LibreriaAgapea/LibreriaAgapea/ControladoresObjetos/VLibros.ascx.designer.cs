@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibreriaAgapea.ItemControllers {
+namespace LibreriaAgapea.ControladoresObjetos {
     
     
-    public partial class VBook {
+    public partial class VLibros {
         
         /// <summary>
         /// body control.
@@ -31,40 +31,40 @@ namespace LibreriaAgapea.ItemControllers {
         protected global::System.Web.UI.WebControls.Table table_Body;
         
         /// <summary>
-        /// imgbutton_Book control.
+        /// imgbutton_Libro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgbutton_Book;
+        protected global::System.Web.UI.WebControls.ImageButton imgbutton_Libro;
         
         /// <summary>
-        /// label_Title control.
+        /// label_Titulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Title;
+        protected global::System.Web.UI.WebControls.Label label_Titulo;
         
         /// <summary>
-        /// label_Author control.
+        /// label_Autor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Author;
+        protected global::System.Web.UI.WebControls.Label label_Autor;
         
         /// <summary>
-        /// label_Type control.
+        /// label_Categoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Type;
+        protected global::System.Web.UI.WebControls.Label label_Categoria;
         
         /// <summary>
         /// label_Editorial control.
@@ -94,21 +94,21 @@ namespace LibreriaAgapea.ItemControllers {
         protected global::System.Web.UI.WebControls.Label label_ISBN1;
         
         /// <summary>
-        /// label_Price control.
+        /// label_Precio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Price;
+        protected global::System.Web.UI.WebControls.Label label_Precio;
         
         /// <summary>
-        /// button_Buy control.
+        /// button_Comprar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_Buy;
+        protected global::System.Web.UI.WebControls.Button button_Comprar;
     }
 }

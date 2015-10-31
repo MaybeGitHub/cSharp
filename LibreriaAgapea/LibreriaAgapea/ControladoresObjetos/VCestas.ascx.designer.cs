@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibreriaAgapea.ItemControllers {
+namespace LibreriaAgapea.ControladoresObjetos {
     
     
-    public partial class VCarts {
+    public partial class VCestas {
         
         /// <summary>
-        /// table_Cart control.
+        /// table_Cesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Cart;
+        protected global::System.Web.UI.WebControls.Table table_Cesta;
         
         /// <summary>
-        /// label_Title control.
+        /// label_Titulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Title;
+        protected global::System.Web.UI.WebControls.Label label_Titulo;
         
         /// <summary>
-        /// label_Count control.
+        /// label_Cantidad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Count;
+        protected global::System.Web.UI.WebControls.Label label_Cantidad;
         
         /// <summary>
-        /// button_Erase control.
+        /// button_Borrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_Erase;
+        protected global::System.Web.UI.WebControls.Button button_Borrar;
     }
 }

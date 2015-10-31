@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Index.Master.cs" Inherits="LibreriaAgapea.Vistas.Index" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="width:95%; padding:1%">
+    <form runat="server">
+        <asp:Panel ID="cabecera" runat="server" style="height:15%">
+
+            <asp:ImageButton ID="headImage" runat="server" ImageUrl="~/Imagenes/cabecera.png" Width="100%"/>
+
+        </asp:Panel>
+        <asp:Panel ID="Buscador" runat="server" style="height:15%" HorizontalAlign="Center">
+            <asp:Label ID="label_Buscador" runat="server" Text="Buscar Libro: "></asp:Label>
+            <asp:TextBox ID="text_Buscador" runat="server" Width="50%"></asp:TextBox>
+            <asp:Button ID="button_Buscador" runat="server" Text="Buscar"/>
+            <asp:Label ID="label_Welcome" runat="server" Text="Bienvenido"></asp:Label>
+            <br /><asp:Table ID="table_Radios" runat="server" HorizontalAlign="Center">
+                <asp:TableRow runat="server">
+                    <asp:TableCell runat="server">
+                        <asp:RadioButton ID="titulo" runat="server" Checked="true" Text="Titulo"/>
+                    </asp:TableCell>
+                    <asp:TableCell runat="server">
+                        <asp:RadioButton ID="autor" runat="server" Text="Autor"/>
+                    </asp:TableCell>
+                    <asp:TableCell runat="server">
+                        <asp:RadioButton ID="editorial" runat="server" Text="Editorial"/>
+                    </asp:TableCell>
+                    <asp:TableCell runat="server">
+                        <asp:RadioButton ID="isbn10" runat="server" Text="ISBN10"/>
+                    </asp:TableCell>
+                    <asp:TableCell runat="server">
+                        <asp:RadioButton ID="isbn13" runat="server" Text="ISBN13"/>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>            
+        </asp:Panel>
+        <asp:panel ID="body" runat="server" style="height:60%">        
+            <asp:panel ID="panel_Tree" runat="server" style="float:left; width:15%" BorderColor="RosyBrown" BorderWidth="1px">
+                <asp:TreeView ID="tree_Categorias" runat="server" ShowLines="True" Width="100%">
+                </asp:TreeView>
+            </asp:panel>
+            <asp:panel ID="panel_Libros" runat="server" style="float:left; width:74%" BorderColor="RosyBrown" BorderWidth="1px">
+                <asp:ContentPlaceHolder ID="main" runat="server">        
+                </asp:ContentPlaceHolder>
+            </asp:panel>
+            <asp:Panel ID="panel_Cesta" runat="server" style="padding-left:10px; float:left; width:10%">
+                <asp:Table ID="table_Cesta" runat="server" Width="100%" Height="100%" HorizontalAlign="Center" CellSpacing="0"></asp:Table>
+            </asp:Panel>
+        </asp:panel>
+        <asp:panel ID="pie" runat="server" style="height:10%">
+            <asp:ImageButton ID="image_Pie" runat="server" ImageUrl="~/Imagenes/pie.png" Width="100%"/>
+        </asp:panel>
+        <asp:TextBox ID="text_PageInfo" runat="server" Width="100%" TextMode="MultiLine" Height="200px"></asp:TextBox>
+    </form>    
+</body>
+</html>

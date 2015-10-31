@@ -66,11 +66,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ItemControllers\VBook.ascx" />
-    <Content Include="Images\NoImage.jpg" />
-    <Content Include="ItemControllers\VCarts.ascx" />
+    <Content Include="ControladoresObjetos\VLibros.ascx" />
+    <Content Include="Imagenes\NoImage.jpg" />
+    <Content Include="ControladoresObjetos\VCestas.ascx" />
     <Content Include="packages.config" />
-    <Content Include="Views\Index.Master" />
+    <Content Include="Vistas\Index.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -79,51 +79,51 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Files\Books.txt" />
-    <Content Include="App_Code\Files\Carts.txt" />
-    <Content Include="App_Code\Files\Users.txt" />
-    <Content Include="Images\cabecera.png" />
-    <Content Include="Images\pie.png" />
-    <Content Include="Views\Center.aspx" />
+    <Content Include="App_Code\Ficheros\Libros.txt" />
+    <Content Include="App_Code\Ficheros\Cestas.txt" />
+    <Content Include="App_Code\Ficheros\Usuarios.txt" />
+    <Content Include="Imagenes\cabecera.png" />
+    <Content Include="Imagenes\pie.png" />
+    <Content Include="Vistas\Centro.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ItemControllers\VBook.ascx.cs">
-      <DependentUpon>VBook.ascx</DependentUpon>
+    <Compile Include="ControladoresObjetos\VLibros.ascx.cs">
+      <DependentUpon>VLibros.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ItemControllers\VBook.ascx.designer.cs">
-      <DependentUpon>VBook.ascx</DependentUpon>
+    <Compile Include="ControladoresObjetos\VLibros.ascx.designer.cs">
+      <DependentUpon>VLibros.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ItemControllers\VCarts.ascx.cs">
-      <DependentUpon>VCarts.ascx</DependentUpon>
+    <Compile Include="ControladoresObjetos\VCestas.ascx.cs">
+      <DependentUpon>VCestas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ItemControllers\VCarts.ascx.designer.cs">
-      <DependentUpon>VCarts.ascx</DependentUpon>
+    <Compile Include="ControladoresObjetos\VCestas.ascx.designer.cs">
+      <DependentUpon>VCestas.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Center.aspx.cs">
-      <DependentUpon>Center.aspx</DependentUpon>
+    <Compile Include="Vistas\Centro.aspx.cs">
+      <DependentUpon>Centro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Center.aspx.designer.cs">
-      <DependentUpon>Center.aspx</DependentUpon>
+    <Compile Include="Vistas\Centro.aspx.designer.cs">
+      <DependentUpon>Centro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Index.Master.cs">
+    <Compile Include="Vistas\Index.Master.cs">
       <DependentUpon>Index.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Index.Master.designer.cs">
+    <Compile Include="Vistas\Index.Master.designer.cs">
       <DependentUpon>Index.Master</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\Controllers\CFile.cs" />
-    <Compile Include="App_Code\Controllers\CCart.cs" />
-    <Compile Include="App_Code\Controllers\CBook.cs" />
-    <Compile Include="App_Code\Controllers\CUser.cs" />
-    <Compile Include="App_Code\Models\Cart.cs" />
-    <Compile Include="App_Code\Models\Book.cs" />
-    <Compile Include="App_Code\Models\User.cs" />
-    <Compile Include="App_Code\Tools\Tool.cs" />
+    <Compile Include="App_Code\Controladores\CFichero.cs" />
+    <Compile Include="App_Code\Controladores\CCesta.cs" />
+    <Compile Include="App_Code\Controladores\CLibro.cs" />
+    <Compile Include="App_Code\Controladores\CUsuario.cs" />
+    <Compile Include="App_Code\Modelos\Cesta.cs" />
+    <Compile Include="App_Code\Modelos\Libro.cs" />
+    <Compile Include="App_Code\Modelos\Usuario.cs" />
+    <Compile Include="App_Code\Herramientas\Ayudante.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

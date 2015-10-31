@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace LibreriaAgapea.App_Code.Models
+namespace LibreriaAgapea.App_Code.Modelos
 {
-    public class Book
+    public class Libro
     {
         public string titulo { get; set; }
         public string autor { get; set; }
@@ -20,7 +20,7 @@ namespace LibreriaAgapea.App_Code.Models
         private string[] atributos = new string[] { "titulo", "autor", "editorial", "ISBN10", "ISBN13", "resumen", "categoria", "precio" };
         private List<string> valores = new List<string>();
 
-        public Book(string[] datosLibro)
+        public Libro(string[] datosLibro)
         {
             this.titulo = datosLibro[0];
             this.autor = datosLibro[1];
@@ -39,22 +39,6 @@ namespace LibreriaAgapea.App_Code.Models
             string ret = "";
             for (int i = 0; i < atributos.Length; i++) ret += valores.ToArray()[i] + (i < atributos.Length - 1 ? ":" : "");
             return ret;
-        }
-
-        public List<Label> generarLabels()
-        {
-            List<Label> labels = new List<Label>();
-            Label label;
-
-            for (int i = 0; i < atributos.Length; i++)
-            {
-                label = new Label();
-                label.Text = atributos[i].ToUpper() + ": " + valores.ToArray()[i] + (atributos[i].Equals("precio") ? " €" : "");
-                label.Style.Add("display", "block");
-                labels.Add(label);
-            }
-
-            return labels;
-        }
+        }        
     }
 }

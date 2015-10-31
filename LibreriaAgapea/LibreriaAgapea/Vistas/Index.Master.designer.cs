@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibreriaAgapea.Views {
+namespace LibreriaAgapea.Vistas {
     
     
     public partial class Index {
@@ -49,31 +49,31 @@ namespace LibreriaAgapea.Views {
         protected global::System.Web.UI.WebControls.Panel Buscador;
         
         /// <summary>
-        /// label_Find control.
+        /// label_Buscador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Find;
+        protected global::System.Web.UI.WebControls.Label label_Buscador;
         
         /// <summary>
-        /// text_Find control.
+        /// text_Buscador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox text_Find;
+        protected global::System.Web.UI.WebControls.TextBox text_Buscador;
         
         /// <summary>
-        /// button_Find control.
+        /// button_Buscador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_Find;
+        protected global::System.Web.UI.WebControls.Button button_Buscador;
         
         /// <summary>
         /// label_Welcome control.
@@ -94,13 +94,49 @@ namespace LibreriaAgapea.Views {
         protected global::System.Web.UI.WebControls.Table table_Radios;
         
         /// <summary>
-        /// text_Found control.
+        /// titulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox text_Found;
+        protected global::System.Web.UI.WebControls.RadioButton titulo;
+        
+        /// <summary>
+        /// autor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton autor;
+        
+        /// <summary>
+        /// editorial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton editorial;
+        
+        /// <summary>
+        /// isbn10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton isbn10;
+        
+        /// <summary>
+        /// isbn13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton isbn13;
         
         /// <summary>
         /// body control.
@@ -121,22 +157,22 @@ namespace LibreriaAgapea.Views {
         protected global::System.Web.UI.WebControls.Panel panel_Tree;
         
         /// <summary>
-        /// tree_BookType control.
+        /// tree_Categorias control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView tree_BookType;
+        protected global::System.Web.UI.WebControls.TreeView tree_Categorias;
         
         /// <summary>
-        /// panel_Books control.
+        /// panel_Libros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel_Books;
+        protected global::System.Web.UI.WebControls.Panel panel_Libros;
         
         /// <summary>
         /// main control.
@@ -148,22 +184,22 @@ namespace LibreriaAgapea.Views {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder main;
         
         /// <summary>
-        /// panel_Cart control.
+        /// panel_Cesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel_Cart;
+        protected global::System.Web.UI.WebControls.Panel panel_Cesta;
         
         /// <summary>
-        /// table_Cart control.
+        /// table_Cesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Cart;
+        protected global::System.Web.UI.WebControls.Table table_Cesta;
         
         /// <summary>
         /// pie control.
@@ -175,13 +211,13 @@ namespace LibreriaAgapea.Views {
         protected global::System.Web.UI.WebControls.Panel pie;
         
         /// <summary>
-        /// footImage control.
+        /// image_Pie control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton footImage;
+        protected global::System.Web.UI.WebControls.ImageButton image_Pie;
         
         /// <summary>
         /// text_PageInfo control.

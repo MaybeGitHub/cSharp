@@ -5,13 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace LibreriaAgapea.Views
+namespace LibreriaAgapea.Vistas
 {
     public partial class Center : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-          
-        }
     }
 }

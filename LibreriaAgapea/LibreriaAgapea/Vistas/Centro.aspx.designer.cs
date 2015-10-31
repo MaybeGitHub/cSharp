@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibreriaAgapea.Views {
+namespace LibreriaAgapea.Vistas {
     
     
     public partial class Center {
         
         /// <summary>
-        /// table_Books control.
+        /// table_Libros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Books;
+        protected global::System.Web.UI.WebControls.Table table_Libros;
     }
 }
