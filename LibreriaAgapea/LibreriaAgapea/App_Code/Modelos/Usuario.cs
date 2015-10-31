@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using LibreriaAgapea.App_Code.Herramientas;
 
 namespace LibreriaAgapea.App_Code.Modelos
 {
@@ -9,30 +10,14 @@ namespace LibreriaAgapea.App_Code.Modelos
     {
         public string nombre { get; set; }
         public string contraseña { get; set; }
-        private Cesta __cesta;
-        public Cesta cesta {
-            get
-            {
-                if (__cesta.cerrada)
-                {
-                    historialCestas.Add(DateTime.Now, cesta);
-                    __cesta = new Cesta();
-                }
-                return __cesta;
-            }
-              set
-            {
-                __cesta = value;
-            }
-        }
-
-        public Dictionary<DateTime, Cesta> historialCestas = new Dictionary<DateTime, Cesta>();
+        public Cesta cesta { get; set; }
+        private Ayudante ayudante = new Ayudante();
 
         public Usuario(string usuario, string contraseña)
         {
             this.nombre = usuario;
             this.contraseña = contraseña;
-            cesta = new Cesta();
+            cesta = ayudante.fabricaCesta(this);
         }
 
         public Usuario(string[] datos)
@@ -46,32 +31,12 @@ namespace LibreriaAgapea.App_Code.Modelos
                 }
 
             }
-            cesta = new Cesta();
+            cesta = ayudante.fabricaCesta(this);
         }
 
         public string datos()
         {
             return nombre + ":" + contraseña;
-        }
-
-        public bool sacarLibroDeCesta(Libro libro)
-        {
-            if (!cesta.cerrada)
-            {
-                cesta.listaLibros.Remove(libro);
-                return true;
-            }
-            return false;
-        }
-
-        public bool meterLibroEnCesta(Libro libro)
-        {
-            if (!cesta.cerrada)
-            {
-                cesta.listaLibros.Add(libro);
-                return true;
-            }
-            return false;
         }
     }
 }

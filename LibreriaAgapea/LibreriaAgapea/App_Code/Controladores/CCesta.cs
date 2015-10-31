@@ -14,6 +14,7 @@ namespace LibreriaAgapea.App_Code.Controladores
 
         public CCesta()
         {
+            listaCestas.AddRange(File.ReadAllLines(CFichero.rutaCestas).Select(linea => new Cesta(linea.Split(':'))));
         }
     }
 }

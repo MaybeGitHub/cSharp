@@ -11,30 +11,29 @@ namespace LibreriaAgapea.App_Code.Controladores
     public class CUsuario
     {
         public List<Usuario> listaUsuarios = new List<Usuario>();
-        public Ayudante ayudante = new Ayudante();
 
         public CUsuario()
         {
             listaUsuarios.AddRange(File.ReadAllLines(CFichero.rutaUsuarios).Select(linea => new Usuario(linea.Split(':'))));
-            foreach (Usuario usuario in listaUsuarios)
-            {
-                usuario.cesta = ayudante.conseguirLibros(usuario);
-            }
         }
 
         public void meterEnCesta(Usuario usuario, Libro libro)
         {
-            if ( usuario.meterLibroEnCesta(libro) ){
-                CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, true);
-            }
+            usuario.cesta.listaLibros.Add(libro);
+            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, true);            
         }
 
         public void sacarDeCesta(Usuario usuario, Libro libro)
         {
-            if ( usuario.sacarLibroDeCesta(libro) )
+            foreach(Libro libroUsuario in usuario.cesta.listaLibros)
             {
-                CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false);
+                if ( libroUsuario.ISBN10 == libro.ISBN10)
+                {
+                    usuario.cesta.listaLibros.Remove(libroUsuario);
+                    break;
+                }
             }
+            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false);
         }
     }
 }

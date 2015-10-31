@@ -21,21 +21,21 @@
             <asp:Button ID="button_Buscador" runat="server" Text="Buscar"/>
             <asp:Label ID="label_Welcome" runat="server" Text="Bienvenido"></asp:Label>
             <br /><asp:Table ID="table_Radios" runat="server" HorizontalAlign="Center">
-                <asp:TableRow runat="server">
+                <asp:TableRow ID="row_Radios" runat="server">
                     <asp:TableCell runat="server">
-                        <asp:RadioButton ID="titulo" runat="server" Checked="true" Text="Titulo"/>
+                        <asp:RadioButton ID="titulo" runat="server" GroupName="filtros" Checked="true" Text="Titulo"/>
                     </asp:TableCell>
                     <asp:TableCell runat="server">
-                        <asp:RadioButton ID="autor" runat="server" Text="Autor"/>
+                        <asp:RadioButton ID="autor" runat="server" GroupName="filtros" Text="Autor"/>
                     </asp:TableCell>
                     <asp:TableCell runat="server">
-                        <asp:RadioButton ID="editorial" runat="server" Text="Editorial"/>
+                        <asp:RadioButton ID="editorial" runat="server" GroupName="filtros" Text="Editorial"/>
                     </asp:TableCell>
                     <asp:TableCell runat="server">
-                        <asp:RadioButton ID="isbn10" runat="server" Text="ISBN10"/>
+                        <asp:RadioButton ID="isbn10" runat="server" GroupName="filtros" Text="ISBN10"/>
                     </asp:TableCell>
                     <asp:TableCell runat="server">
-                        <asp:RadioButton ID="isbn13" runat="server" Text="ISBN13"/>
+                        <asp:RadioButton ID="isbn13" runat="server" GroupName="filtros" Text="ISBN13"/>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>            

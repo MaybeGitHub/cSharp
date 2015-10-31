@@ -12,28 +12,28 @@ namespace LibreriaAgapea.App_Code.Modelos
     public class Cesta
     {     
         public List<Libro> listaLibros { get; set; }
-        public DateTime fechaCreacion = DateTime.Now;
-        public bool cerrada
+        public Usuario usuario { get; set; }
+        private Ayudante ayudante = new Ayudante();      
+
+        public Cesta(Usuario usuario)
         {
-            get
-            {
-                if (DateTime.Now.AddHours(1).CompareTo(fechaCreacion) < 1) { return true; } else return false;
-            }
-            set
-            {
-                cerrada = value;
-            }
+            this.usuario = usuario;
+            listaLibros = new List<Libro>();
         }
 
-        public Cesta()
+        public Cesta(string[] datosFichero)
         {
-            listaLibros = new List<Libro>();
+            usuario = ayudante.fabricaUsuario(datosFichero[0]);
+            for(int i = 1; i < datosFichero.Count(); i++)
+            {
+                listaLibros.Add(ayudante.fabricaLibros(datosFichero[i], false));
+            }
         }
 
         public string datos()
         {
             string ret = "";
-            foreach (Libro libro in listaLibros) ret += libro.titulo + (listaLibros.IndexOf(libro) == listaLibros.Count-1? "":":") ;
+            foreach (Libro libro in listaLibros) ret += libro.ISBN10 + (listaLibros.IndexOf(libro) < listaLibros.Count-1? ":":"") ;
             return ret;
         }
     }

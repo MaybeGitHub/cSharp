@@ -19,12 +19,23 @@ namespace LibreriaAgapea.App_Code.Controladores
 
         public List<Libro> buscarLibros(string patron, string tipoBusqueda)
         {
-            if (tipoBusqueda == "titulo") return listaLibros.Where(libro => libro.titulo.StartsWith(patron)).ToList();
-            if (tipoBusqueda == "autor") return listaLibros.Where(libro => libro.autor.StartsWith(patron)).ToList();
-            if (tipoBusqueda == "categoria") return listaLibros.Where(libro => libro.categoria.StartsWith(patron)).ToList();
-            if (tipoBusqueda == "editorial") return listaLibros.Where(libro => libro.editorial.StartsWith(patron)).ToList();
-            if (tipoBusqueda == "isbn") return listaLibros.Where(libro => libro.ISBN10.StartsWith(patron) || libro.ISBN13.StartsWith(patron) ).ToList();
-            return null;
+            switch (tipoBusqueda)
+            {
+                case "titulo":
+                    return listaLibros.Where(libro => libro.titulo.StartsWith(patron)).ToList();
+                case "autor":
+                    return listaLibros.Where(libro => libro.autor.StartsWith(patron)).ToList();
+                case "categoria":
+                    return listaLibros.Where(libro => libro.categoria.StartsWith(patron)).ToList();
+                case "editorial":
+                    return listaLibros.Where(libro => libro.editorial.StartsWith(patron)).ToList();
+                case "isbn10":
+                    return listaLibros.Where(libro => libro.ISBN10.StartsWith(patron)).ToList();
+                case "isbn13":
+                    return listaLibros.Where(libro => libro.ISBN13.StartsWith(patron)).ToList();
+                default:
+                    return null;
+            }
         }
     }
 }

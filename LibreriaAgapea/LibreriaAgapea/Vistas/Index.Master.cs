@@ -20,48 +20,50 @@ namespace LibreriaAgapea.Vistas
         Usuario usuario = new Usuario("admin", "12345678");
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             List<Libro> librosQueMeInteresan = cL.listaLibros;      
             ayudante.pintarCajaInfoPagina(text_PageInfo, Context);
             text_Buscador.Focus();
 
-            if (Session["usuario"] != null)
-            {
-                usuario = (Usuario)Session["usuario"];
-            }
-           
+            if (Session["usuario"] != null) usuario = (Usuario)Session["usuario"];
+
             label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
 
             if (IsPostBack)
             {
                 foreach (string clave in Request.Params) { 
+                    
+                    //TreeView
+                    if (clave == "__EVENTARGUMENT" && Request.Params[clave].Split('\\').Count() > 1) librosQueMeInteresan = cL.buscarLibros(Request.Params[clave].Split('\\')[1], "categoria");
+                    
+                    //Panel Central
+                    if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar") cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
 
-                    if (clave == "__EVENTARGUMENT" && Request.Params[clave].Split('\\').Count() > 1)
-                    {
-                        //TreeView
-                        librosQueMeInteresan = cL.buscarLibros(Request.Params[clave].Split('\\')[1], "categoria");
-                    }
+                    //Cesta
+                    if (clave.Contains("button_Borrar") && Request.Params[clave] == "X") cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[3], false));
 
-                    if (clave.Contains("ctl00$main$ctl00$button_Comprar"))
+                    //Buscador                    
+                    if (clave.Contains("button_Buscador") && Request.Params[clave] == "Buscar" && text_Buscador.Text != "")
                     {
-                        //Panel Central
-                        cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
-                    }
-
-                    if (clave.Contains("ctl00$main$ctl00$button_Borrar"))
-                    {
-                        //Cesta
-                        cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
+                        string tipoBusqueda = "";
+                        for ( int i = 0; i < row_Radios.Cells.Count; i++)
+                        {
+                            RadioButton radio = row_Radios.Cells[i].Controls[0] as RadioButton;
+                            if (radio.Checked) { tipoBusqueda = radio.ID; break; }
+                        }
+                        librosQueMeInteresan = cL.buscarLibros(ayudante.capitalizar(text_Buscador.Text), tipoBusqueda);
+                        if (librosQueMeInteresan.Count == 0) librosQueMeInteresan = cL.listaLibros;
                     }
                 }
             }
             else
             {               
                 generarTreeCategorias();                       
-            }
+            }            
 
             generarTablaCentral(librosQueMeInteresan);
             generarCesta(usuario.cesta);
+            text_Buscador.Text = "";
         }
               
 
@@ -96,7 +98,6 @@ namespace LibreriaAgapea.Vistas
                 vC.crearVCestas(libro.titulo);
                 vC.cantidad = ayudante.librosRepetidos(libro, cesta.listaLibros);
                 vC.getButton().ID = vC.getButton().ID + "$" + libro.ISBN10;
-                if (!ayudante.mapeoBotones.ContainsKey(vC.getButton().ID)) ayudante.mapeoBotones.Add(vC.getButton().ID, libro);
                 columna.Controls.Add(vC);
               
             }
@@ -130,11 +131,14 @@ namespace LibreriaAgapea.Vistas
             table_Cesta.Rows[3].Cells.Add(columna);            
             columna.Controls.Add(pagar_button);
 
+            int cont = 0;
             foreach (TableRow filaSeleccionada in table_Cesta.Rows)
-            {
-                filaSeleccionada.Cells[0].ControlStyle.BorderColor = System.Drawing.Color.DarkSalmon;
-                filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.LightSalmon;
+            {                
+                filaSeleccionada.Cells[0].ControlStyle.BorderColor = System.Drawing.Color.SaddleBrown;
+                filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.SaddleBrown;
+                if (cont == 1) filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.SandyBrown;
                 filaSeleccionada.Cells[0].ControlStyle.BorderStyle = BorderStyle.Solid;
+                cont++;
             }
         }
 
@@ -171,7 +175,6 @@ namespace LibreriaAgapea.Vistas
                 columnActual.ControlStyle.BorderWidth = 1;
                 vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;
                 vL.getButton().ID = vL.getButton().ID + "$" + libro.ISBN10;
-                if(!ayudante.mapeoBotones.ContainsKey(vL.getButton().ID)) ayudante.mapeoBotones.Add(vL.getButton().ID, libro);
                 vL.createVBook(libro);
                 columnActual.Controls.Add(vL);
                 rowActual.Cells.Add(columnActual);
@@ -181,7 +184,7 @@ namespace LibreriaAgapea.Vistas
         public class ComparadorTitulos : IEqualityComparer<Libro>
         {
             public bool Equals(Libro x, Libro y)
-            {                
+            {
                 return x.titulo == y.titulo;
             }
 

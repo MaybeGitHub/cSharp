@@ -11,8 +11,6 @@ namespace LibreriaAgapea.App_Code.Herramientas
 {
     public class Ayudante
     {
-        public Dictionary<string, Libro> mapeoBotones = new Dictionary<string, Libro>();
-
         public void pintarCajaInfoPagina(TextBox cajaMultilinea, HttpContext datos)
         {
             string message = "";
@@ -21,17 +19,23 @@ namespace LibreriaAgapea.App_Code.Herramientas
             cajaMultilinea.Text = message;
         }
 
-        public Cesta conseguirLibros(Usuario usuario)
+        public Cesta fabricaCesta(Usuario usuario)
         {
-            string cestaActivaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[0] == usuario.nombre && linea.Split(':')[1] == "true").SingleOrDefault();
-            for (int i = 2; i < cestaActivaUsuario.Split(':').Count(); i++)
+            Cesta cesta = new Cesta(usuario);
+            string datosCestaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[0] == usuario.nombre).SingleOrDefault();
+            if ( datosCestaUsuario == null )
             {
-                if (!usuario.cesta.cerrada)
-                {
-                    usuario.cesta.listaLibros.Add(fabricaLibros(cestaActivaUsuario.Split(':')[i], false));
+                StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append, FileAccess.ReadWrite ));
+                sw.WriteLine(usuario.datos());
+                
+            }
+            else {
+                for (int i = 1; i < datosCestaUsuario.Split(':').Count(); i++)
+                {                   
+                    cesta.listaLibros.Add(fabricaLibros(datosCestaUsuario.Split(':')[i], false));
                 }
             }
-            return usuario.cesta;
+            return cesta;           
         }
 
         public Libro fabricaLibros(string ISBN, bool ISBN13)
@@ -41,6 +45,10 @@ namespace LibreriaAgapea.App_Code.Herramientas
             return File.ReadAllLines(CFichero.rutaLibros).Where(libro => libro.Split(':')[posicion] == ISBN).Select(libro => new Libro(libro.Split(':'))).SingleOrDefault();
         }
 
+        public Usuario fabricaUsuario(string nombre)
+        {         
+            return File.ReadAllLines(CFichero.rutaUsuarios).Where(usuario => usuario.Split(':')[0] == nombre).Select(libro => new Usuario(libro.Split(':'))).SingleOrDefault();
+        }
         public int librosRepetidos(Libro libro, List<Libro> listaLibros)
         {
             int cont = 0;
@@ -52,6 +60,11 @@ namespace LibreriaAgapea.App_Code.Herramientas
                 }
             }
             return cont;
+        }
+
+        public string capitalizar(string frase)
+        {
+            return char.ToUpper(frase[0]) + frase.Substring(1);
         }
     }
 }

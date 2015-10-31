@@ -37,19 +37,19 @@ namespace LibreriaAgapea.App_Code.Controladores
                     }
                 }
                 lineaSeleccionada = "";
-                foreach(string elemento in datosLinea)
+                for(int i = 0; i < datosLinea.Count(); i++)
                 {
-                    lineaSeleccionada += elemento + (datosLinea.IndexOf(elemento) < datosLinea.Count() - 1 ? ":" : "");
+                    lineaSeleccionada += datosLinea.ElementAt(i) + (i < datosLinea.Count() - 1 ? ":" : "");
                 }
             }
             datos.RemoveAt(posicion);
             datos.Insert(posicion, lineaSeleccionada);
             StreamWriter sw = new StreamWriter( File.Create(path) );
-            sw.WriteLine(datos);
-            //foreach ( string linea in datos)
-            //{
-                
-            //}
+            foreach (string linea in datos)
+            {
+                sw.WriteLine(linea);
+            }
+            sw.Close();            
         }
     }
 }

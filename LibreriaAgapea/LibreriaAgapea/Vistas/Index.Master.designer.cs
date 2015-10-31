@@ -94,6 +94,15 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.Table table_Radios;
         
         /// <summary>
+        /// row_Radios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow row_Radios;
+        
+        /// <summary>
         /// titulo control.
         /// </summary>
         /// <remarks>
