@@ -10,7 +10,7 @@ using System.IO;
 namespace LibreriaAgapea.App_Code.Modelos
 {
     public class Cesta
-    {     
+    {             
         public List<Libro> listaLibros { get; set; }
         public Usuario usuario { get; set; }
         private Ayudante ayudante = new Ayudante();      

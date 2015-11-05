@@ -10,7 +10,7 @@
 namespace LibreriaAgapea.Vistas {
     
     
-    public partial class Center {
+    public partial class Centro {
         
         /// <summary>
         /// table_Libros control.

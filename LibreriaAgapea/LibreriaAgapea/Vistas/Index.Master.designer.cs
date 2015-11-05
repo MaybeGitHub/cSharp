@@ -40,13 +40,40 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.ImageButton headImage;
         
         /// <summary>
-        /// Buscador control.
+        /// bienvenido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Buscador;
+        protected global::System.Web.UI.WebControls.Panel bienvenido;
+        
+        /// <summary>
+        /// label_Welcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_Welcome;
+        
+        /// <summary>
+        /// navegador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel navegador;
+        
+        /// <summary>
+        /// buscador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel buscador;
         
         /// <summary>
         /// label_Buscador control.
@@ -74,15 +101,6 @@ namespace LibreriaAgapea.Vistas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button_Buscador;
-        
-        /// <summary>
-        /// label_Welcome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_Welcome;
         
         /// <summary>
         /// table_Radios control.

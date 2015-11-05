@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace LibreriaAgapea.Vistas
 {
-    public partial class Center : System.Web.UI.Page
+    public partial class Centro : System.Web.UI.Page
     {
     }
 }

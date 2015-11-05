@@ -16,7 +16,7 @@ namespace LibreriaAgapea.App_Code.Controladores
         public static void añadirUsuario(Usuario usuario)
         {
             StreamWriter sw = new StreamWriter(new FileStream(rutaUsuarios, FileMode.Append));
-            sw.Write(usuario.datos());
+            sw.WriteLine(usuario.datos());
             sw.Close();
         }
 

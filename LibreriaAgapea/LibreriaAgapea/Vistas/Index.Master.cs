@@ -15,29 +15,49 @@ namespace LibreriaAgapea.Vistas
     {
         private CLibro cL = new CLibro();
         private CUsuario cU = new CUsuario();
-        private Ayudante ayudante = new Ayudante();
-       
-        Usuario usuario = new Usuario("admin", "12345678");
+        private Ayudante ayudante = new Ayudante();      
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
+            Usuario usuario = null;         
+
+            if (Request.Cookies["usuario"] != null )
+            {
+                usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
+                label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
+                Button button_Salir = new Button();
+                button_Salir.Text = "Log out";
+                button_Salir.ID = "button_Salir";
+                bienvenido.Controls.Add(button_Salir);
+                generarCesta(usuario.cesta);
+            }
+            else
+            {
+                label_Welcome.Text = "Bienvenido, nuevo cliente";
+                Button button_Registo = new Button();
+                button_Registo.Text = "Registro";
+                button_Registo.ID = "button_Registro";
+                Button button_Login = new Button();
+                button_Login.Text = "Iniciar Sesion";
+                button_Login.ID = "button_Login";
+                bienvenido.Controls.Add(button_Registo);
+                bienvenido.Controls.Add(button_Login);
+
+            }           
+
             List<Libro> librosQueMeInteresan = cL.listaLibros;      
             ayudante.pintarCajaInfoPagina(text_PageInfo, Context);
-            text_Buscador.Focus();
-
-            if (Session["usuario"] != null) usuario = (Usuario)Session["usuario"];
-
-            label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
+            text_Buscador.Focus();            
 
             if (IsPostBack)
-            {
+            {               
                 foreach (string clave in Request.Params) { 
                     
                     //TreeView
                     if (clave == "__EVENTARGUMENT" && Request.Params[clave].Split('\\').Count() > 1) librosQueMeInteresan = cL.buscarLibros(Request.Params[clave].Split('\\')[1], "categoria");
                     
                     //Panel Central
-                    if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar") cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
+                    if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar" && usuario != null ) cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
 
                     //Cesta
                     if (clave.Contains("button_Borrar") && Request.Params[clave] == "X") cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[3], false));
@@ -54,15 +74,30 @@ namespace LibreriaAgapea.Vistas
                         librosQueMeInteresan = cL.buscarLibros(ayudante.capitalizar(text_Buscador.Text), tipoBusqueda);
                         if (librosQueMeInteresan.Count == 0) librosQueMeInteresan = cL.listaLibros;
                     }
+
+                    // Log out
+                    if ( clave.Contains("button_Salir") && Request.Params[clave] == "Log out")
+                    {
+                        HttpCookie miCookie = new HttpCookie("usuario");
+                        miCookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(miCookie);
+                        Response.Redirect("Centro.aspx");
+                    }
+
+                    // Redirigir
+
+                    if ( (clave.Contains("button_Registro") || clave.Contains("button_Login")) && Request.Params[clave] != "")
+                    {
+                        Response.Redirect(clave.Split('_')[1] + ".aspx");
+                    }
                 }
             }
             else
-            {               
+            {                
                 generarTreeCategorias();                       
             }            
 
-            generarTablaCentral(librosQueMeInteresan);
-            generarCesta(usuario.cesta);
+            generarTablaCentral(librosQueMeInteresan);            
             text_Buscador.Text = "";
         }
               
@@ -92,7 +127,7 @@ namespace LibreriaAgapea.Vistas
 
             columna = new TableCell();
 
-            foreach (Libro libro in cesta.listaLibros.Distinct(new ComparadorTitulos()))
+            foreach (Libro libro in cesta.listaLibros.Distinct(ayudante.comparadorTitulos()))
             {               
                 VCestas vC = LoadControl("~/ControladoresObjetos/VCestas.ascx") as VCestas;
                 vC.crearVCestas(libro.titulo);
@@ -126,17 +161,18 @@ namespace LibreriaAgapea.Vistas
             columna = new TableCell();
             Button pagar_button = new Button();
             pagar_button.ID = "button_Pagar";
-            pagar_button.Text = "Pagar";                        
+            pagar_button.Text = "Pagar";
+            pagar_button.Click += new EventHandler(pagar_boton_Click);                  
             columna.HorizontalAlign = HorizontalAlign.Center;
             table_Cesta.Rows[3].Cells.Add(columna);            
             columna.Controls.Add(pagar_button);
 
             int cont = 0;
             foreach (TableRow filaSeleccionada in table_Cesta.Rows)
-            {                
-                filaSeleccionada.Cells[0].ControlStyle.BorderColor = System.Drawing.Color.SaddleBrown;
-                filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.SaddleBrown;
-                if (cont == 1) filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.SandyBrown;
+            {      
+                filaSeleccionada.Cells[0].ControlStyle.BorderColor = System.Drawing.Color.FromArgb(Convert.ToInt32("ff9966", 16));
+                filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.FromArgb(Convert.ToInt32("ff9966", 16));
+                if (cont == 1) filaSeleccionada.Cells[0].ControlStyle.BackColor = System.Drawing.Color.FromArgb(Convert.ToInt32("ffcc99", 16));
                 filaSeleccionada.Cells[0].ControlStyle.BorderStyle = BorderStyle.Solid;
                 cont++;
             }
@@ -147,11 +183,11 @@ namespace LibreriaAgapea.Vistas
             TreeNode hoja = new TreeNode("Categorias");
             tree_Categorias.Nodes.Add(hoja);
             tree_Categorias.ExpandDepth = 1;
-            List<Libro> librosFiltrados = cL.listaLibros.Distinct(new ComparadorCategorias()).ToList();
-            foreach (Libro libro in librosFiltrados)
+            List<string> listaCategorias = cL.listaLibros.Select(libro => libro.categoria).Distinct().ToList();
+            foreach (string categoriaLibro in listaCategorias)
             {
                 hoja = new TreeNode();
-                hoja.Text = libro.categoria;                
+                hoja.Text = categoriaLibro;                
                 tree_Categorias.Nodes[0].ChildNodes.Add(hoja);
             }
         }
@@ -171,40 +207,20 @@ namespace LibreriaAgapea.Vistas
                     ((Table)main.FindControl("table_Libros")).Rows.Add(rowActual);
                 }
                 columnActual = new TableCell();
-                columnActual.ControlStyle.BorderColor = System.Drawing.Color.RosyBrown;
-                columnActual.ControlStyle.BorderWidth = 1;
+                columnActual.HorizontalAlign = HorizontalAlign.Center;                
                 vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;
                 vL.getButton().ID = vL.getButton().ID + "$" + libro.ISBN10;
                 vL.createVBook(libro);
+                columnActual.Width = vL.width;
+                columnActual.Height = vL.heigth;
                 columnActual.Controls.Add(vL);
                 rowActual.Cells.Add(columnActual);
             }
         }
 
-        public class ComparadorTitulos : IEqualityComparer<Libro>
+        protected void pagar_boton_Click(object sender, EventArgs e)
         {
-            public bool Equals(Libro x, Libro y)
-            {
-                return x.titulo == y.titulo;
-            }
-
-            public int GetHashCode(Libro libro)
-            {               
-                return libro.titulo.GetHashCode();
-            }
-        }
-
-        public class ComparadorCategorias : IEqualityComparer<Libro>
-        {
-            public bool Equals(Libro x, Libro y)
-            {
-                return x.categoria == y.categoria;
-            }
-
-            public int GetHashCode(Libro libro)
-            {
-                return libro.categoria.GetHashCode();
-            }
+            Response.Redirect("Carro.aspx");
         }
     }
 }

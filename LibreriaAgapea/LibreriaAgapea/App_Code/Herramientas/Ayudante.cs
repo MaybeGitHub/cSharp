@@ -9,6 +9,7 @@ using System.IO;
 
 namespace LibreriaAgapea.App_Code.Herramientas
 {
+    [Serializable]
     public class Ayudante
     {
         public void pintarCajaInfoPagina(TextBox cajaMultilinea, HttpContext datos)
@@ -25,9 +26,9 @@ namespace LibreriaAgapea.App_Code.Herramientas
             string datosCestaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[0] == usuario.nombre).SingleOrDefault();
             if ( datosCestaUsuario == null )
             {
-                StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append, FileAccess.ReadWrite ));
-                sw.WriteLine(usuario.datos());
-                
+                StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append));
+                sw.WriteLine(usuario.nombre);
+                sw.Close();
             }
             else {
                 for (int i = 1; i < datosCestaUsuario.Split(':').Count(); i++)
@@ -65,6 +66,42 @@ namespace LibreriaAgapea.App_Code.Herramientas
         public string capitalizar(string frase)
         {
             return char.ToUpper(frase[0]) + frase.Substring(1);
+        }       
+
+        public IEqualityComparer<Libro> comparadorCategorias()
+        {
+            return new ComparadorCategorias();
+        }
+
+        public IEqualityComparer<Libro> comparadorTitulos()
+        {
+            return new ComparadorTitulos();
+        }
+
+        private class ComparadorTitulos : IEqualityComparer<Libro>
+        {
+            public bool Equals(Libro x, Libro y)
+            {
+                return x.titulo == y.titulo;
+            }
+
+            public int GetHashCode(Libro libro)
+            {
+                return libro.titulo.GetHashCode();
+            }
+        }
+
+        private class ComparadorCategorias : IEqualityComparer<Libro>
+        {
+            public bool Equals(Libro x, Libro y)
+            {
+                return x.categoria == y.categoria;
+            }
+
+            public int GetHashCode(Libro libro)
+            {
+                return libro.categoria.GetHashCode();
+            }
         }
     }
 }
