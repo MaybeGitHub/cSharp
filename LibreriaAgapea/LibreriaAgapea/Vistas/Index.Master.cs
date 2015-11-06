@@ -105,6 +105,7 @@ namespace LibreriaAgapea.Vistas
         private void generarCesta(Cesta cesta)
         {           
             table_Cesta.Controls.Clear();
+            table_Cesta.Width = new Unit("90%");
 
             // Cabecera
 
@@ -207,12 +208,12 @@ namespace LibreriaAgapea.Vistas
                     ((Table)main.FindControl("table_Libros")).Rows.Add(rowActual);
                 }
                 columnActual = new TableCell();
-                columnActual.HorizontalAlign = HorizontalAlign.Center;                
+                columnActual.HorizontalAlign = HorizontalAlign.Center;                               
                 vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;
                 vL.getButton().ID = vL.getButton().ID + "$" + libro.ISBN10;
                 vL.createVBook(libro);
-                columnActual.Width = vL.width;
-                columnActual.Height = vL.heigth;
+                columnActual.Width = new Unit("30%");
+                columnActual.Height = new Unit("30%");
                 columnActual.Controls.Add(vL);
                 rowActual.Cells.Add(columnActual);
             }

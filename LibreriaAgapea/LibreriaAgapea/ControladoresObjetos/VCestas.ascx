@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="VCestas.ascx.cs" Inherits="LibreriaAgapea.ControladoresObjetos.VCestas" %>
 <html>
     <body>
-        <asp:Table ID="table_Cesta" runat="server">
+        <asp:Table ID="table_Cesta" runat="server" Width="100%">
             <asp:TableRow>
                 <asp:TableCell Width="70%">
                     <asp:Label ID="label_Titulo" runat="server" Text="Titulo"></asp:Label>
