@@ -13,7 +13,6 @@ namespace LibreriaAgapea.ControladoresObjetos
         private string __titulo, __autor, __categoria, __ISBN10, __ISBN13, __editorial;
         private double __precio;
         private Image __imagen;
-        public Unit width, heigth;
 
         public Image imagen
         {
@@ -127,8 +126,6 @@ namespace LibreriaAgapea.ControladoresObjetos
             ISBN13 = book.ISBN13;
             precio = book.precio;
             categoria = book.categoria;
-            width = body.Width;
-            heigth = body.Height;
         }
 
         public Button getButton()

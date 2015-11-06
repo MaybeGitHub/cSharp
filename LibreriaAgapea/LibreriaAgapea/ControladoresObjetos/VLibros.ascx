@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
-        <asp:Panel ID="body" runat="server" Width="400px" Height="200px" BorderColor="RosyBrown" BorderWidth="1px">
+        <asp:Panel ID="body" runat="server" Width="100%" Height="100%" BorderColor="RosyBrown" BorderWidth="1px">
             <asp:Table ID="table_Body" runat="server" Width="100%" Height="100%" CellPadding="5" CellSpacing="5">               
                 <asp:TableRow runat="server" Height="90%" Width="100%">
                     <asp:TableCell runat="server" Width="30%" Height="100%">

@@ -8,7 +8,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body style="width:100%">
     <form runat="server">
         <asp:Panel ID="cabecera" runat="server" style="height:15%">
 
@@ -48,17 +48,18 @@
                 </asp:Table> 
             </asp:Panel>               
         </asp:Panel>
-        <asp:panel ID="body" runat="server" style="height:60%">        
+        <asp:panel ID="body" runat="server" style="height:60%" Width="100%">        
             <asp:panel ID="panel_Tree" runat="server" style="float:left; width:15%" BorderColor="RosyBrown" BorderWidth="1px">
                 <asp:TreeView ID="tree_Categorias" runat="server" ShowLines="True" Width="100%">
                 </asp:TreeView>
             </asp:panel>
-            <asp:panel ID="panel_Libros" runat="server" style="float:left; width:74%">
-                <asp:ContentPlaceHolder ID="main" runat="server">        
+            <asp:panel ID="panel_Libros" runat="server" style="float:left; width:70%">
+                <asp:ContentPlaceHolder ID="main" runat="server">
+
                 </asp:ContentPlaceHolder>
             </asp:panel>
-            <asp:Panel ID="panel_Cesta" runat="server" style="margin-right:10px; margin-top:2px; float:left; width:10%">
-                <asp:Table ID="table_Cesta" runat="server" Width="100%" Height="100%" CellSpacing="0"></asp:Table>
+            <asp:Panel ID="panel_Cesta" runat="server" style="margin-right:10px; margin-left:10px; margin-top:2px; float:left; width:10%">
+                <asp:Table ID="table_Cesta" runat="server" CellSpacing="0" HorizontalAlign="Center"></asp:Table>
             </asp:Panel>
         </asp:panel>
         <asp:panel ID="pie" runat="server" style="height:10%">
