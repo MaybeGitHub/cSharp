@@ -14,7 +14,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
-
+        <asp:Panel ID="path" runat="server">
+            <asp:Table ID="table_Path" runat="server"></asp:Table>
+        </asp:Panel>
         <table style="width: 100%">
             <tr>
                 <td class="auto-style1">

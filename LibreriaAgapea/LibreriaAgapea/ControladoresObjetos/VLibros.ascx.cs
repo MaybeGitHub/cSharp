@@ -135,5 +135,10 @@ namespace LibreriaAgapea.ControladoresObjetos
         {
             return button_Comprar;
         }
+
+        public void mostrarBoton(bool mostrar)
+        {
+            if (!mostrar) button_Comprar.Visible = false; else button_Comprar.Visible = true;
+        }
     }
 }

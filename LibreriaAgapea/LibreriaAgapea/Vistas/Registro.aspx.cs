@@ -20,6 +20,13 @@ namespace LibreriaAgapea.Vistas
         {
             ayudante.pintarCajaInfoPagina(TextBox1, Context);
             usuario_TxBox.Focus();
+
+            if (!IsPostBack)
+            {
+                string path = Request.Cookies["path"].Value;
+                path += ":Registro";
+                ayudante.construirPath(table_Path, path);
+            }
         }
 
         protected void registrar_boton_Click(object sender, ImageClickEventArgs e)

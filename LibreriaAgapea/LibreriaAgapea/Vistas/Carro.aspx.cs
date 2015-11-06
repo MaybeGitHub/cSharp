@@ -26,6 +26,12 @@ namespace LibreriaAgapea.Vistas
             {
                 pruebaPostBack.Text = "He causado PostBack";
             }
+            else
+            {
+                string path = Request.Cookies["path"].Value;
+                path += ":Carro";
+                ayudante.construirPath(table_Path, path);
+            }
         }
     }
 }

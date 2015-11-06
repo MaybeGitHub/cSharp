@@ -17,7 +17,10 @@
         </asp:Panel>
         
         <asp:Panel ID="bienvenido" runat="server" Width="100%" HorizontalAlign="Right">
-            <asp:Label ID="label_Welcome" runat="server" Text="Bienvenido"></asp:Label>
+             <asp:Panel ID="path" runat="server" style="float:left">
+                 <asp:Table ID="table_path" runat="server"></asp:Table> 
+             </asp:Panel>
+             <asp:Label ID="label_Welcome" runat="server" Text="Bienvenido"></asp:Label>
         </asp:Panel>
         <asp:Panel ID="navegador" runat="server" style="height:15%" HorizontalAlign="Center">
             <asp:Panel ID="buscador" runat="server" HorizontalAlign="Center">

@@ -15,12 +15,11 @@ namespace LibreriaAgapea.Vistas
     {
         private CLibro cL = new CLibro();
         private CUsuario cU = new CUsuario();
-        private Ayudante ayudante = new Ayudante();      
+        private Ayudante ayudante = new Ayudante();
+        private Usuario usuario = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario usuario = null;         
-
             if (Request.Cookies["usuario"] != null )
             {
                 usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
@@ -28,8 +27,7 @@ namespace LibreriaAgapea.Vistas
                 Button button_Salir = new Button();
                 button_Salir.Text = "Log out";
                 button_Salir.ID = "button_Salir";
-                bienvenido.Controls.Add(button_Salir);
-                generarCesta(usuario.cesta);
+                bienvenido.Controls.Add(button_Salir);                
             }
             else
             {
@@ -55,9 +53,9 @@ namespace LibreriaAgapea.Vistas
                     
                     //TreeView
                     if (clave == "__EVENTARGUMENT" && Request.Params[clave].Split('\\').Count() > 1) librosQueMeInteresan = cL.buscarLibros(Request.Params[clave].Split('\\')[1], "categoria");
-                    
+
                     //Panel Central
-                    if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar" && usuario != null ) cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
+                    if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar" && usuario != null) cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
 
                     //Cesta
                     if (clave.Contains("button_Borrar") && Request.Params[clave] == "X") cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[3], false));
@@ -94,9 +92,15 @@ namespace LibreriaAgapea.Vistas
             }
             else
             {                
-                generarTreeCategorias();                       
+                generarTreeCategorias();
+                string path = "Inicio";
+                HttpCookie miCookie = new HttpCookie("path");
+                miCookie.Value = path;
+                Response.Cookies.Add(miCookie);
+                ayudante.construirPath(table_path, path);                       
             }            
 
+            if ( usuario != null ) generarCesta(usuario.cesta);
             generarTablaCentral(librosQueMeInteresan);            
             text_Buscador.Text = "";
         }
@@ -127,7 +131,7 @@ namespace LibreriaAgapea.Vistas
 
             columna = new TableCell();
 
-            foreach (Libro libro in cesta.listaLibros.Distinct(ayudante.comparadorTitulos()))
+            foreach (Libro libro in cesta.listaLibros.Distinct(ayudante.comparadorTitulos()).OrderBy(libro => libro.titulo))
             {               
                 VCestas vC = LoadControl("~/ControladoresObjetos/VCestas.ascx") as VCestas;
                 vC.crearVCestas(libro.titulo);
@@ -211,6 +215,7 @@ namespace LibreriaAgapea.Vistas
                 vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;
                 vL.getButton().ID = vL.getButton().ID + "$" + libro.ISBN10;
                 vL.createVBook(libro);
+                if ( usuario == null) vL.mostrarBoton(false);
                 columnActual.Width = vL.width;
                 columnActual.Height = vL.heigth;
                 columnActual.Controls.Add(vL);

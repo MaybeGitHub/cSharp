@@ -9,6 +9,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:Panel ID="path" runat="server">
+            <asp:Table ID="table_Path" runat="server"></asp:Table>
+        </asp:Panel>
         <asp:Panel ID="central" runat="server" Width="40%" style="margin-left: 30%">
             Login <asp:TextBox ID="nombre" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="usuario_FV" runat="server" ControlToValidate="nombre" Display="Dynamic" ErrorMessage="No se puede dejar este campo vacio" Font-Size="Small" ForeColor="#990033">No se puede dejar este campo vacio</asp:RequiredFieldValidator>

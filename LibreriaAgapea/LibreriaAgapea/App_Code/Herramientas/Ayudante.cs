@@ -103,5 +103,43 @@ namespace LibreriaAgapea.App_Code.Herramientas
                 return libro.categoria.GetHashCode();
             }
         }
+
+        public void construirPath(Table tabla, string path) {
+            TableRow fila = new TableRow();
+            TableCell columna = null;
+            string pagina;
+            List<string> rutas = path.Split(':').ToList();           
+            for (int i = 0; i < (rutas.Count()*2)-1; i++)
+            {                
+                if (i % 2 == 0) {
+                    columna = new TableCell();
+                    if (i == (rutas.Count() * 2) - 2)
+                    {
+                        Label label = new Label();
+                        label.Text = capitalizar(rutas.ElementAt(i / 2));
+                        columna.Controls.Add(label);
+                    }
+                    else
+                    {                       
+                        HyperLink link = new HyperLink();
+                        pagina = capitalizar(rutas.ElementAt(i / 2));
+                        link.NavigateUrl = pagina + ".aspx";
+                        link.Text = pagina;
+                        if ( pagina == "Inicio") link.NavigateUrl = "Centro.aspx";                                         
+                        columna.Controls.Add(link);                        
+                    }
+                    fila.Cells.Add(columna);
+                }
+                else
+                {
+                    columna = new TableCell();
+                    Label label = new Label();
+                    label.Text = " > ";
+                    columna.Controls.Add(label);
+                    fila.Cells.Add(columna);
+                }
+            }            
+            tabla.Rows.Add(fila);          
+        }
     }
 }

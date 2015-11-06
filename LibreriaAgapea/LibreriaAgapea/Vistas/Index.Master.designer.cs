@@ -49,6 +49,24 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.Panel bienvenido;
         
         /// <summary>
+        /// path control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel path;
+        
+        /// <summary>
+        /// table_path control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table table_path;
+        
+        /// <summary>
         /// label_Welcome control.
         /// </summary>
         /// <remarks>

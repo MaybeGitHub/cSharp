@@ -22,6 +22,13 @@ namespace LibreriaAgapea.Vistas
         {
             ayudante.pintarCajaInfoPagina(cajaInfo, Context);
             nombre.Focus();
+
+            if (!IsPostBack)
+            {
+                string path = Request.Cookies["path"].Value;
+                path += ":Login";
+                ayudante.construirPath(table_Path, path);
+            }
         }
 
         protected void usuario_CV_ServerValidate(object source, ServerValidateEventArgs args)

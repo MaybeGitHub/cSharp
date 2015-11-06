@@ -9,6 +9,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:Panel ID="path" runat="server">
+            <asp:Table ID="table_Path" runat="server"></asp:Table>
+        </asp:Panel>
         <asp:Label ID="welcome" runat="server" Text="Welcome"></asp:Label>
         <asp:TextBox runat="server" TextMode="MultiLine" ID="pruebaLibros" Height="56px" Width="297px"></asp:TextBox>
         <asp:Button runat="server" ID="pruebaPostBack" Text="Clickeame" />
