@@ -13,36 +13,22 @@ namespace LibreriaAgapea.Vistas
 {
     public partial class Login : System.Web.UI.Page
     {
-
         private Ayudante ayudante = new Ayudante();
         private CUsuario cU = new CUsuario();
-        private Usuario usuario;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ayudante.pintarCajaInfoPagina(cajaInfo, Context);
             nombre.Focus();
 
             if (!IsPostBack)
             {
-                string path = Request.Cookies["path"].Value;
-                path += ":Login";
-                ayudante.construirPath(table_Path, path);
+                Request.Cookies["path"].Value += ":Login";            
             }
         }
 
         protected void usuario_CV_ServerValidate(object source, ServerValidateEventArgs args)
         {
             if (cU.listaUsuarios.Where(usuario => usuario.nombre == nombre.Text && usuario.contraseña == password.Text).Count() == 1) args.IsValid = true; else args.IsValid = false;
-        }
-
-        protected void password_FV_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (password.Text == "") args.IsValid = false;
-        }
-        protected void datos_FV_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (nombre.Text == "") args.IsValid = false;
         }
 
         protected void entrar_Click(object sender, EventArgs e)

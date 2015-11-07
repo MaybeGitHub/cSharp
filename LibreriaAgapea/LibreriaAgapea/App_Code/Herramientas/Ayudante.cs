@@ -105,6 +105,7 @@ namespace LibreriaAgapea.App_Code.Herramientas
         }
 
         public void construirPath(Table tabla, string path) {
+            tabla.Controls.Clear();
             TableRow fila = new TableRow();
             TableCell columna = null;
             string pagina;

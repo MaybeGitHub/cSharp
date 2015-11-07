@@ -16,21 +16,15 @@ namespace LibreriaAgapea.Vistas
         protected void Page_Load(object sender, EventArgs e)
         {
             Usuario usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
-            welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
             pruebaLibros.Text = "";
 
             foreach (Libro libro in usuario.cesta.listaLibros.Distinct(ayudante.comparadorTitulos()))
                 pruebaLibros.Text += libro.titulo + " x " + ayudante.librosRepetidos(libro, usuario.cesta.listaLibros) + "\n";
 
-            if (IsPostBack)
+            if(!IsPostBack)
             {
-                pruebaPostBack.Text = "He causado PostBack";
-            }
-            else
-            {
-                string path = Request.Cookies["path"].Value;
-                path += ":Carro";
-                ayudante.construirPath(table_Path, path);
+                Request.Cookies["path"].Value += ":Carro";
+                        
             }
         }
     }

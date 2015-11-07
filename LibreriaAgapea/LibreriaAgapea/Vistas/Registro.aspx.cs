@@ -18,14 +18,11 @@ namespace LibreriaAgapea.Vistas
 
         protected void Page_Load(Object sender, EventArgs e)
         {
-            ayudante.pintarCajaInfoPagina(TextBox1, Context);
             usuario_TxBox.Focus();
 
             if (!IsPostBack)
             {
-                string path = Request.Cookies["path"].Value;
-                path += ":Registro";
-                ayudante.construirPath(table_Path, path);
+                Request.Cookies["path"].Value += ":Registro";
             }
         }
 

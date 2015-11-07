@@ -13,40 +13,13 @@ namespace LibreriaAgapea.Vistas {
     public partial class Carro {
         
         /// <summary>
-        /// form1 control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// path control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel path;
-        
-        /// <summary>
-        /// table_Path control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Path;
-        
-        /// <summary>
-        /// welcome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label welcome;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
         /// pruebaLibros control.
@@ -56,14 +29,5 @@ namespace LibreriaAgapea.Vistas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox pruebaLibros;
-        
-        /// <summary>
-        /// pruebaPostBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button pruebaPostBack;
     }
 }
