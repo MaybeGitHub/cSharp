@@ -23,7 +23,7 @@ namespace LibreriaAgapea.App_Code.Controladores
                 salida += linea + "\n";
             }
             pagina.Canvas.DrawString(salida, new PdfFont(PdfFontFamily.TimesRoman, 14), new PdfSolidBrush(Color.Black), 10, 10);
-            pdf.SaveToFile("Recibo.pdf");
+            pdf.SaveToFile("Recibo.pdf");            
             pdf.Close();
         }
 
@@ -38,8 +38,8 @@ namespace LibreriaAgapea.App_Code.Controladores
             nuevoCorreo.Body = "Gracias por usar nuestra Pagina";
 
             SmtpClient servidor = new SmtpClient();
-            servidor.Host = "smtp-relay.gmail.com";
-            servidor.Port = 25;
+            servidor.Host = "mail.gmail.com";
+            servidor.Port = 587;
             servidor.Credentials = new System.Net.NetworkCredential(email, "1jesusin2unibus");
             try {
                 servidor.Send(nuevoCorreo);
