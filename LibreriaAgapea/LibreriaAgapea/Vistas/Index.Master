@@ -11,7 +11,7 @@
 <body>
     <form runat="server">
         <asp:Panel ID="cabecera" runat="server" style="height:15%" Width="100%">
-            <asp:ImageButton ID="headImage" runat="server" ImageUrl="~/Imagenes/cabecera.png"/>
+            <asp:ImageButton ID="headImage" runat="server" ImageUrl="~/Imagenes/cabecera.png" Width="100%"/>
         </asp:Panel>
         
         <asp:Panel ID="bienvenido" runat="server" Width="100%" HorizontalAlign="Right">
@@ -26,6 +26,6 @@
             <asp:ImageButton ID="image_Pie" runat="server" ImageUrl="~/Imagenes/pie.png" Width="100%"/>
         </asp:Panel>
         <asp:TextBox ID="text_PageInfo" runat="server" Width="100%" TextMode="MultiLine" Height="200px"></asp:TextBox>
-    </form>    
+    </form>  
 </body>
 </html>

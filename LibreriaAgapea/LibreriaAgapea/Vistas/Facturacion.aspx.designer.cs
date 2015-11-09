@@ -10,25 +10,16 @@
 namespace LibreriaAgapea.Vistas {
     
     
-    public partial class Login {
+    public partial class Facturacion {
         
         /// <summary>
-        /// central control.
+        /// table_Info control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel central;
-        
-        /// <summary>
-        /// table_Componentes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Componentes;
+        protected global::System.Web.UI.WebControls.Table table_Info;
         
         /// <summary>
         /// nombre control.
@@ -37,60 +28,105 @@ namespace LibreriaAgapea.Vistas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox nombre;
+        protected global::System.Web.UI.WebControls.Label nombre;
         
         /// <summary>
-        /// usuario_FV control.
+        /// campo_nombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator usuario_FV;
+        protected global::System.Web.UI.WebControls.Label campo_nombre;
         
         /// <summary>
-        /// usuario_CV control.
+        /// apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator usuario_CV;
+        protected global::System.Web.UI.WebControls.Label apellido;
         
         /// <summary>
-        /// password control.
+        /// campo_apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.WebControls.Label campo_apellido;
         
         /// <summary>
-        /// contraseña_FV control.
+        /// direccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator contraseña_FV;
+        protected global::System.Web.UI.WebControls.Label direccion;
         
         /// <summary>
-        /// salir control.
+        /// campo_direccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button salir;
+        protected global::System.Web.UI.WebControls.Label campo_direccion;
         
         /// <summary>
-        /// entrar control.
+        /// email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button entrar;
+        protected global::System.Web.UI.WebControls.Label email;
+        
+        /// <summary>
+        /// campo_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label campo_email;
+        
+        /// <summary>
+        /// cesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cesta;
+        
+        /// <summary>
+        /// list_Cesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox list_Cesta;
+        
+        /// <summary>
+        /// button_Volver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_Volver;
+        
+        /// <summary>
+        /// button_Pagar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_Pagar;
     }
 }

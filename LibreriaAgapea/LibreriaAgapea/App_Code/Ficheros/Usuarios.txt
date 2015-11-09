@@ -1,7 +1,2 @@
-﻿admin:12345678
-qwe:qweqweqwe
-jesus:123123123
-asd:asdasdasd
-werwer:werwerwer
-qweqwe:qweqweqwe
-fdg:dfgdfgdfg
+﻿admin:admin:12345678:Localhost:jesus.salvador.barcenilla@gmail.com
+qwe:qwe:qweqweqwe:qwe:qwe

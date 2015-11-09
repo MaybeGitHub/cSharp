@@ -16,7 +16,7 @@ namespace LibreriaAgapea.App_Code.Herramientas
         {
             string message = "";
             List<string> valores = (from string key in datos.Request.Params where (key != null) select key).ToList();
-            foreach (string key in datos.Request.Params) message += "clave: " + key + " ---- valor:_" + datos.Request[key] + "\n";
+            foreach (string key in valores) message += "clave: " + key + " ---- valor:_" + datos.Request[key] + "\n";
             cajaMultilinea.Text = message;
         }
 

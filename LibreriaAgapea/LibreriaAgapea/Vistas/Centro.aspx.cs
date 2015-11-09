@@ -17,6 +17,7 @@ namespace LibreriaAgapea.Vistas
         private CUsuario cU = new CUsuario();
         private Ayudante ayudante = new Ayudante();
         private Usuario usuario = null;
+        private int pagina = 0, cantidadLibros, numeroLibrosTabla = 6;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +40,7 @@ namespace LibreriaAgapea.Vistas
                     if (clave.Contains("button_Comprar") && Request.Params[clave] == "Comprar" && usuario != null) cU.meterEnCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false));
 
                     //Cesta
-                    if (clave.Contains("button_Borrar") && Request.Params[clave] == "X") cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[3], false));
+                    if (clave.Contains("button_Borrar") && Request.Params[clave] == "X") cU.sacarDeCesta(usuario, ayudante.fabricaLibros(clave.Split('$')[4], false), false);
 
                     //Buscador                    
                     if (clave.Contains("button_Buscador") && Request.Params[clave] == "Buscar" && text_Buscador.Text != "")
@@ -53,6 +54,18 @@ namespace LibreriaAgapea.Vistas
                         librosQueMeInteresan = cL.buscarLibros(ayudante.capitalizar(text_Buscador.Text), tipoBusqueda);
                         if (librosQueMeInteresan.Count == 0) librosQueMeInteresan = cL.listaLibros;
                     }
+
+                    //imgButtons
+                    if (clave.Contains("imgButton_Libro"))
+                    {
+                        string codigoLibro = clave.Split('$')[1];
+                    }
+
+                    //Paginas
+                    if (clave.Contains("button_Pagina"))
+                    {
+                        pagina = int.Parse(Request.Params[clave]) - 1;                        
+                    }
                 }
             }
             else
@@ -61,6 +74,18 @@ namespace LibreriaAgapea.Vistas
             }
 
             if (usuario != null) generarCesta(usuario.cesta);
+
+            cantidadLibros = librosQueMeInteresan.Count;
+            if ((pagina * numeroLibrosTabla) + numeroLibrosTabla <= librosQueMeInteresan.Count)
+            {
+                librosQueMeInteresan = librosQueMeInteresan.GetRange(pagina * numeroLibrosTabla, numeroLibrosTabla);
+            }
+            else
+            {
+                int librosRestantes = librosQueMeInteresan.Count - (pagina * numeroLibrosTabla);
+                librosQueMeInteresan = librosQueMeInteresan.GetRange(librosQueMeInteresan.Count - librosRestantes, librosRestantes);
+            }
+
             generarTablaCentral(librosQueMeInteresan);
             text_Buscador.Text = "";
         }
@@ -162,6 +187,7 @@ namespace LibreriaAgapea.Vistas
             TableRow rowActual = null;
             VLibros vL;
 
+            // Libros 
             foreach (Libro libro in lista)
             {
                 if (lista.IndexOf(libro) % 3 == 0)
@@ -171,18 +197,34 @@ namespace LibreriaAgapea.Vistas
                 }
                 columnActual = new TableCell();
                 columnActual.HorizontalAlign = HorizontalAlign.Center;
-                vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;
-                vL.getButton().ID = vL.getButton().ID + "$" + libro.ISBN10;
+                vL = LoadControl("~/ControladoresObjetos/VLibros.ascx") as VLibros;                
                 vL.createVBook(libro);
                 if (usuario == null) vL.mostrarBoton(false);                
                 columnActual.Controls.Add(vL);
                 rowActual.Cells.Add(columnActual);
             }
+
+            // Botones Paginas
+            if (cantidadLibros > numeroLibrosTabla)
+            {
+                TableRow fila = new TableRow();
+                TableCell columna = new TableCell();
+                Button boton;
+                for (int i = 0; i < (cantidadLibros / numeroLibrosTabla) + 1; i++)
+                {
+                    boton = new Button();
+                    boton.ID = "button_Pagina" + (i + 1).ToString();
+                    boton.Text = (i + 1).ToString();
+                    columna.Controls.Add(boton);
+                }
+                fila.Cells.Add(columna);
+                table_Paginas.Rows.Add(fila);
+            }
         }
 
         protected void pagar_boton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Carro.aspx");
+            if(usuario.cesta.listaLibros.Count != 0) Response.Redirect("Carro.aspx");
         }
     }
 }

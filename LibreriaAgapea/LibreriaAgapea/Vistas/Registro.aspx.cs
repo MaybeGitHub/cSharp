@@ -18,7 +18,7 @@ namespace LibreriaAgapea.Vistas
 
         protected void Page_Load(Object sender, EventArgs e)
         {
-            usuario_TxBox.Focus();
+            text_Nombre.Focus();
 
             if (!IsPostBack)
             {
@@ -30,16 +30,16 @@ namespace LibreriaAgapea.Vistas
         {
             if (IsValid)
             {
-                usuario = new Usuario(usuario_TxBox.Text, pass_TxBox.Text);
+                usuario = new Usuario(text_Nombre.Text, text_Apellido.Text, text_Contraseña.Text, text_Direccion.Text, text_Email.Text);
                 CFichero.añadirUsuario(usuario);
                 if (Request.Cookies["usuario"] != null)
                 {
-                    Request.Cookies["usuario"].Value = usuario_TxBox.Text;
+                    Request.Cookies["usuario"].Value = text_Nombre.Text;
                 }
                 else
                 {
                     HttpCookie miCookie = new HttpCookie("usuario");
-                    miCookie.Value = usuario_TxBox.Text;
+                    miCookie.Value = text_Nombre.Text;
                     Response.Cookies.Add(miCookie);
                 }                
                 Response.Redirect("Centro.aspx");
@@ -48,7 +48,7 @@ namespace LibreriaAgapea.Vistas
 
         protected void passLong_V_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (pass2_TxBox.Text.Length < 8) args.IsValid = false;
+            if (text_Contraseña2.Text.Length < 8) args.IsValid = false;
         }
 
         protected void almaCheck_V_ServerValidate(object source, ServerValidateEventArgs args)
@@ -59,7 +59,7 @@ namespace LibreriaAgapea.Vistas
 
         protected void usuarioExiste_FV_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (cU.listaUsuarios.Where(usuario => usuario.nombre == usuario_TxBox.Text).Count() != 0) args.IsValid = false;
+            if (cU.listaUsuarios.Where(usuario => usuario.nombre == text_Nombre.Text).Count() != 0) args.IsValid = false;
         }
     }
 }

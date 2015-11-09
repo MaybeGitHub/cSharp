@@ -13,22 +13,22 @@ namespace LibreriaAgapea.Vistas {
     public partial class Registro {
         
         /// <summary>
-        /// usuario_Label control.
+        /// label_Nombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usuario_Label;
+        protected global::System.Web.UI.WebControls.Label label_Nombre;
         
         /// <summary>
-        /// usuario_TxBox control.
+        /// text_Nombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox usuario_TxBox;
+        protected global::System.Web.UI.WebControls.TextBox text_Nombre;
         
         /// <summary>
         /// usuarioExiste_FV control.
@@ -40,22 +40,40 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.CustomValidator usuarioExiste_FV;
         
         /// <summary>
-        /// pass_Label control.
+        /// label_Apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pass_Label;
+        protected global::System.Web.UI.WebControls.Label label_Apellido;
         
         /// <summary>
-        /// pass_TxBox control.
+        /// text_Apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pass_TxBox;
+        protected global::System.Web.UI.WebControls.TextBox text_Apellido;
+        
+        /// <summary>
+        /// label_Contraseña control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_Contraseña;
+        
+        /// <summary>
+        /// text_Contraseña control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox text_Contraseña;
         
         /// <summary>
         /// passLong_V control.
@@ -67,22 +85,22 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.CustomValidator passLong_V;
         
         /// <summary>
-        /// pass2_Label control.
+        /// label_Contraseña2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pass2_Label;
+        protected global::System.Web.UI.WebControls.Label label_Contraseña2;
         
         /// <summary>
-        /// pass2_TxBox control.
+        /// text_Contraseña2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pass2_TxBox;
+        protected global::System.Web.UI.WebControls.TextBox text_Contraseña2;
         
         /// <summary>
         /// pass2_CV control.
@@ -103,6 +121,24 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.CheckBox alma_ChkBox;
         
         /// <summary>
+        /// label_Direccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_Direccion;
+        
+        /// <summary>
+        /// text_Direccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox text_Direccion;
+        
+        /// <summary>
         /// almaCheck_V control.
         /// </summary>
         /// <remarks>
@@ -110,6 +146,24 @@ namespace LibreriaAgapea.Vistas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator almaCheck_V;
+        
+        /// <summary>
+        /// label_Email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_Email;
+        
+        /// <summary>
+        /// text_Email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox text_Email;
         
         /// <summary>
         /// registrar_boton control.

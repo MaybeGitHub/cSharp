@@ -33,14 +33,13 @@
             <asp:TreeView ID="tree_Categorias" runat="server" ShowLines="True" Width="100%">
             </asp:TreeView>
         </asp:panel>
-        <asp:panel ID="panel_Libros" runat="server" style="float:left; width:70%">
-                
+        <asp:panel ID="panel_Libros" runat="server" style="float:left; width:70%">                
             <asp:Table ID="table_Libros" runat="server" HorizontalAlign="Center">
             </asp:Table>
-                
+            <asp:Table ID="table_Paginas" runat="server" HorizontalAlign="Center"></asp:Table>    
         </asp:panel>
-        <asp:Panel ID="panel_Cesta" runat="server" style="float:left;width:14%">
-            <asp:Table ID="table_Cesta" runat="server" CellSpacing="0"></asp:Table>
+        <asp:Panel ID="panel_Cesta" runat="server" Width="14%" style="float:left">
+            <asp:Table ID="table_Cesta" runat="server" CellSpacing="0" HorizontalAlign="Center" Width="100%"></asp:Table>
         </asp:Panel>
     </asp:panel>
 </asp:Content>

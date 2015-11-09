@@ -16,15 +16,14 @@ namespace LibreriaAgapea.Vistas
         private CLibro cL = new CLibro();
         private CUsuario cU = new CUsuario();
         private Ayudante ayudante = new Ayudante();
-        private Usuario usuario = null;
-
-        
+        private Usuario usuario = null;       
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            text_PageInfo.Text = "";
             ayudante.pintarCajaInfoPagina(text_PageInfo, Context);
 
-            if (Request.Cookies["usuario"] != null)
+            if (Request.Cookies["usuario"] != null )
             {
                 usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
                 label_Welcome.Text = "Bienvenido de nuevo, " + usuario.nombre;
@@ -60,7 +59,6 @@ namespace LibreriaAgapea.Vistas
                     }
 
                     // Redirigir
-
                     if ( (clave.Contains("button_Registro") || clave.Contains("button_Login")) && Request.Params[clave] != "")
                     {
                         Response.Redirect(clave.Split('_')[1] + ".aspx");

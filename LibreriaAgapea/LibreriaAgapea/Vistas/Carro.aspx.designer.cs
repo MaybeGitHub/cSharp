@@ -22,12 +22,12 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// pruebaLibros control.
+        /// table_Carrito control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pruebaLibros;
+        protected global::System.Web.UI.WebControls.Table table_Carrito;
     }
 }

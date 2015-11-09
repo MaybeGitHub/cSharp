@@ -22,18 +22,18 @@ namespace LibreriaAgapea.Vistas
 
             if (!IsPostBack)
             {
-                Request.Cookies["path"].Value += ":Login";            
+                Request.Cookies["path"].Value += ":Login";
             }
         }
 
         protected void usuario_CV_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (cU.listaUsuarios.Where(usuario => usuario.nombre == nombre.Text && usuario.contraseña == password.Text).Count() == 1) args.IsValid = true; else args.IsValid = false;
+            if (cU.listaUsuarios.Where(usuario => usuario.nombre == nombre.Text && usuario.contraseña == password.Text).Count() == 1 ) args.IsValid = true; else args.IsValid = false;
         }
 
         protected void entrar_Click(object sender, EventArgs e)
         {
-            if ( IsValid)
+            if ( IsValid )
             {
                 if (Request.Cookies["usuario"] != null)
                 {

@@ -166,6 +166,15 @@ namespace LibreriaAgapea.Vistas {
         protected global::System.Web.UI.WebControls.Table table_Libros;
         
         /// <summary>
+        /// table_Paginas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table table_Paginas;
+        
+        /// <summary>
         /// panel_Cesta control.
         /// </summary>
         /// <remarks>

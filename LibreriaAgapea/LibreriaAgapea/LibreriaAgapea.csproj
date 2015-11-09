@@ -78,8 +78,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="ControladoresObjetos\VCarrito.ascx" />
     <Content Include="ControladoresObjetos\VLibros.ascx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Imagenes\Botonera\mas.jpg" />
+    <Content Include="Imagenes\Botonera\menos.jpg" />
+    <Content Include="Imagenes\Botonera\equis.jpg" />
     <Content Include="Imagenes\NoImage.jpg" />
     <Content Include="ControladoresObjetos\VCestas.ascx" />
     <Content Include="Imagenes\registrar.png" />
@@ -96,6 +100,7 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Vistas\Carro.aspx" />
+    <Content Include="Vistas\Facturacion.aspx" />
     <Content Include="Vistas\Index.Master" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
@@ -117,6 +122,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Controladores\CMensajeria.cs" />
+    <Compile Include="ControladoresObjetos\VCarrito.ascx.cs">
+      <DependentUpon>VCarrito.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControladoresObjetos\VCarrito.ascx.designer.cs">
+      <DependentUpon>VCarrito.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ControladoresObjetos\VLibros.ascx.cs">
       <DependentUpon>VLibros.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,6 +157,13 @@
     </Compile>
     <Compile Include="Vistas\Carro.aspx.designer.cs">
       <DependentUpon>Carro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Facturacion.aspx.cs">
+      <DependentUpon>Facturacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vistas\Facturacion.aspx.designer.cs">
+      <DependentUpon>Facturacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Index.Master.cs">
       <DependentUpon>Index.Master</DependentUpon>

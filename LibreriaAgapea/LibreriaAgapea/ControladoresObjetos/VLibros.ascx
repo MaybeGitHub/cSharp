@@ -7,7 +7,7 @@
             <asp:Table ID="table_Body" runat="server" Width="100%" Height="100%" CellPadding="5" CellSpacing="5">               
                 <asp:TableRow runat="server" Height="90%" Width="100%">
                     <asp:TableCell runat="server" Width="30%" Height="100%">
-                            <asp:ImageButton ID="imgbutton_Libro" runat="server" ImageUrl="~/Imagenes/NoImage.jpg" Width="100px" Height="120px"/>                                               
+                            <asp:ImageButton ID="imgButton_Libro" runat="server" ImageUrl="~/Imagenes/NoImage.jpg" Width="100px" Height="120px"/>                                               
                     </asp:TableCell>                                                 
                     <asp:TableCell runat="server" Width="70%">
                         <asp:Label ID="label_Titulo" runat="server" Text="Title"></asp:Label>

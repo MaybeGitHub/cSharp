@@ -23,7 +23,7 @@ namespace LibreriaAgapea.ControladoresObjetos
             set
             {
                 __imagen = value;
-                imgbutton_Libro.ImageUrl = __imagen.ImageUrl;
+                imgButton_Libro.ImageUrl = __imagen.ImageUrl;
             }
         }
         public string titulo
@@ -126,12 +126,9 @@ namespace LibreriaAgapea.ControladoresObjetos
             ISBN13 = book.ISBN13;
             precio = book.precio;
             categoria = book.categoria;
-        }
-
-        public Button getButton()
-        {
-            return button_Comprar;
-        }
+            button_Comprar.ID = button_Comprar.ID + "$" + ISBN10;
+            imgButton_Libro.ID = imgButton_Libro.ID + "$" + ISBN10;
+        }      
 
         public void mostrarBoton(bool mostrar)
         {

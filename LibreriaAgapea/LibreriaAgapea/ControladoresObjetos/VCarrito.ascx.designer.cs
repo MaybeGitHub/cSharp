@@ -7,90 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibreriaAgapea.Vistas {
+namespace LibreriaAgapea.ControladoresObjetos {
     
     
-    public partial class Login {
+    public partial class VCarrito {
         
         /// <summary>
-        /// central control.
+        /// table_Libro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel central;
+        protected global::System.Web.UI.WebControls.Table table_Libro;
         
         /// <summary>
-        /// table_Componentes control.
+        /// label_Titulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_Componentes;
+        protected global::System.Web.UI.WebControls.Label label_Titulo;
         
         /// <summary>
-        /// nombre control.
+        /// imgButton_Down control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox nombre;
+        protected global::System.Web.UI.WebControls.ImageButton imgButton_Down;
         
         /// <summary>
-        /// usuario_FV control.
+        /// label_Cantidad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator usuario_FV;
+        protected global::System.Web.UI.WebControls.TextBox label_Cantidad;
         
         /// <summary>
-        /// usuario_CV control.
+        /// imgButton_Up control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator usuario_CV;
+        protected global::System.Web.UI.WebControls.ImageButton imgButton_Up;
         
         /// <summary>
-        /// password control.
+        /// label_Precio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.WebControls.TextBox label_Precio;
         
         /// <summary>
-        /// contraseña_FV control.
+        /// imgButton_Borrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator contraseña_FV;
-        
-        /// <summary>
-        /// salir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button salir;
-        
-        /// <summary>
-        /// entrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button entrar;
+        protected global::System.Web.UI.WebControls.ImageButton imgButton_Borrar;
     }
 }

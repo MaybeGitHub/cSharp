@@ -23,17 +23,24 @@ namespace LibreriaAgapea.App_Code.Controladores
             CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, true);            
         }
 
-        public void sacarDeCesta(Usuario usuario, Libro libro)
+        public void sacarDeCesta(Usuario usuario, Libro libro, bool varios)
         {
-            foreach(Libro libroUsuario in usuario.cesta.listaLibros)
+            List<Libro> librosBorrar = new List<Libro>();
+            foreach (Libro libroUsuario in usuario.cesta.listaLibros)
             {
                 if ( libroUsuario.ISBN10 == libro.ISBN10)
                 {
-                    usuario.cesta.listaLibros.Remove(libroUsuario);
-                    break;
+                    librosBorrar.Add(libroUsuario);
+                    if ( !varios ) break;
                 }
             }
-            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false);
+
+            foreach(Libro libroUsuario in librosBorrar)
+            {
+                usuario.cesta.listaLibros.Remove(libroUsuario);
+                CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false);
+            }
+            
         }
     }
 }

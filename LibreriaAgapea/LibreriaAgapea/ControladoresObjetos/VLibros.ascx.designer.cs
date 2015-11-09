@@ -31,13 +31,13 @@ namespace LibreriaAgapea.ControladoresObjetos {
         protected global::System.Web.UI.WebControls.Table table_Body;
         
         /// <summary>
-        /// imgbutton_Libro control.
+        /// imgButton_Libro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgbutton_Libro;
+        protected global::System.Web.UI.WebControls.ImageButton imgButton_Libro;
         
         /// <summary>
         /// label_Titulo control.
