@@ -7,6 +7,7 @@ using Spire.Pdf.Graphics;
 using System.IO;
 using System.Drawing;
 using System.Net.Mail;
+using System.Net;
 
 namespace LibreriaAgapea.App_Code.Controladores
 {
@@ -27,8 +28,8 @@ namespace LibreriaAgapea.App_Code.Controladores
             pdf.Close();
         }
 
-        public static void mandarMail(string email)
-        {
+        public static string mandarMail(string email)
+        {            
             crearPdf();
             MailMessage nuevoCorreo = new MailMessage();
             nuevoCorreo.To.Add(new MailAddress(email));
@@ -38,15 +39,19 @@ namespace LibreriaAgapea.App_Code.Controladores
             nuevoCorreo.Body = "Gracias por usar nuestra Pagina";
 
             SmtpClient servidor = new SmtpClient();
-            servidor.Host = "mail.gmail.com";
+            servidor.Host = "smtp.gmail.com";
             servidor.Port = 587;
-            servidor.Credentials = new System.Net.NetworkCredential(email, "1jesusin2unibus");
+            servidor.EnableSsl = true;
+            servidor.DeliveryMethod = SmtpDeliveryMethod.Network;
+            servidor.Credentials = new NetworkCredential(email, "1jesusin2unibus");
+            servidor.Timeout = 20000;
             try {
                 servidor.Send(nuevoCorreo);
+                return "ok";
             }
-            catch
+            catch ( Exception e )
             {
-
+                return e.Message;
             }
         }
     }

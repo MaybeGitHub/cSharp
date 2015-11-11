@@ -26,8 +26,7 @@ namespace LibreriaAgapea.Vistas
                     // Boton Pagar
                     if (clave.Contains("button_Pagar"))
                     {
-                        CMensajeria.mandarMail(usuario.email);
-                        Response.Redirect("Centro.aspx");
+                        if (CMensajeria.mandarMail(usuario.email) == "ok") Response.Redirect("Centro.aspx");
                     }
 
                     if (clave.Contains("button_Volver"))
