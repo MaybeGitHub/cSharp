@@ -30,6 +30,7 @@ namespace LibreriaAgapea.Vistas
                         if (CMensajeria.mandarMail(usuario.email))
                         {
                             CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, "0", false, true);
+                            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, DateTime.Now.ToShortDateString(), true, false);
                             Response.Redirect("Centro.aspx");
                         }
                     }

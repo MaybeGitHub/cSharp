@@ -23,17 +23,22 @@ namespace LibreriaAgapea.App_Code.Herramientas
         public Cesta fabricaCesta(Usuario usuario)
         {
             Cesta cesta = new Cesta(usuario);
-            string datosCestaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[1] == usuario.nombre && linea.Split(':')[0] == "1").SingleOrDefault();
-            if ( datosCestaUsuario == null )
+            string[] datosTxTCestas = File.ReadAllLines(CFichero.rutaCestas);
+            if (datosTxTCestas[0].Split(':')[0] != "")
             {
-                StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append));
-                sw.WriteLine(cesta.activa + ":" + usuario.nombre);
-                sw.Close();
-            }
-            else {
-                for (int i = 2; i < datosCestaUsuario.Split(':').Count(); i++)
-                {                   
-                    cesta.listaLibros.Add(fabricaLibros(datosCestaUsuario.Split(':')[i], false));
+                string datosCestaUsuario = datosTxTCestas.Where(linea => linea.Split(':')[1] == usuario.nombre && linea.Split(':')[0] == "1").SingleOrDefault();
+                if (datosCestaUsuario == null)
+                {
+                    StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append));
+                    sw.WriteLine(cesta.activa + ":" + usuario.nombre);
+                    sw.Close();
+                }
+                else
+                {
+                    for (int i = 2; i < datosCestaUsuario.Split(':').Count(); i++)
+                    {
+                        cesta.listaLibros.Add(fabricaLibros(datosCestaUsuario.Split(':')[i], false));
+                    }
                 }
             }
             return cesta;           
