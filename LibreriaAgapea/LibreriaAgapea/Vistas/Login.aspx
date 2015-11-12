@@ -33,10 +33,6 @@
                     <asp:Button ID="entrar" runat="server" Text="Entrar" OnClick="entrar_Click"/>
                 </asp:TableCell>
             </asp:TableRow>
-        </asp:Table>     
-   
-        
-        
+        </asp:Table>
     </asp:Panel>
-
 </asp:Content>

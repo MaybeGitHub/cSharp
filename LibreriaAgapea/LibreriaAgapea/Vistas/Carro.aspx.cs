@@ -20,6 +20,7 @@ namespace LibreriaAgapea.Vistas
         protected void Page_Load(object sender, EventArgs e)
         {
             usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
+            ayudante.construirPath((Table)Master.FindControl("table_Path"), "Inicio:Carro");
 
             if (IsPostBack)
             {
@@ -65,11 +66,7 @@ namespace LibreriaAgapea.Vistas
                         }
                     }
                 }
-            }
-            else
-            {
-                Request.Cookies["path"].Value += ":Carro";
-            }
+            }           
 
             generarTabla();
         }

@@ -19,11 +19,7 @@ namespace LibreriaAgapea.Vistas
         protected void Page_Load(object sender, EventArgs e)
         {
             nombre.Focus();
-
-            if (!IsPostBack)
-            {
-                Request.Cookies["path"].Value += ":Login";
-            }
+            ayudante.construirPath((Table)Master.FindControl("table_Path"), "Inicio:Login");            
         }
 
         protected void usuario_CV_ServerValidate(object source, ServerValidateEventArgs args)

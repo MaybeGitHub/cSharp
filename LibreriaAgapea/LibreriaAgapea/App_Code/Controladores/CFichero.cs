@@ -20,32 +20,46 @@ namespace LibreriaAgapea.App_Code.Controladores
             sw.Close();
         }
 
-        public static void sobrescribirTxt(string path, string datoUnico, string dato, bool meterDato)
+        public static void sobrescribirTxt(string path, string clave, string dato, bool meterDato, bool remplazarDato)
         {
-            List<string> datos = File.ReadAllLines(path).ToList();
-            string lineaSeleccionada = datos.Where(linea => linea.Split(':')[0] == datoUnico).SingleOrDefault();
-            int posicion = datos.IndexOf(lineaSeleccionada);
-            if (meterDato) {
-                lineaSeleccionada += ":" + dato;
-            } else {
-                List<string> datosLinea = lineaSeleccionada.Split(':').ToList();
-                foreach (string elemento in datosLinea ) {
-                    if ( elemento == dato )
+            List<string> lineasFichero = File.ReadAllLines(path).ToList();
+            string lineaDeseada = lineasFichero.Where(linea => linea.Split(':')[1] == clave && linea.Split(':')[0] == "1").SingleOrDefault();
+            int posicion = lineasFichero.IndexOf(lineaDeseada);
+            if (meterDato)
+            {
+                lineaDeseada += ":" + dato;
+            }
+            else
+            {
+                List<string> datosLinea = lineaDeseada.Split(':').ToList();
+
+                if (remplazarDato)
+                {
+                    datosLinea.RemoveAt(0);
+                    datosLinea.Insert(0, dato);
+                }
+                else
+                {
+                    foreach (string elemento in datosLinea)
                     {
-                        datosLinea.Remove(elemento);
-                        break;
+                        if (elemento == dato)
+                        {
+                            datosLinea.Remove(elemento);
+                            break;
+                        }
                     }
                 }
-                lineaSeleccionada = "";
+
+                lineaDeseada = "";
                 for(int i = 0; i < datosLinea.Count(); i++)
                 {
-                    lineaSeleccionada += datosLinea.ElementAt(i) + (i < datosLinea.Count() - 1 ? ":" : "");
+                    lineaDeseada += datosLinea.ElementAt(i) + (i < datosLinea.Count() - 1 ? ":" : "");
                 }
             }
-            datos.RemoveAt(posicion);
-            datos.Insert(posicion, lineaSeleccionada);
+            lineasFichero.RemoveAt(posicion);
+            lineasFichero.Insert(posicion, lineaDeseada);
             StreamWriter sw = new StreamWriter( File.Create(path) );
-            foreach (string linea in datos)
+            foreach (string linea in lineasFichero)
             {
                 sw.WriteLine(linea);
             }

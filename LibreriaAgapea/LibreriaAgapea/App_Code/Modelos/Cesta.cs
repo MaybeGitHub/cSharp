@@ -13,18 +13,21 @@ namespace LibreriaAgapea.App_Code.Modelos
     {             
         public List<Libro> listaLibros { get; set; }
         public Usuario usuario { get; set; }
-        private Ayudante ayudante = new Ayudante();      
+        private Ayudante ayudante = new Ayudante();   
+        public string activa { get; set; }
 
         public Cesta(Usuario usuario)
         {
             this.usuario = usuario;
+            activa = "1";
             listaLibros = new List<Libro>();
         }
 
         public Cesta(string[] datosFichero)
         {
-            usuario = ayudante.fabricaUsuario(datosFichero[0]);
-            for(int i = 1; i < datosFichero.Count(); i++)
+            activa = datosFichero[0];
+            usuario = ayudante.fabricaUsuario(datosFichero[1]);
+            for(int i = 2; i < datosFichero.Count(); i++)
             {
                 listaLibros.Add(ayudante.fabricaLibros(datosFichero[i], false));
             }

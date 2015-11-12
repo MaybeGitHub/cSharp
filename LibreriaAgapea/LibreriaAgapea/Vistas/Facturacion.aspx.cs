@@ -18,6 +18,7 @@ namespace LibreriaAgapea.Vistas
         protected void Page_Load(object sender, EventArgs e)
         {
             usuario = ayudante.fabricaUsuario(Request.Cookies["usuario"].Value);
+            ayudante.construirPath((Table)Master.FindControl("table_Path"), "Inicio:Carro:Facturacion");
 
             if (IsPostBack)
             {
@@ -26,7 +27,11 @@ namespace LibreriaAgapea.Vistas
                     // Boton Pagar
                     if (clave.Contains("button_Pagar"))
                     {
-                        if (CMensajeria.mandarMail(usuario.email) == "ok") Response.Redirect("Centro.aspx");
+                        if (CMensajeria.mandarMail(usuario.email) == "ok")
+                        {
+                            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, "0", false, true);
+                            Response.Redirect("Centro.aspx");
+                        }
                     }
 
                     if (clave.Contains("button_Volver"))
@@ -34,10 +39,6 @@ namespace LibreriaAgapea.Vistas
                         Response.Redirect("Carro.aspx");
                     }
                 }
-            }
-            else
-            {
-                Request.Cookies["path"].Value += ":Carro:Facturacion";
             }
 
             campo_nombre.Text = usuario.nombre;

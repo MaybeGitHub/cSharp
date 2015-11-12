@@ -19,11 +19,7 @@ namespace LibreriaAgapea.Vistas
         protected void Page_Load(Object sender, EventArgs e)
         {
             text_Nombre.Focus();
-
-            if (!IsPostBack)
-            {
-                Request.Cookies["path"].Value += ":Registro";
-            }
+            ayudante.construirPath((Table)Master.FindControl("table_Path"), "Inicio:Registro");
         }
 
         protected void registrar_boton_Click(object sender, ImageClickEventArgs e)

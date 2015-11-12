@@ -23,15 +23,15 @@ namespace LibreriaAgapea.App_Code.Herramientas
         public Cesta fabricaCesta(Usuario usuario)
         {
             Cesta cesta = new Cesta(usuario);
-            string datosCestaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[0] == usuario.nombre).SingleOrDefault();
+            string datosCestaUsuario = File.ReadAllLines(CFichero.rutaCestas).Where(linea => linea.Split(':')[1] == usuario.nombre && linea.Split(':')[0] == "1").SingleOrDefault();
             if ( datosCestaUsuario == null )
             {
                 StreamWriter sw = new StreamWriter(new FileStream(CFichero.rutaCestas, FileMode.Append));
-                sw.WriteLine(usuario.nombre);
+                sw.WriteLine(cesta.activa + ":" + usuario.nombre);
                 sw.Close();
             }
             else {
-                for (int i = 1; i < datosCestaUsuario.Split(':').Count(); i++)
+                for (int i = 2; i < datosCestaUsuario.Split(':').Count(); i++)
                 {                   
                     cesta.listaLibros.Add(fabricaLibros(datosCestaUsuario.Split(':')[i], false));
                 }
@@ -50,6 +50,7 @@ namespace LibreriaAgapea.App_Code.Herramientas
         {         
             return File.ReadAllLines(CFichero.rutaUsuarios).Where(usuario => usuario.Split(':')[0] == nombre).Select(libro => new Usuario(libro.Split(':'))).SingleOrDefault();
         }
+
         public int librosRepetidos(Libro libro, List<Libro> listaLibros)
         {
             int cont = 0;
@@ -66,43 +67,7 @@ namespace LibreriaAgapea.App_Code.Herramientas
         public string capitalizar(string frase)
         {
             return char.ToUpper(frase[0]) + frase.Substring(1);
-        }       
-
-        public IEqualityComparer<Libro> comparadorCategorias()
-        {
-            return new ComparadorCategorias();
-        }
-
-        public IEqualityComparer<Libro> comparadorTitulos()
-        {
-            return new ComparadorTitulos();
-        }
-
-        private class ComparadorTitulos : IEqualityComparer<Libro>
-        {
-            public bool Equals(Libro x, Libro y)
-            {
-                return x.titulo == y.titulo;
-            }
-
-            public int GetHashCode(Libro libro)
-            {
-                return libro.titulo.GetHashCode();
-            }
-        }
-
-        private class ComparadorCategorias : IEqualityComparer<Libro>
-        {
-            public bool Equals(Libro x, Libro y)
-            {
-                return x.categoria == y.categoria;
-            }
-
-            public int GetHashCode(Libro libro)
-            {
-                return libro.categoria.GetHashCode();
-            }
-        }
+        } 
 
         public void construirPath(Table tabla, string path) {
             tabla.Controls.Clear();
@@ -141,6 +106,42 @@ namespace LibreriaAgapea.App_Code.Herramientas
                 }
             }            
             tabla.Rows.Add(fila);          
+        }
+
+        public IEqualityComparer<Libro> comparadorCategorias()
+        {
+            return new ComparadorCategorias();
+        }
+
+        public IEqualityComparer<Libro> comparadorTitulos()
+        {
+            return new ComparadorTitulos();
+        }
+
+        private class ComparadorTitulos : IEqualityComparer<Libro>
+        {
+            public bool Equals(Libro x, Libro y)
+            {
+                return x.titulo == y.titulo;
+            }
+
+            public int GetHashCode(Libro libro)
+            {
+                return libro.titulo.GetHashCode();
+            }
+        }
+
+        private class ComparadorCategorias : IEqualityComparer<Libro>
+        {
+            public bool Equals(Libro x, Libro y)
+            {
+                return x.categoria == y.categoria;
+            }
+
+            public int GetHashCode(Libro libro)
+            {
+                return libro.categoria.GetHashCode();
+            }
         }
     }
 }

@@ -65,17 +65,6 @@ namespace LibreriaAgapea.Vistas
                     }
                 }
             }
-
-            if (Request.Cookies["path"] == null)
-            {
-                string path = "Inicio";
-                HttpCookie miCookie = new HttpCookie("path");
-                miCookie.Value = path;
-                Response.Cookies.Add(miCookie);
-            }
-
-            ayudante.construirPath(table_Path, Request.Cookies["path"].Value);
-
         }
     }
 }
