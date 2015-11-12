@@ -27,7 +27,7 @@ namespace LibreriaAgapea.Vistas
                     // Boton Pagar
                     if (clave.Contains("button_Pagar"))
                     {
-                        if (CMensajeria.mandarMail(usuario.email) == "ok")
+                        if (CMensajeria.mandarMail(usuario.email))
                         {
                             CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, "0", false, true);
                             Response.Redirect("Centro.aspx");

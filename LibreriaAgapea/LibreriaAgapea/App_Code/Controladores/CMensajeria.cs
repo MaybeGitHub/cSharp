@@ -28,12 +28,12 @@ namespace LibreriaAgapea.App_Code.Controladores
             pdf.Close();
         }
 
-        public static string mandarMail(string email)
+        public static bool mandarMail(string email)
         {            
             crearPdf();
             MailMessage nuevoCorreo = new MailMessage();
             nuevoCorreo.To.Add(new MailAddress(email));
-            nuevoCorreo.From = new MailAddress(email);
+            nuevoCorreo.From = new MailAddress("proyectos.clase.net@gmail.com");
             nuevoCorreo.Subject = "Factura compra en Libreria Agapea";
             nuevoCorreo.Attachments.Add(new Attachment("Recibo.pdf"));
             nuevoCorreo.Body = "Gracias por usar nuestra Pagina";
@@ -43,15 +43,15 @@ namespace LibreriaAgapea.App_Code.Controladores
             servidor.Port = 587;
             servidor.EnableSsl = true;
             servidor.DeliveryMethod = SmtpDeliveryMethod.Network;
-            servidor.Credentials = new NetworkCredential(email, "1jesusin2unibus");
+            servidor.Credentials = new NetworkCredential("proyectos.clase.net@gmail.com", "solosequenosenada");
             servidor.Timeout = 20000;
             try {
                 servidor.Send(nuevoCorreo);
-                return "ok";
+                return true;
             }
-            catch ( Exception e )
+            catch
             {
-                return e.Message;
+                return false;
             }
         }
     }
