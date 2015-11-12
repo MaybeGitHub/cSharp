@@ -20,7 +20,7 @@ namespace LibreriaAgapea.App_Code.Controladores
         public void meterEnCesta(Usuario usuario, Libro libro)
         {
             usuario.cesta.listaLibros.Add(libro);
-            CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, true, false);            
+            CFichero.sobrescribirCestasTxT(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, true, false);            
         }
 
         public void sacarDeCesta(Usuario usuario, Libro libro, bool varios)
@@ -38,7 +38,7 @@ namespace LibreriaAgapea.App_Code.Controladores
             foreach(Libro libroUsuario in librosBorrar)
             {
                 usuario.cesta.listaLibros.Remove(libroUsuario);
-                CFichero.sobrescribirTxt(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false, false);
+                CFichero.sobrescribirCestasTxT(CFichero.rutaCestas, usuario.nombre, libro.ISBN10, false, false);
             }
             
         }

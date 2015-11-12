@@ -20,29 +20,30 @@ namespace LibreriaAgapea.App_Code.Controladores
             sw.Close();
         }
 
-        public static void sobrescribirTxt(string path, string clave, string dato, bool meterDato, bool remplazarDato)
+        public static void sobrescribirCestasTxT(string path, string clave, string datoCambiar, bool meterDato, bool cerrarCesta)
         {
             List<string> lineasFichero = File.ReadAllLines(path).ToList();
             string lineaDeseada = lineasFichero.Where(linea => linea.Split(':')[1] == clave && linea.Split(':')[0] == "1").SingleOrDefault();
             int posicion = lineasFichero.IndexOf(lineaDeseada);
             if (meterDato)
             {
-                lineaDeseada += ":" + dato;
+                lineaDeseada += ":" + datoCambiar;
             }
             else
             {
                 List<string> datosLinea = lineaDeseada.Split(':').ToList();
 
-                if (remplazarDato)
+                if (cerrarCesta)
                 {
                     datosLinea.RemoveAt(0);
-                    datosLinea.Insert(0, dato);
+                    datosLinea.Insert(0, datoCambiar);
+                    datosLinea.Add(DateTime.Now.ToShortDateString());
                 }
                 else
                 {
                     foreach (string elemento in datosLinea)
                     {
-                        if (elemento == dato)
+                        if (elemento == datoCambiar)
                         {
                             datosLinea.Remove(elemento);
                             break;
